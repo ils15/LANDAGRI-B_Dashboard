@@ -13,16 +13,11 @@ export default function Expandable({ title, children, defaultExpanded = false, i
 
   return (
     <div
-      className="rounded-lg mb-3 overflow-hidden"
-      style={{ borderColor: 'var(--color-border)', borderWidth: '1px', borderStyle: 'solid' }}
+      className="rounded-lg mb-3 overflow-hidden border border-theme"
     >
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200"
-        style={{
-          backgroundColor: 'var(--color-bg-secondary)',
-          color: 'var(--color-text-primary)',
-        }}
+        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200 bg-secondary text-primary"
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = 'var(--color-surface-hover)';
         }}
@@ -35,7 +30,7 @@ export default function Expandable({ title, children, defaultExpanded = false, i
         {title}
       </button>
       {expanded && (
-        <div className="px-4 py-3 text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+        <div className="px-4 py-3 text-sm text-secondary">
           {children}
         </div>
       )}

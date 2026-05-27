@@ -24,19 +24,16 @@ export default function Breadcrumbs({ category, page }: BreadcrumbsProps) {
         {/* Desktop: Home icon */}
         <Home
           size={14}
-          className="hidden sm:block"
-          style={{ color: 'var(--color-text-muted)' }}
+          className="hidden sm:block text-muted"
         />
         <span
-          className="hidden sm:inline"
-          style={{ color: 'var(--color-text-muted)' }}
+          className="hidden sm:inline text-muted"
         >
           Dashboard
         </span>
         <ChevronRight
           size={12}
-          className="hidden sm:block"
-          style={{ color: 'var(--color-text-muted)' }}
+          className="hidden sm:block text-muted"
         />
 
         {/* Category — always visible */}
@@ -56,11 +53,10 @@ export default function Breadcrumbs({ category, page }: BreadcrumbsProps) {
           <>
             <ChevronRight
               size={12}
-              style={{ color: 'var(--color-text-muted)' }}
+              className="text-muted"
             />
             <span
-              className="font-semibold truncate max-w-[200px]"
-              style={{ color: 'var(--color-text-primary)' }}
+              className="font-semibold truncate max-w-[200px] text-primary"
             >
               {page}
             </span>
@@ -69,8 +65,7 @@ export default function Breadcrumbs({ category, page }: BreadcrumbsProps) {
 
         {/* Current route path (mobile only) */}
         <span
-          className="sm:hidden ml-auto text-xs truncate max-w-[120px]"
-          style={{ color: 'var(--color-text-muted)' }}
+          className="sm:hidden ml-auto text-xs truncate max-w-[120px] text-muted"
         >
           {location.pathname.split('/').filter(Boolean).pop()}
         </span>

@@ -24,7 +24,7 @@ function LoadingSpinner({ message = 'Carregando...' }: { message?: string }) {
           className="animate-spin rounded-full h-10 w-10 border-b-2 mx-auto mb-3"
           style={{ borderColor: 'var(--color-primary)' }}
         />
-        <p style={{ color: 'var(--color-text-muted)' }} className="text-sm">
+        <p className="text-sm text-muted">
           {message}
         </p>
       </div>
@@ -56,10 +56,10 @@ function AppContent() {
       <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="text-center max-w-md">
           <div className="text-4xl mb-4" style={{ color: 'var(--color-error)' }}>⚠</div>
-          <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+          <h2 className="text-xl font-bold mb-2 text-primary">
             Erro ao carregar dados
           </h2>
-          <p style={{ color: 'var(--color-text-secondary)' }}>{error}</p>
+          <p className="text-secondary">{error}</p>
         </div>
       </div>
     );
@@ -82,12 +82,7 @@ function AppContent() {
       </main>
 
       <footer
-        className="border-t py-6 mt-12 text-center text-xs"
-        style={{
-          borderColor: 'var(--color-border)',
-          color: 'var(--color-text-muted)',
-          backgroundColor: 'var(--color-bg-secondary)',
-        }}
+        className="border-t border-theme py-6 mt-12 text-center text-xs text-muted bg-secondary"
       >
         <div className="max-w-7xl mx-auto px-4">
           <p>© 2026 LANDAGRI-B Dashboard — Dados: MapBiomas & IBGE</p>

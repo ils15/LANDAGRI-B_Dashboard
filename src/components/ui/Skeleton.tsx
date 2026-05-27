@@ -50,8 +50,7 @@ export default function Skeleton({ className = '', variant = 'text', width, heig
 export function CardSkeleton() {
   return (
     <div
-      className="p-5 rounded-xl"
-      style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
+      className="p-5 rounded-xl bg-surface border border-theme"
     >
       <Skeleton variant="text" width="60%" className="mb-3" />
       <Skeleton variant="text" width="40%" className="mb-2" />
@@ -63,8 +62,7 @@ export function CardSkeleton() {
 export function ChartSkeleton() {
   return (
     <div
-      className="p-5 rounded-xl"
-      style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
+      className="p-5 rounded-xl bg-surface border border-theme"
     >
       <Skeleton variant="text" width="40%" className="mb-4" />
       <div className="flex items-end gap-2 h-64">
@@ -86,8 +84,7 @@ export function ChartSkeleton() {
 export function MetricCardSkeleton() {
   return (
     <div
-      className="p-4 rounded-xl flex flex-col items-center min-h-[120px]"
-      style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
+      className="p-4 rounded-xl flex flex-col items-center min-h-[120px] bg-surface border border-theme"
     >
       <Skeleton variant="circular" width={32} height={32} className="mb-2" />
       <Skeleton variant="text" width="60%" className="mb-1" />

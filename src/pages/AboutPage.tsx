@@ -35,11 +35,7 @@ export default function AboutPage() {
       <div className="space-y-6">
         {/* Header */}
         <div
-          className="rounded-2xl p-6 border relative overflow-hidden"
-          style={{
-            backgroundColor: 'var(--color-surface)',
-            borderColor: 'var(--color-border)',
-          }}
+          className="rounded-2xl p-6 border relative overflow-hidden bg-surface border-theme"
         >
           <div className="flex items-start gap-4">
             <div
@@ -53,12 +49,11 @@ export default function AboutPage() {
             </div>
             <div>
               <h2
-                className="text-xl font-bold tracking-tight"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="text-xl font-bold tracking-tight text-primary"
               >
                 Publicações, Referências e Fontes de Dados
               </h2>
-              <p className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+              <p className="text-sm mt-1 text-secondary">
                 Modelos de citação, parâmetros de satélite e bases de dados utilizadas no{' '}
                 <strong>LANDAGRI-B Dashboard</strong>.
               </p>
@@ -71,11 +66,7 @@ export default function AboutPage() {
           <div className="lg:col-span-7 space-y-6">
             {/* Research Citation */}
             <div
-              className="rounded-2xl p-6 border space-y-4"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                borderColor: 'var(--color-border)',
-              }}
+              className="rounded-2xl p-6 border space-y-4 bg-surface border-theme"
             >
               <div className="flex gap-4 items-start">
                 <div
@@ -90,18 +81,16 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p
-                    className="text-[10px] font-bold uppercase tracking-wider mb-1"
-                    style={{ color: 'var(--color-text-muted)' }}
+                    className="text-[10px] font-bold uppercase tracking-wider mb-1 text-muted"
                   >
                     Contribuição Acadêmica
                   </p>
                   <h3
-                    className="text-base font-bold leading-snug"
-                    style={{ color: 'var(--color-text-primary)' }}
+                    className="text-base font-bold leading-snug text-primary"
                   >
                     A Multi-Scale Land Use and Land Cover Classification Initiative for the Brazilian Territory
                   </h3>
-                  <p className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+                  <p className="text-sm mt-1 text-secondary">
                     Publicado por{' '}
                     <strong style={{ color: 'var(--color-primary)' }}>Igor S. Leite</strong> e
                     colaboradores (2024). <em>Remote Sensing Applications: Society and Environment</em>,
@@ -119,12 +108,11 @@ export default function AboutPage() {
                 }}
               >
                 <p
-                  className="text-xs font-bold uppercase tracking-wider mb-2"
-                  style={{ color: 'var(--color-text-muted)' }}
+                  className="text-xs font-bold uppercase tracking-wider mb-2 text-muted"
                 >
                   Resumo
                 </p>
-                <p className="text-sm italic leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+                <p className="text-sm italic leading-relaxed text-secondary">
                   "Este estudo apresenta uma iniciativa abrangente de classificação de uso e cobertura da terra
                   para o território brasileiro, integrando dados de sensoriamento remoto de múltiplas escalas
                   (30m a 250m) e validando com referências terrestres. Os resultados demonstram acurácia
@@ -135,7 +123,7 @@ export default function AboutPage() {
               {/* BibTeX */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>
+                  <span className="text-sm font-semibold text-primary">
                     BibTeX Citation
                   </span>
                   <button
@@ -160,11 +148,10 @@ export default function AboutPage() {
                   </button>
                 </div>
                 <pre
-                  className="p-4 rounded-xl overflow-x-auto text-xs leading-relaxed border"
+                  className="p-4 rounded-xl overflow-x-auto text-xs leading-relaxed border text-secondary"
                   style={{
                     backgroundColor: 'var(--color-bg)',
                     borderColor: 'var(--color-border)',
-                    color: 'var(--color-text-secondary)',
                   }}
                 >
                   {bibtexEntry}
@@ -191,15 +178,10 @@ export default function AboutPage() {
           <div className="lg:col-span-5 space-y-6">
             {/* Data Sources */}
             <div
-              className="rounded-2xl p-6 border space-y-5"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                borderColor: 'var(--color-border)',
-              }}
+              className="rounded-2xl p-6 border space-y-5 bg-surface border-theme"
             >
               <h3
-                className="text-xs font-bold uppercase tracking-wider flex items-center gap-2"
-                style={{ color: 'var(--color-text-muted)' }}
+                className="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-muted"
               >
                 <Database size={14} />
                 Plataformas Espaciais Integradas
@@ -225,13 +207,12 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h4
-                      className="text-sm font-semibold flex items-center gap-1.5"
-                      style={{ color: 'var(--color-text-primary)' }}
+                      className="text-sm font-semibold flex items-center gap-1.5 text-primary"
                     >
                       {source.name}
-                      <ExternalLink size={10} style={{ color: 'var(--color-text-muted)' }} />
+                      <ExternalLink size={10} className="text-muted" />
                     </h4>
-                    <p className="text-xs mt-1 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+                    <p className="text-xs mt-1 leading-relaxed text-secondary">
                       {source.description}
                     </p>
                   </div>
@@ -241,20 +222,15 @@ export default function AboutPage() {
 
             {/* Downloads */}
             <div
-              className="rounded-2xl p-6 border"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                borderColor: 'var(--color-border)',
-              }}
+              className="rounded-2xl p-6 border bg-surface border-theme"
             >
               <h3
-                className="text-sm font-bold flex items-center gap-2 mb-3"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="text-sm font-bold flex items-center gap-2 mb-3 text-primary"
               >
                 <Download size={16} />
                 Exportar Dados
               </h3>
-              <p className="text-xs mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+              <p className="text-xs mb-4 text-secondary">
                 Exporte métricas espaciais compiladas para processamento GIS externo.
               </p>
 
@@ -315,15 +291,10 @@ export default function AboutPage() {
 
             {/* Technical Metadata */}
             <div
-              className="rounded-2xl p-6 border"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                borderColor: 'var(--color-border)',
-              }}
+              className="rounded-2xl p-6 border bg-surface border-theme"
             >
               <h3
-                className="text-sm font-bold flex items-center gap-2 mb-4"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="text-sm font-bold flex items-center gap-2 mb-4 text-primary"
               >
                 <Globe size={16} />
                 Metadados Técnicos
@@ -350,8 +321,7 @@ export default function AboutPage() {
                         style={{ color: item.highlight ? 'var(--color-primary)' : 'var(--color-text-muted)' }}
                       />
                       <p
-                        className="text-[10px] font-bold uppercase tracking-wider"
-                        style={{ color: 'var(--color-text-muted)' }}
+                        className="text-[10px] font-bold uppercase tracking-wider text-muted"
                       >
                         {item.label}
                       </p>

@@ -41,8 +41,7 @@ export default function BaseChart({
 
   return (
     <div
-      className="w-full rounded-xl p-3"
-      style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
+      className="w-full rounded-xl p-3 bg-surface border border-theme"
     >
       <div
         ref={containerRef}

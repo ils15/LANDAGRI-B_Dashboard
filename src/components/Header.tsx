@@ -43,11 +43,7 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 border-b"
-      style={{
-        backgroundColor: 'var(--color-sidebar-bg)',
-        borderColor: 'var(--color-border)',
-      }}
+      className="sticky top-0 z-50 border-b bg-surface border-theme"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -63,14 +59,12 @@ export default function Header() {
             </div>
             <div className="hidden sm:block">
               <h1
-                className="text-sm font-bold tracking-tight leading-none"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="text-sm font-bold tracking-tight leading-none text-primary"
               >
                 LANDAGRI-B
               </h1>
               <p
-                className="text-[10px] font-mono mt-0.5"
-                style={{ color: 'var(--color-text-muted)' }}
+                className="text-[10px] font-mono mt-0.5 text-muted"
               >
                 Dashboard de Análise Territorial
               </p>
@@ -117,12 +111,7 @@ export default function Header() {
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg cursor-pointer"
-              style={{
-                color: 'var(--color-text-secondary)',
-                backgroundColor: 'var(--color-surface)',
-                borderColor: 'var(--color-border)',
-              }}
+              className="md:hidden p-2 rounded-lg cursor-pointer text-secondary bg-surface border border-theme"
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -137,7 +126,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            style={{ borderTop: '1px solid var(--color-border)' }}
+            className="border-t border-theme"
           >
             <div className="px-4 py-3 space-y-1">
               {tabs.map((tab) => {

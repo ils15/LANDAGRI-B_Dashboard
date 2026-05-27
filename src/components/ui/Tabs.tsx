@@ -24,8 +24,7 @@ export default function Tabs({ tabs, defaultTab, onChange }: TabsProps) {
     <div>
       {/* Tab headers */}
       <div
-        className="flex mb-4 overflow-x-auto"
-        style={{ borderBottomColor: 'var(--color-border)', borderBottomWidth: '1px', borderBottomStyle: 'solid' }}
+        className="flex mb-4 overflow-x-auto border-b border-theme"
       >
         {tabs.map((tab) => (
           <button
