@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DashboardLayout from './layouts/DashboardLayout';
 import OverviewPage from './pages/OverviewPage';
@@ -6,10 +7,22 @@ import InitiativeAnalysisPage from './pages/InitiativeAnalysisPage';
 import AgriculturalAnalysisPage from './pages/AgriculturalAnalysisPage';
 import AboutPage from './pages/AboutPage';
 import { useInitiatives } from './hooks/useInitiatives';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const queryClient = new QueryClient();
 
 function AppContent() {
+  const navigate = useNavigate();
+
+  // Restore SPA redirect path stored by 404.html
+  useEffect(() => {
+    const redirectPath = sessionStorage.getItem('redirectPath');
+    if (redirectPath && redirectPath !== '/') {
+      sessionStorage.removeItem('redirectPath');
+      navigate(redirectPath, { replace: true });
+    }
+  }, [navigate]);
+
   // Load data on mount
   const { isLoading, error } = useInitiatives();
 
@@ -51,10 +64,12 @@ function AppContent() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="/LANDAGRI-B_Dashboard">
-        <AppContent />
-      </BrowserRouter>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter basename="/LANDAGRI-B_Dashboard">
+          <AppContent />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }

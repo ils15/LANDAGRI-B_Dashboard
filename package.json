@@ -63,7 +63,7 @@
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
       "eslint --fix",
-      "vitest run --related --reporter=verbose --no-coverage",
+      "vitest run --reporter=verbose --no-coverage",
       "bash -c 'tsc --noEmit'"
     ],
     "src/**/*.{css,json,md}": [

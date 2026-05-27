@@ -4,9 +4,12 @@
   <meta charset="utf-8">
   <title>LANDAGRI-B Dashboard</title>
   <script>
-    sessionStorage.redirect = location.href;
+    (function() {
+      var path = location.pathname.replace(/^\/LANDAGRI-B_Dashboard/, '') || '/';
+      sessionStorage.setItem('redirectPath', path);
+      location.replace('/LANDAGRI-B_Dashboard/');
+    })();
   </script>
-  <meta http-equiv="refresh" content="0;URL='/LANDAGRI-B_Dashboard/'">
 </head>
 <body>
   <p>Redirecting to LANDAGRI-B Dashboard...</p>
