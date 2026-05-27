@@ -30,7 +30,7 @@ export default function Skeleton({ className = '', variant = 'text', width, heig
   const style: CSSProperties = {
     backgroundColor: 'var(--color-border)',
     width: width || (variant === 'circular' ? 40 : '100%'),
-    height: height || variantHeights[variant] ?? 16,
+    height: height ?? variantHeights[variant] ?? 16,
   };
 
   return (
@@ -73,7 +73,7 @@ export function ChartSkeleton() {
             key={i}
             className="flex-1 rounded-t animate-pulse"
             style={{
-              height: `${30 + Math.random() * 70}%`,
+              height: `${30 + ((i * 17 + 5) % 71)}%`,
               backgroundColor: 'var(--color-border)',
             }}
           />

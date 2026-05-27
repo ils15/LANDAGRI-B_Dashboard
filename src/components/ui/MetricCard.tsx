@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react';
-
 interface MetricCardProps {
   icon: string;
   label: string;

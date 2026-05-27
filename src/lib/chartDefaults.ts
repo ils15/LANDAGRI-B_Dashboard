@@ -1,4 +1,4 @@
-import type { Layout, Template } from 'plotly.js';
+import type { Layout } from 'plotly.js';
 
 /**
  * Build standard Plotly layout with modern styling
@@ -106,7 +106,7 @@ export const STANDARD_CONFIG = {
   modeBarButtonsToRemove: ['lasso2d', 'select2d', 'autoScale2d', 'toggleSpikelines', 'hoverCompareCartesian', 'hoverClosestCartesian'],
   modeBarButtonsToAdd: ['drawline', 'eraseshape'],
   toImageButtonOptions: {
-    format: 'png',
+    format: 'png' as const,
     filename: 'landagri-chart',
     height: 600,
     width: 1000,
