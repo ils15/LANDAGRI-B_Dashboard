@@ -1,4 +1,5 @@
-import Plot from 'react-plotly.js';
+import { useEffect, useRef } from 'react';
+import Plotly from 'plotly.js-dist-min';
 import type { Data, Layout, Config } from 'plotly.js';
 import { buildStandardLayout, STANDARD_CONFIG } from '../../lib/chartDefaults';
 
@@ -19,19 +20,30 @@ export default function BaseChart({
   useStandardLayout = true,
   className = '',
 }: BaseChartProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const finalLayout = useStandardLayout
     ? buildStandardLayout({ ...layout, height })
     : { ...layout, height };
 
+  useEffect(() => {
+    if (containerRef.current) {
+      Plotly.react(containerRef.current, data, finalLayout, {
+        ...STANDARD_CONFIG,
+        ...config,
+      });
+    }
+    return () => {
+      if (containerRef.current) {
+        Plotly.purge(containerRef.current);
+      }
+    };
+  }, [data, finalLayout, config]);
+
   return (
-    <div className={`w-full ${className}`}>
-      <Plot
-        data={data}
-        layout={finalLayout}
-        config={{ ...STANDARD_CONFIG, ...config }}
-        style={{ width: '100%', height: '100%' }}
-        useResizeHandler={true}
-      />
-    </div>
+    <div
+      ref={containerRef}
+      className={`w-full ${className}`}
+      style={{ width: '100%', height: '100%' }}
+    />
   );
 }
