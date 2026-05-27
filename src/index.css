@@ -123,6 +123,12 @@
 .bg-secondary {
   background-color: var(--color-bg-secondary);
 }
+.bg-bg {
+  background-color: var(--color-bg);
+}
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
 .text-primary {
   color: var(--color-text-primary);
 }

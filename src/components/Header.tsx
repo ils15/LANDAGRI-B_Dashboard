@@ -17,16 +17,17 @@ type TabId = 'overview' | 'initiative-analysis' | 'agricultural-analysis' | 'pre
 interface TabConfig {
   id: TabId;
   label: string;
+  shortLabel: string;
   path: string;
   icon: React.ElementType;
 }
 
 const tabs: TabConfig[] = [
-  { id: 'overview', label: 'Visão Geral', path: '/overview', icon: BarChart3 },
-  { id: 'initiative-analysis', label: 'Análise de Iniciativas', path: '/initiative-analysis', icon: Calendar },
-  { id: 'agricultural-analysis', label: 'Análise Agrícola', path: '/agricultural-analysis', icon: Map },
-  { id: 'predictive', label: 'Simulador Preditivo', path: '/predictive', icon: BrainCircuit },
-  { id: 'about', label: 'Referências', path: '/about', icon: BookOpen },
+  { id: 'overview', label: 'Visão Geral', shortLabel: 'Visão Geral', path: '/overview', icon: BarChart3 },
+  { id: 'initiative-analysis', label: 'Análise de Iniciativas', shortLabel: 'Iniciativas', path: '/initiative-analysis', icon: Calendar },
+  { id: 'agricultural-analysis', label: 'Análise Agrícola', shortLabel: 'Agrícola', path: '/agricultural-analysis', icon: Map },
+  { id: 'predictive', label: 'Simulador Preditivo', shortLabel: 'Simulador', path: '/predictive', icon: BrainCircuit },
+  { id: 'about', label: 'Referências', shortLabel: 'Referências', path: '/about', icon: BookOpen },
 ];
 
 export default function Header() {
@@ -42,37 +43,32 @@ export default function Header() {
   };
 
   return (
-    <header
-      className="sticky top-0 z-50 border-b bg-surface border-theme"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo + Brand */}
+    <>
+      {/* Desktop Header (md+) */}
+      <header className="sticky top-0 z-40 bg-surface border-b border-theme shadow-sm hidden md:block">
+        <div className="flex items-center justify-between h-14 px-6">
+          {/* Logo */}
           <div className="flex items-center gap-3 shrink-0">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center"
+              className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
               style={{
                 background: 'linear-gradient(135deg, var(--color-primary) 0%, #1e40af 100%)',
               }}
             >
-              <BarChart3 size={18} className="text-white" />
+              <BarChart3 size={16} className="text-white" />
             </div>
-            <div className="hidden sm:block">
-              <h1
-                className="text-sm font-bold tracking-tight leading-none text-primary"
-              >
+            <div className="flex items-baseline gap-2">
+              <h1 className="text-sm font-bold tracking-tight text-primary">
                 LANDAGRI-B
               </h1>
-              <p
-                className="text-[10px] font-mono mt-0.5 text-muted"
-              >
+              <span className="text-[10px] font-mono text-muted hidden lg:inline">
                 Dashboard de Análise Territorial
-              </p>
+              </span>
             </div>
           </div>
 
-          {/* Desktop Tabs */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Desktop Tabs - centered */}
+          <nav className="flex items-center gap-0.5 mx-auto px-4">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = tab.id === activeTab;
@@ -80,77 +76,142 @@ export default function Header() {
                 <button
                   key={tab.id}
                   onClick={() => handleNavigate(tab.path)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer"
-                  style={{
-                    backgroundColor: isActive ? 'var(--color-primary-light)' : 'transparent',
-                    color: isActive ? 'var(--color-primary)' : 'var(--color-text-secondary)',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.backgroundColor = 'var(--color-surface-hover)';
-                      e.currentTarget.style.color = 'var(--color-text-primary)';
+                  className={`
+                    relative flex items-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer rounded-lg
+                    ${isActive
+                      ? 'text-primary'
+                      : 'text-secondary hover:text-primary hover:bg-surface-hover'
                     }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.color = 'var(--color-text-secondary)';
-                    }
-                  }}
+                  `}
                 >
                   <Icon size={15} />
-                  {tab.label}
+                  <span className="hidden lg:inline">{tab.label}</span>
+                  <span className="lg:hidden">{tab.shortLabel}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-primary rounded-full"
+                    />
+                  )}
                 </button>
               );
             })}
           </nav>
 
-          {/* Right side */}
+          {/* Right */}
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg cursor-pointer text-secondary bg-surface border border-theme"
-            >
-              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile menu */}
+      {/* Mobile Header (< md) */}
+      <header className="sticky top-0 z-40 bg-surface border-b border-theme md:hidden">
+        <div className="flex items-center justify-between h-12 px-4">
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="p-2 -ml-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-hover active:bg-surface-hover cursor-pointer"
+            aria-label="Abrir menu"
+          >
+            <Menu size={20} />
+          </button>
+
+          <div className="flex items-center gap-2">
+            <div
+              className="w-7 h-7 rounded-lg flex items-center justify-center"
+              style={{
+                background: 'linear-gradient(135deg, var(--color-primary) 0%, #1e40af 100%)',
+              }}
+            >
+              <BarChart3 size={14} className="text-white" />
+            </div>
+            <span className="text-xs font-bold text-primary">
+              {tabs.find(t => t.id === activeTab)?.shortLabel || 'Visão Geral'}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Slide-in Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="border-t border-theme"
-          >
-            <div className="px-4 py-3 space-y-1">
-              {tabs.map((tab) => {
-                const Icon = tab.icon;
-                const isActive = tab.id === activeTab;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => handleNavigate(tab.path)}
-                    className="flex items-center gap-3 w-full p-3 rounded-xl text-xs font-semibold cursor-pointer transition-all"
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-50 bg-black/40 md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed top-0 left-0 bottom-0 z-50 w-72 bg-surface border-r border-theme shadow-xl md:hidden"
+            >
+              <div className="flex items-center justify-between p-4 border-b border-theme">
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center"
                     style={{
-                      backgroundColor: isActive ? 'var(--color-primary-light)' : 'transparent',
-                      color: isActive ? 'var(--color-primary)' : 'var(--color-text-secondary)',
+                      background: 'linear-gradient(135deg, var(--color-primary) 0%, #1e40af 100%)',
                     }}
                   >
-                    <Icon size={16} />
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </div>
-          </motion.div>
+                    <BarChart3 size={16} className="text-white" />
+                  </div>
+                  <span className="text-sm font-bold text-primary">LANDAGRI-B</span>
+                </div>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-hover cursor-pointer"
+                  aria-label="Fechar menu"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <nav className="p-3 space-y-1">
+                {tabs.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = tab.id === activeTab;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleNavigate(tab.path)}
+                      className={`
+                        flex items-center gap-3 w-full p-3 rounded-xl text-sm font-semibold cursor-pointer transition-all
+                        ${isActive
+                          ? 'bg-primary-light text-primary'
+                          : 'text-secondary hover:text-primary hover:bg-surface-hover'
+                        }
+                      `}
+                    >
+                      <Icon size={18} />
+                      <span>{tab.label}</span>
+                      {isActive && (
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary" />
+                      )}
+                    </button>
+                  );
+                })}
+              </nav>
+
+              <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-theme">
+                <p className="text-[10px] text-muted text-center">
+                  LANDAGRI-B v2.4
+                </p>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

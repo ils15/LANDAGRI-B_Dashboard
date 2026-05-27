@@ -8,7 +8,7 @@ test.describe('P2 - Visual Tests', () => {
     await bp.navigate(ROUTES.overview);
     await page.waitForTimeout(2000);
 
-    const header = page.locator('header');
+    const header = page.locator('header').first();
     const main = page.locator('main');
 
     await expect(header).toBeVisible();
