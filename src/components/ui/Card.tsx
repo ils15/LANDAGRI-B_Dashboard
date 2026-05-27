@@ -13,10 +13,25 @@ export default function Card({ children, className = '', padding = 'md', hover =
 
   return (
     <div
-      className={`bg-white rounded-xl border border-slate-200/60 shadow-sm
-        ${hover ? 'hover:shadow-md hover:-translate-y-0.5' : ''}
+      className={`rounded-xl border ${hover ? 'hover:-translate-y-0.5' : ''}
         ${paddingMap[padding]}
         transition-all duration-300 ${className}`}
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+        boxShadow: 'var(--color-shadow-sm)',
+        ...(hover ? { transitionProperty: 'background-color, border-color, box-shadow, transform' } : {}),
+      }}
+      onMouseEnter={(e) => {
+        if (hover) {
+          e.currentTarget.style.boxShadow = 'var(--color-shadow)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (hover) {
+          e.currentTarget.style.boxShadow = 'var(--color-shadow-sm)';
+        }
+      }}
     >
       {children}
     </div>

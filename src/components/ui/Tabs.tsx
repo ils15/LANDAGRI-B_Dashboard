@@ -23,17 +23,33 @@ export default function Tabs({ tabs, defaultTab, onChange }: TabsProps) {
   return (
     <div>
       {/* Tab headers */}
-      <div className="flex border-b border-slate-200 mb-4 overflow-x-auto">
+      <div
+        className="flex mb-4 overflow-x-auto"
+        style={{ borderBottomColor: 'var(--color-border)', borderBottomWidth: '1px', borderBottomStyle: 'solid' }}
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={`px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-all duration-200
-              border-b-2 -mb-px ${
-              activeTab === tab.id
-                ? 'text-blue-600 border-blue-600 font-semibold'
-                : 'text-slate-500 border-transparent hover:text-slate-700 hover:border-slate-300'
-            }`}
+              border-b-2 -mb-px`}
+            style={{
+              borderBottomColor: activeTab === tab.id ? 'var(--color-primary)' : 'transparent',
+              color: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-text-muted)',
+              fontWeight: activeTab === tab.id ? 600 : 400,
+            }}
+            onMouseEnter={(e) => {
+              if (activeTab !== tab.id) {
+                e.currentTarget.style.color = 'var(--color-text-primary)';
+                e.currentTarget.style.borderBottomColor = 'var(--color-border)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeTab !== tab.id) {
+                e.currentTarget.style.color = 'var(--color-text-muted)';
+                e.currentTarget.style.borderBottomColor = 'transparent';
+              }
+            }}
           >
             {tab.label}
           </button>

@@ -12,18 +12,30 @@ export default function Expandable({ title, children, defaultExpanded = false, i
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   return (
-    <div className="border border-slate-200 rounded-lg mb-3 overflow-hidden">
+    <div
+      className="rounded-lg mb-3 overflow-hidden"
+      style={{ borderColor: 'var(--color-border)', borderWidth: '1px', borderStyle: 'solid' }}
+    >
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center gap-2 px-4 py-3 bg-slate-50 hover:bg-slate-100 
-          text-sm font-medium text-slate-700 transition-colors duration-200"
+        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200"
+        style={{
+          backgroundColor: 'var(--color-bg-secondary)',
+          color: 'var(--color-text-primary)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--color-surface-hover)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)';
+        }}
       >
         {expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
         {icon && <span>{icon}</span>}
         {title}
       </button>
       {expanded && (
-        <div className="px-4 py-3 text-sm text-slate-600">
+        <div className="px-4 py-3 text-sm" style={{ color: 'var(--color-text-secondary)' }}>
           {children}
         </div>
       )}

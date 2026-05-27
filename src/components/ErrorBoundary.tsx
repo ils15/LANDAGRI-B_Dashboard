@@ -30,16 +30,19 @@ export default class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
       return (
-        <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center justify-center min-h-[400px]" style={{ backgroundColor: 'var(--color-bg)' }}>
           <div className="text-center max-w-md p-8">
-            <div className="text-red-500 text-5xl mb-4">⚠️</div>
-            <h2 className="text-xl font-bold text-slate-800 mb-2">Something went wrong</h2>
-            <p className="text-slate-600 text-sm mb-4">
+            <div className="text-5xl mb-4" style={{ color: 'var(--color-error)' }}>⚠</div>
+            <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>Something went wrong</h2>
+            <p className="text-sm mb-4" style={{ color: 'var(--color-text-secondary)' }}>
               {this.state.error?.message || 'An unexpected error occurred'}
             </p>
             <button
               onClick={() => this.setState({ hasError: false, error: null })}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 text-white rounded-lg transition-colors"
+              style={{ backgroundColor: 'var(--color-primary)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-primary-hover)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-primary)'; }}
             >
               Try again
             </button>

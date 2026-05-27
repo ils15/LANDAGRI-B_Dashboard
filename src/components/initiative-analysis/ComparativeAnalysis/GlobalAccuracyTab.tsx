@@ -80,7 +80,7 @@ export default function GlobalAccuracyTab() {
         }}
       />
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="bg-white rounded-lg border border-slate-200 p-3 text-center">
           <div className="text-xs text-slate-500">Average Accuracy</div>
           <div className="text-lg font-bold text-emerald-600">{avgAccuracy.toFixed(1)}%</div>

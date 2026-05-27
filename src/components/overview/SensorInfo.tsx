@@ -19,7 +19,7 @@ function SensorCard({ sensorKey, sensor }: { sensorKey: string; sensor: SensorMe
       </div>
 
       <Expandable title="Sensor Specifications" icon="🔍" defaultExpanded={true}>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <div><span className="font-medium">Platform:</span> {sensor.platform_name || '-'}</div>
             <div><span className="font-medium">Family:</span> {sensor.sensor_family || '-'}</div>

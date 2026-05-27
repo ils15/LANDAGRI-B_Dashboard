@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { ToastProvider } from './contexts/ToastContext';
 import DashboardLayout from './layouts/DashboardLayout';
-import { useInitiatives } from './hooks/useInitiatives';
 import ErrorBoundary from './components/ErrorBoundary';
+import { useInitiatives } from './hooks/useInitiatives';
 
+// Lazy loaded pages
 const OverviewPage = lazy(() => import('./pages/OverviewPage'));
 const InitiativeAnalysisPage = lazy(() => import('./pages/InitiativeAnalysisPage'));
 const AgriculturalAnalysisPage = lazy(() => import('./pages/AgriculturalAnalysisPage'));
@@ -29,10 +32,13 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-50">
+      <div className="flex items-center justify-center min-h-screen bg-secondary">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
-          <p className="text-slate-600 text-lg">Carregando dados do dashboard...</p>
+          <div
+            className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4"
+            style={{ borderColor: 'var(--color-primary)' }}
+          />
+          <p className="text-secondary text-lg">Carregando dados do dashboard...</p>
         </div>
       </div>
     );
@@ -40,11 +46,11 @@ function AppContent() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-50">
+      <div className="flex items-center justify-center min-h-screen bg-secondary">
         <div className="text-center max-w-md">
-          <div className="text-red-500 text-5xl mb-4">⚠</div>
-          <h2 className="text-xl font-bold text-slate-800 mb-2">Erro ao carregar dados</h2>
-          <p className="text-slate-600">{error}</p>
+          <div className="text-5xl mb-4" style={{ color: 'var(--color-error)' }}>⚠</div>
+          <h2 className="text-xl font-bold text-primary mb-2">Erro ao carregar dados</h2>
+          <p className="text-secondary">{error}</p>
         </div>
       </div>
     );
@@ -52,10 +58,13 @@ function AppContent() {
 
   return (
     <Suspense fallback={
-      <div className="flex items-center justify-center min-h-screen bg-slate-50">
+      <div className="flex items-center justify-center min-h-screen bg-secondary">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto mb-3" />
-          <p className="text-slate-500">Carregando página...</p>
+          <div
+            className="animate-spin rounded-full h-10 w-10 border-b-2 mx-auto mb-3"
+            style={{ borderColor: 'var(--color-primary)' }}
+          />
+          <p className="text-muted">Carregando página...</p>
         </div>
       </div>
     }>
@@ -75,11 +84,15 @@ function AppContent() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename="/LANDAGRI-B_Dashboard">
-          <AppContent />
-        </BrowserRouter>
-      </QueryClientProvider>
+      <ThemeProvider>
+        <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter basename="/LANDAGRI-B_Dashboard">
+            <AppContent />
+          </BrowserRouter>
+        </QueryClientProvider>
+        </ToastProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }
