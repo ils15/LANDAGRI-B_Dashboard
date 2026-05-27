@@ -1,0 +1,144 @@
+import { useMemo } from 'react';
+import Card from '../../ui/Card';
+import BaseChart from '../../charts/BaseChart';
+import type { Data, Layout } from 'plotly.js';
+import conabCalendar from '../../../data/processed/conab_calendar.json';
+import conabMapping from '../../../data/processed/conab_mapping.json';
+import { CATEGORICAL_COLORS } from '../../../types/theme';
+
+const MONTHS_FULL = ['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
+
+interface CalendarRow {
+  'Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September': string;
+}
+
+interface StateInfo {
+  name: string;
+  region: string;
+}
+
+interface MappingDataType {
+  states?: Record<string, StateInfo>;
+}
+
+function parseActivityValue(val: string): number {
+  if (!val || val.trim() === '') return 0;
+  const v = val.trim();
+  if (v === 'P' || v === 'H' || v === 'PH') return 1;
+  return 0;
+}
+
+interface SpatioTemporalTabProps {
+  selectedCrops: string[];
+  selectedRegions: string[];
+}
+
+export default function SpatioTemporalTab({ selectedCrops, selectedRegions }: SpatioTemporalTabProps) {
+  const rawData = conabCalendar as CalendarRow[];
+  const mappingData = conabMapping as MappingDataType;
+  const statesMap = mappingData?.states || {};
+
+  const chartData = useMemo(() => {
+    const stateRegions: Record<string, string> = {};
+    for (const [code, info] of Object.entries(statesMap)) {
+      stateRegions[code] = info.region;
+    }
+
+    // Track per-state per-crop: which months are active
+    const stateCropMonths: Record<string, Record<string, Set<number>>> = {};
+
+    for (const row of rawData) {
+      const entry = row['Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September'];
+      if (!entry || entry.trim() === '' || entry.startsWith(';')) continue;
+
+      const parts = entry.split(';');
+      if (parts.length < 13) continue;
+
+      const crop = parts[0].trim();
+      if (!crop || !selectedCrops.includes(crop)) continue;
+
+      const state = parts[1].trim();
+      const region = stateRegions[state];
+      if (region && !selectedRegions.includes(region)) continue;
+
+      if (!stateCropMonths[state]) stateCropMonths[state] = {};
+      if (!stateCropMonths[state][crop]) stateCropMonths[state][crop] = new Set();
+
+      parts.slice(2).forEach((v, i) => {
+        if (parseActivityValue(v) > 0) {
+          stateCropMonths[state][crop].add(i);
+        }
+      });
+    }
+
+    // Create gantt-like scatter traces: one per state, thick line from min to max month
+    const traces: Data[] = [];
+    const stateNames = Object.keys(stateCropMonths).sort();
+
+    stateNames.forEach((state, idx) => {
+      const monthsSet = new Set<number>();
+      const cropColors = new Map<string, string>();
+
+      for (const [crop, mSet] of Object.entries(stateCropMonths[state])) {
+        mSet.forEach(m => monthsSet.add(m));
+        cropColors.set(crop, CATEGORICAL_COLORS[selectedCrops.indexOf(crop) % CATEGORICAL_COLORS.length]);
+      }
+
+      if (monthsSet.size === 0) return;
+
+      const sortedMonths = Array.from(monthsSet).sort((a, b) => a - b);
+      const firstMonth = sortedMonths[0];
+      const lastMonth = sortedMonths[sortedMonths.length - 1];
+      const dominantCrop = [...cropColors.entries()]
+        .sort((a, b) => stateCropMonths[state][b[0]]?.size || 0 - (stateCropMonths[state][a[0]]?.size || 0))[0]?.[0] || '';
+
+      traces.push({
+        type: 'scatter',
+        mode: 'lines+markers',
+        x: [firstMonth, lastMonth],
+        y: [state, state],
+        name: `${state} - ${dominantCrop}`,
+        line: {
+          color: cropColors.get(dominantCrop) || CATEGORICAL_COLORS[idx % CATEGORICAL_COLORS.length],
+          width: 15,
+          shape: 'linear',
+        },
+        marker: {
+          size: 8,
+          color: cropColors.get(dominantCrop) || CATEGORICAL_COLORS[idx % CATEGORICAL_COLORS.length],
+          symbol: 'circle',
+        },
+        hovertemplate: `<b>${state}</b><br>Period: ${firstMonth}-${lastMonth}<br>Crop: ${dominantCrop}<extra></extra>`,
+      });
+    });
+
+    return traces;
+  }, [rawData, selectedCrops, selectedRegions, statesMap]);
+
+  const layout: Partial<Layout> = {
+    title: { text: 'Spatio-Temporal Distribution by State', x: 0.5 },
+    xaxis: {
+      title: 'Month Index (0=Oct, 11=Sep)',
+      tickmode: 'array',
+      tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      ticktext: ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+    },
+    yaxis: {
+      title: 'State',
+      automargin: true,
+    },
+    showlegend: false,
+    height: Math.max(400, chartData.length * 25 + 100),
+  };
+
+  return (
+    <Card padding="lg" hover={false}>
+      <h3 className="text-base font-semibold text-slate-700 mb-3">Spatio-Temporal Distribution</h3>
+      {chartData.length > 0 ? (
+        <BaseChart data={chartData} layout={layout} />
+      ) : (
+        <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+      )}
+    </Card>
+  );
+}

@@ -1,0 +1,170 @@
+import { useMemo } from 'react';
+import Card from '../../ui/Card';
+import HeatmapChart from '../../charts/HeatmapChart';
+import conabCalendar from '../../../data/processed/conab_calendar.json';
+import conabMapping from '../../../data/processed/conab_mapping.json';
+
+const MONTHS = ['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
+
+interface CalendarRow {
+  'Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September': string;
+}
+
+interface StateInfo {
+  name: string;
+  region: string;
+}
+
+interface MappingDataType {
+  metadata?: Record<string, unknown>;
+  states?: Record<string, StateInfo>;
+  crop_calendar?: Record<string, unknown[]>;
+}
+
+interface CalendarHeatmapsTabProps {
+  selectedCrops: string[];
+  selectedRegions: string[];
+}
+
+function parseActivityValue(val: string): number {
+  if (!val || val.trim() === '') return 0;
+  const v = val.trim();
+  if (v === 'PH') return 3; // both planting and harvest
+  if (v === 'P') return 1; // planting
+  if (v === 'H') return 2; // harvest
+  return 0;
+}
+
+function getActivityLabel(val: number): string {
+  if (val === 1) return 'Planting';
+  if (val === 2) return 'Harvest';
+  if (val === 3) return 'Both';
+  return '';
+}
+
+export default function CalendarHeatmapsTab({ selectedCrops, selectedRegions }: CalendarHeatmapsTabProps) {
+  const rawData = conabCalendar as CalendarRow[];
+  const mappingData = conabMapping as MappingDataType;
+  const statesMap = mappingData?.states || {};
+
+  const matrix = useMemo(() => {
+    const crops = [...new Set(selectedCrops)];
+    const monthIndices = MONTHS.map((_, i) => i);
+
+    // Build state-region lookup
+    const stateRegions: Record<string, string> = {};
+    for (const [code, info] of Object.entries(statesMap)) {
+      stateRegions[code] = info.region;
+    }
+
+    // Filter the raw CSV-like data
+    const filtered: { crop: string; state: string; activities: number[] }[] = [];
+
+    for (const row of rawData) {
+      const entry = row['Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September'];
+      if (!entry || entry.trim() === '' || entry.startsWith(';')) continue;
+
+      const parts = entry.split(';');
+      if (parts.length < 13) continue;
+
+      const crop = parts[0].trim();
+      if (!crop || !selectedCrops.includes(crop)) continue;
+
+      const state = parts[1].trim();
+      const region = stateRegions[state];
+      if (region && !selectedRegions.includes(region)) continue;
+
+      const activities = parts.slice(2).map(v => parseActivityValue(v));
+      filtered.push({ crop, state, activities });
+    }
+
+    // National matrix: crops x months showing sum of activities
+    const nationalZ: number[][] = [];
+    const cropLabels: string[] = [];
+
+    for (const crop of crops) {
+      const cropEntries = filtered.filter(f => f.crop === crop);
+      if (cropEntries.length === 0) continue;
+      cropLabels.push(crop);
+
+      const monthSums = monthIndices.map(m => {
+        let sum = 0;
+        let hasPlanting = false;
+        let hasHarvest = false;
+        for (const entry of cropEntries) {
+          const val = entry.activities[m];
+          if (val === 1 || val === 3) hasPlanting = true;
+          if (val === 2 || val === 3) hasHarvest = true;
+        }
+        if (hasPlanting && hasHarvest) sum = 3;
+        else if (hasPlanting) sum = 1;
+        else if (hasHarvest) sum = 2;
+        return sum;
+      });
+      nationalZ.push(monthSums);
+    }
+
+    return { z: nationalZ, crops: cropLabels, months: MONTHS };
+  }, [rawData, selectedCrops, selectedRegions, statesMap]);
+
+  const colorscale = [
+    [0, '#f3f4f6'],
+    [0.33, '#22c55e'],
+    [0.66, '#f97316'],
+    [1, '#3b82f6'],
+  ];
+
+  if (matrix.crops.length === 0) {
+    return (
+      <Card padding="lg" hover={false}>
+        <div className="p-8 text-center text-slate-500">
+          <p>No calendar data available for the selected filters.</p>
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <Card padding="lg" hover={false}>
+        <h3 className="text-base font-semibold text-slate-700 mb-2">National Calendar Matrix</h3>
+        <p className="text-xs text-slate-500 mb-4">
+          Green = Planting | Orange = Harvest | Blue = Both
+        </p>
+        <HeatmapChart
+          z={matrix.z}
+          x={matrix.months}
+          y={matrix.crops}
+          title="Crop Calendar Activity (Planting & Harvest)"
+          height={Math.max(300, matrix.crops.length * 50 + 100)}
+          colorscale={colorscale}
+          zmin={0}
+          zmax={3}
+        />
+      </Card>
+
+      {/* Legend */}
+      <Card padding="md" hover={false}>
+        <div className="flex items-center gap-6 flex-wrap">
+          <span className="text-sm font-medium text-slate-600">Legend:</span>
+          <div className="flex items-center gap-2">
+            <span className="w-4 h-4 rounded bg-green-500 inline-block" />
+            <span className="text-xs text-slate-600">Planting (P)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-4 h-4 rounded bg-orange-500 inline-block" />
+            <span className="text-xs text-slate-600">Harvest (H)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-4 h-4 rounded bg-blue-500 inline-block" />
+            <span className="text-xs text-slate-600">Planting &amp; Harvest (PH)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-4 h-4 rounded bg-gray-200 inline-block" />
+            <span className="text-xs text-slate-600">No activity</span>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+}

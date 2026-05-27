@@ -1,0 +1,47 @@
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import ModuleHeader from '../layouts/ModuleHeader';
+import AgricultureOverviewPage from '../components/agricultural-analysis/AgricultureOverview/AgricultureOverviewPage';
+import CropCalendarPage from '../components/agricultural-analysis/CropCalendar/CropCalendarPage';
+import AgricultureAvailabilityPage from '../components/agricultural-analysis/AgricultureAvailability/AgricultureAvailabilityPage';
+
+export default function AgriculturalAnalysisPage() {
+  const location = useLocation();
+
+  const subPages = [
+    { path: 'overview', label: '🔎 Agriculture Overview' },
+    { path: 'crop-calendar', label: '📅 Crop Calendar' },
+    { path: 'availability', label: '⏳ Agriculture Availability' },
+  ];
+
+  return (
+    <div>
+      <ModuleHeader
+        moduleName="Agricultural Analysis"
+        title="🌾 Agricultural Analysis"
+        subtitle="Agricultural indicators, crop calendar and aggregated availability by region and time period."
+      />
+      <div className="flex border-b border-slate-200 mb-6 overflow-x-auto">
+        {subPages.map((tab) => {
+          const isActive = location.pathname.includes(tab.path);
+          return (
+            <a
+              key={tab.path}
+              href={`/LANDAGRI-B_Dashboard/agricultural-analysis/${tab.path}`}
+              className={`px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-all duration-200 ${
+                isActive ? 'text-amber-700 border-amber-600 font-semibold' : 'text-slate-500 border-transparent hover:text-slate-700 hover:border-slate-300'
+              }`}
+            >
+              {tab.label}
+            </a>
+          );
+        })}
+      </div>
+      <Routes>
+        <Route index element={<Navigate to="overview" replace />} />
+        <Route path="overview" element={<AgricultureOverviewPage />} />
+        <Route path="crop-calendar" element={<CropCalendarPage />} />
+        <Route path="availability" element={<AgricultureAvailabilityPage />} />
+      </Routes>
+    </div>
+  );
+}

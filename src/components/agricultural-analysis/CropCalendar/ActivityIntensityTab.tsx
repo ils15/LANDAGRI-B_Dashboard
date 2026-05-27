@@ -1,0 +1,215 @@
+import { useMemo } from 'react';
+import Tabs from '../../ui/Tabs';
+import Card from '../../ui/Card';
+import HeatmapChart from '../../charts/HeatmapChart';
+import GroupedBarChart from '../../charts/GroupedBarChart';
+import HorizontalBarChart from '../../charts/HorizontalBarChart';
+import conabCalendar from '../../../data/processed/conab_calendar.json';
+import conabMapping from '../../../data/processed/conab_mapping.json';
+
+const MONTHS_FULL = ['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
+const MONTHS_SHORT = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+
+interface CalendarRow {
+  'Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September': string;
+}
+
+interface StateInfo {
+  name: string;
+  region: string;
+}
+
+interface MappingDataType {
+  states?: Record<string, StateInfo>;
+}
+
+function parseActivityValue(val: string): number {
+  if (!val || val.trim() === '') return 0;
+  const v = val.trim();
+  if (v === 'PH') return 2;
+  if (v === 'P' || v === 'H') return 1;
+  return 0;
+}
+
+interface ActivityIntensityTabProps {
+  selectedCrops: string[];
+  selectedRegions: string[];
+}
+
+export default function ActivityIntensityTab({ selectedCrops, selectedRegions }: ActivityIntensityTabProps) {
+  const rawData = conabCalendar as CalendarRow[];
+  const mappingData = conabMapping as MappingDataType;
+  const statesMap = mappingData?.states || {};
+
+  const { intensityMatrix, peakActivity, densityByRegion, concentrationIndex } = useMemo(() => {
+    const stateRegions: Record<string, string> = {};
+    for (const [code, info] of Object.entries(statesMap)) {
+      stateRegions[code] = info.region;
+    }
+
+    // State × Month intensity
+    const stateMonthIntensity: Record<string, number[]> = {};
+    const regionMonthIntensity: Record<string, number[]> = {};
+    const stateCropCount: Record<string, Set<string>> = {};
+
+    for (const row of rawData) {
+      const entry = row['Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September'];
+      if (!entry || entry.trim() === '' || entry.startsWith(';')) continue;
+
+      const parts = entry.split(';');
+      if (parts.length < 13) continue;
+
+      const crop = parts[0].trim();
+      if (!crop || !selectedCrops.includes(crop)) continue;
+
+      const state = parts[1].trim();
+      const region = stateRegions[state];
+      if (region && !selectedRegions.includes(region)) continue;
+
+      if (!stateMonthIntensity[state]) {
+        stateMonthIntensity[state] = MONTHS_FULL.map(() => 0);
+      }
+      if (!stateCropCount[state]) stateCropCount[state] = new Set();
+      stateCropCount[state].add(crop);
+
+      if (region && !regionMonthIntensity[region]) {
+        regionMonthIntensity[region] = MONTHS_FULL.map(() => 0);
+      }
+
+      parts.slice(2).forEach((v, i) => {
+        const intensity = parseActivityValue(v);
+        stateMonthIntensity[state][i] += intensity;
+        if (region) regionMonthIntensity[region][i] += intensity;
+      });
+    }
+
+    // Intensity matrix: states × months
+    const stateLabels = Object.keys(stateMonthIntensity).sort();
+    const z: number[][] = stateLabels.map(s => stateMonthIntensity[s]);
+
+    // Peak activity: max intensity month per state
+    const peakMonths = stateLabels.map(state => {
+      const intensities = stateMonthIntensity[state];
+      const maxVal = Math.max(...intensities);
+      const peakIdx = intensities.indexOf(maxVal);
+      return { state, peakMonth: MONTHS_SHORT[peakIdx], peakValue: maxVal };
+    });
+
+    // Density by region
+    const regionLabels = Object.keys(regionMonthIntensity).sort();
+    const totalByRegion = regionLabels.map(r => {
+      const sum = regionMonthIntensity[r].reduce((a, b) => a + b, 0);
+      return { name: r, value: sum };
+    });
+
+    // Concentration index: states ranked by total activity
+    const stateTotals = stateLabels.map(state => {
+      const sum = stateMonthIntensity[state].reduce((a, b) => a + b, 0);
+      return { name: state, value: sum };
+    }).sort((a, b) => b.value - a.value);
+
+    return {
+      intensityMatrix: { z, states: stateLabels, months: MONTHS_SHORT },
+      peakActivity: {
+        categories: peakMonths.map(p => p.state),
+        series: [{
+          name: 'Peak Intensity',
+          values: peakMonths.map(p => p.peakValue),
+        }],
+      },
+      densityByRegion: {
+        labels: totalByRegion.map(r => r.name),
+        values: totalByRegion.map(r => r.value),
+      },
+      concentrationIndex: {
+        labels: stateTotals.map(s => s.name),
+        values: stateTotals.map(s => s.value),
+      },
+    };
+  }, [rawData, selectedCrops, selectedRegions, statesMap]);
+
+  const noData = intensityMatrix.states.length === 0;
+
+  const intensityContent = (
+    <Card padding="lg" hover={false}>
+      <h3 className="text-base font-semibold text-slate-700 mb-3">Activity Intensity Matrix (States × Months)</h3>
+      {noData ? (
+        <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+      ) : (
+        <HeatmapChart
+          z={intensityMatrix.z}
+          x={intensityMatrix.months}
+          y={intensityMatrix.states}
+          title="Activity Intensity"
+          height={Math.max(400, intensityMatrix.states.length * 25 + 100)}
+          colorscale={[
+            [0, '#f3f4f6'],
+            [0.33, '#fef3c7'],
+            [0.66, '#f97316'],
+            [1, '#dc2626'],
+          ]}
+        />
+      )}
+    </Card>
+  );
+
+  const peakContent = (
+    <Card padding="lg" hover={false}>
+      <h3 className="text-base font-semibold text-slate-700 mb-3">Peak Activity Analysis by State</h3>
+      {noData ? (
+        <p className="text-slate-400 text-center py-8">No data available.</p>
+      ) : (
+        <GroupedBarChart
+          categories={peakActivity.categories}
+          series={peakActivity.series}
+          xlabel="State"
+          ylabel="Peak Intensity"
+          height={Math.max(300, peakActivity.categories.length * 20 + 100)}
+        />
+      )}
+    </Card>
+  );
+
+  const densityContent = (
+    <Card padding="lg" hover={false}>
+      <h3 className="text-base font-semibold text-slate-700 mb-3">Activity Density by Region</h3>
+      {densityByRegion.values.length === 0 || densityByRegion.values.every(v => v === 0) ? (
+        <p className="text-slate-400 text-center py-8">No data available.</p>
+      ) : (
+        <HorizontalBarChart
+          y={densityByRegion.labels}
+          x={densityByRegion.values}
+          xlabel="Total Activity"
+          color="#EC9706"
+          height={Math.max(250, densityByRegion.labels.length * 40)}
+        />
+      )}
+    </Card>
+  );
+
+  const concentrationContent = (
+    <Card padding="lg" hover={false}>
+      <h3 className="text-base font-semibold text-slate-700 mb-3">Concentration Index by State</h3>
+      {concentrationIndex.values.length === 0 || concentrationIndex.values.every(v => v === 0) ? (
+        <p className="text-slate-400 text-center py-8">No data available.</p>
+      ) : (
+        <HorizontalBarChart
+          y={concentrationIndex.labels}
+          x={concentrationIndex.values}
+          xlabel="Total Activity Score"
+          color="#626C01"
+          height={Math.max(300, concentrationIndex.labels.length * 25)}
+        />
+      )}
+    </Card>
+  );
+
+  const subTabs = [
+    { id: 'matrix', label: '📊 Intensity Matrix', content: intensityContent },
+    { id: 'peak', label: '⚡ Peak Activity', content: peakContent },
+    { id: 'density', label: '🗺️ Density Map', content: densityContent },
+    { id: 'concentration', label: '📈 Concentration Index', content: concentrationContent },
+  ];
+
+  return <Tabs tabs={subTabs} />;
+}

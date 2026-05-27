@@ -1,0 +1,141 @@
+import { useMemo } from 'react';
+import Card from '../../ui/Card';
+import HeatmapChart from '../../charts/HeatmapChart';
+import LineChart from '../../charts/LineChart';
+import conabCalendar from '../../../data/processed/conab_calendar.json';
+import conabMapping from '../../../data/processed/conab_mapping.json';
+
+const MONTHS_FULL = ['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
+const MONTHS_SHORT = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+
+interface CalendarRow {
+  'Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September': string;
+}
+
+interface StateInfo {
+  name: string;
+  region: string;
+}
+
+interface MappingDataType {
+  states?: Record<string, StateInfo>;
+}
+
+function parseActivityValue(val: string): number {
+  if (!val || val.trim() === '') return 0;
+  const v = val.trim();
+  if (v === 'PH') return 2;
+  if (v === 'P' || v === 'H') return 1;
+  return 0;
+}
+
+interface MonthlyIntensityTabProps {
+  selectedCrops: string[];
+  selectedRegions: string[];
+}
+
+export default function MonthlyIntensityTab({ selectedCrops, selectedRegions }: MonthlyIntensityTabProps) {
+  const rawData = conabCalendar as CalendarRow[];
+  const mappingData = conabMapping as MappingDataType;
+  const statesMap = mappingData?.states || {};
+
+  const { heatmapZ, intensitySeries } = useMemo(() => {
+    const stateRegions: Record<string, string> = {};
+    for (const [code, info] of Object.entries(statesMap)) {
+      stateRegions[code] = info.region;
+    }
+
+    // Per-crop per-month intensity
+    const cropMonthIntensity: Record<string, number[]> = {};
+    const totalIntensity: number[] = MONTHS_FULL.map(() => 0);
+
+    for (const row of rawData) {
+      const entry = row['Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September'];
+      if (!entry || entry.trim() === '' || entry.startsWith(';')) continue;
+
+      const parts = entry.split(';');
+      if (parts.length < 13) continue;
+
+      const crop = parts[0].trim();
+      if (!crop || !selectedCrops.includes(crop)) continue;
+
+      const state = parts[1].trim();
+      const region = stateRegions[state];
+      if (region && !selectedRegions.includes(region)) continue;
+
+      if (!cropMonthIntensity[crop]) {
+        cropMonthIntensity[crop] = MONTHS_FULL.map(() => 0);
+      }
+
+      parts.slice(2).forEach((v, i) => {
+        const intensity = parseActivityValue(v);
+        cropMonthIntensity[crop][i] += intensity;
+        totalIntensity[i] += intensity;
+      });
+    }
+
+    // Build heatmap Z: rows = crops, cols = months
+    const cropLabels: string[] = [];
+    const z: number[][] = [];
+
+    for (const [crop, intensities] of Object.entries(cropMonthIntensity)) {
+      if (selectedCrops.includes(crop)) {
+        cropLabels.push(crop);
+        z.push(intensities);
+      }
+    }
+
+    return {
+      heatmapZ: { z, crops: cropLabels, months: MONTHS_SHORT },
+      intensitySeries: {
+        series: [{
+          name: 'Activity Intensity',
+          x: MONTHS_SHORT,
+          y: totalIntensity,
+          color: '#EC9706',
+        }],
+      },
+    };
+  }, [rawData, selectedCrops, selectedRegions, statesMap]);
+
+  const noData = intensitySeries.series[0].y.every(v => v === 0);
+
+  return (
+    <div className="space-y-6">
+      <Card padding="lg" hover={false}>
+        <h3 className="text-base font-semibold text-slate-700 mb-3">Monthly Activity Intensity Heatmap</h3>
+        {noData ? (
+          <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+        ) : (
+          <HeatmapChart
+            z={heatmapZ.z}
+            x={heatmapZ.months}
+            y={heatmapZ.crops}
+            title="Activity Intensity (Crops × Months)"
+            height={Math.max(300, heatmapZ.crops.length * 40 + 100)}
+            colorscale={[
+              [0, '#f3f4f6'],
+              [0.33, '#fef3c7'],
+              [0.66, '#f97316'],
+              [1, '#dc2626'],
+            ]}
+          />
+        )}
+      </Card>
+
+      <Card padding="lg" hover={false}>
+        <h3 className="text-base font-semibold text-slate-700 mb-3">Activity Intensity by Month</h3>
+        {noData ? (
+          <p className="text-slate-400 text-center py-8">No data available.</p>
+        ) : (
+          <LineChart
+            series={intensitySeries.series}
+            xlabel="Month"
+            ylabel="Total Activity Count"
+            height={350}
+          />
+        )}
+      </Card>
+    </div>
+  );
+}

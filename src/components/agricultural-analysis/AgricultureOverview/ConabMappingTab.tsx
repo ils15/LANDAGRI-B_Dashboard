@@ -1,0 +1,196 @@
+import { useMemo } from 'react';
+import Card from '../../ui/Card';
+import MetricCard from '../../ui/MetricCard';
+import GroupedBarChart from '../../charts/GroupedBarChart';
+import LineChart from '../../charts/LineChart';
+import conabMapping from '../../../data/processed/conab_mapping.json';
+import conabMappingData from '../../../data/processed/conab_mapping_data.json';
+
+interface StateInfo {
+  name: string;
+  region: string;
+}
+
+interface CalendarEntry {
+  state_code: string;
+  state_name: string;
+  region: string;
+  calendar: Record<string, string>;
+}
+
+interface ConabMappingType {
+  metadata?: {
+    source?: string;
+    description?: string;
+    seasons?: Record<string, { period: string; months: string[] }>;
+    legend?: Record<string, string>;
+  };
+  states?: Record<string, StateInfo>;
+  crop_calendar?: Record<string, CalendarEntry[]>;
+}
+
+interface CropMappingEntry {
+  name: string;
+  scientific_name?: string;
+  mapping_years?: string[];
+  total_area_mapped_2024?: number;
+  main_regions?: string[];
+  accuracy?: number;
+  data_sources?: string[];
+  mapping_method?: string;
+}
+
+interface ConabMappingDataType {
+  metadata?: {
+    source?: string;
+    description?: string;
+    temporal_coverage?: string;
+    spatial_resolution?: string;
+  };
+  crops_mapping?: Record<string, CropMappingEntry>;
+}
+
+type MappingData = ConabMappingType;
+type MappingDataDetailed = ConabMappingDataType;
+
+export default function ConabMappingTab() {
+  const mappingData = conabMapping as MappingData;
+  const mappingDataDetailed = conabMappingData as ConabMappingDataType;
+
+  const metrics = useMemo(() => {
+    const calendar = mappingData?.crop_calendar;
+    const cropCount = calendar ? Object.keys(calendar).length : 0;
+    const states = mappingData?.states;
+    const stateCount = states ? Object.keys(states).length : 0;
+    const regions = states
+      ? [...new Set(Object.values(states).map((s: StateInfo) => s.region))].length
+      : 0;
+    return { cropCount, stateCount, regionCount: regions };
+  }, [mappingData]);
+
+  const cropRegionData = useMemo(() => {
+    const calendar = mappingData?.crop_calendar;
+    if (!calendar) return { categories: [], series: [] };
+
+    const regions = ['North', 'Northeast', 'Central-West', 'Southeast', 'South'];
+    const crops = Object.keys(calendar);
+    const regionCounts: Record<string, Record<string, number>> = {};
+
+    for (const crop of crops) {
+      regionCounts[crop] = {};
+      for (const region of regions) {
+        regionCounts[crop][region] = 0;
+      }
+      for (const entry of calendar[crop]) {
+        if (regionCounts[crop][entry.region] !== undefined) {
+          regionCounts[crop][entry.region]++;
+        }
+      }
+    }
+
+    return {
+      categories: regions,
+      series: crops.map(crop => ({
+        name: crop,
+        values: regions.map(r => regionCounts[crop][r] || 0),
+      })),
+    };
+  }, [mappingData]);
+
+  const temporalData = useMemo(() => {
+    const cropsMapping = mappingDataDetailed?.crops_mapping;
+    if (!cropsMapping) return { series: [] };
+
+    const years = ['2020', '2021', '2022', '2023', '2024'];
+    const series = Object.entries(cropsMapping).map(([, crop]) => ({
+      name: crop.name,
+      x: years,
+      y: years.map(y => (crop.mapping_years?.includes(y) ? 1 : 0)),
+    }));
+
+    return { series };
+  }, [mappingDataDetailed]);
+
+  if (!mappingData?.crop_calendar) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        <p className="text-lg">No CONAB mapping data available.</p>
+        <p className="text-sm mt-2">The mapping data file may be empty or in an unexpected format.</p>
+      </div>
+    );
+  }
+
+  const mappingYears = mappingDataDetailed?.metadata?.temporal_coverage || '2020-2024';
+  const sourceUrl = 'https://portaldeinformacoes.conab.gov.br/mapeamentos-agricolas-downloads.html';
+
+  return (
+    <div className="space-y-6">
+      {/* Metrics Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <MetricCard icon="🌾" label="Total Crops" value={metrics.cropCount} variant="accuracy" />
+        <MetricCard icon="🗺️" label="States Covered" value={metrics.stateCount} variant="resolution" />
+        <MetricCard icon="📍" label="Regions" value={metrics.regionCount} variant="classes" />
+        <MetricCard icon="📅" label="Temporal Span" value={mappingYears} variant="frequency" />
+      </div>
+
+      {/* Crop Regional Distribution */}
+      <Card title="Crop Regional Distribution" padding="lg" hover={false}>
+        <h3 className="text-base font-semibold text-slate-700 mb-3">Crop Regional Distribution</h3>
+        {cropRegionData.series.length > 0 ? (
+          <GroupedBarChart
+            categories={cropRegionData.categories}
+            series={cropRegionData.series}
+            xlabel="Region"
+            ylabel="Number of States"
+            height={400}
+          />
+        ) : (
+          <p className="text-slate-400 text-center py-8">No regional distribution data available.</p>
+        )}
+      </Card>
+
+      {/* Temporal Coverage Evolution */}
+      <Card padding="lg" hover={false}>
+        <h3 className="text-base font-semibold text-slate-700 mb-3">Temporal Coverage Evolution</h3>
+        {temporalData.series.length > 0 ? (
+          <LineChart
+            series={temporalData.series}
+            xlabel="Year"
+            ylabel="Active Mapping"
+            height={350}
+            showMarkers={false}
+            fill="tozeroy"
+          />
+        ) : (
+          <p className="text-slate-400 text-center py-8">No temporal coverage data available.</p>
+        )}
+      </Card>
+
+      {/* Source Info */}
+      <Card padding="md" hover={false}>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h4 className="text-sm font-semibold text-slate-700">Data Source</h4>
+            <p className="text-xs text-slate-500">
+              {mappingData?.metadata?.source || 'CONAB'} &mdash;{' '}
+              {mappingData?.metadata?.description || 'Agricultural Mapping Data'}
+            </p>
+            <p className="text-xs text-slate-400 mt-1">
+              Spatial Resolution: {mappingDataDetailed?.metadata?.spatial_resolution || '30m'} |
+              Temporal Coverage: {mappingYears}
+            </p>
+          </div>
+          <a
+            href={sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-amber-700 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors"
+          >
+            <span>⬇</span>
+            Download Data
+          </a>
+        </div>
+      </Card>
+    </div>
+  );
+}
