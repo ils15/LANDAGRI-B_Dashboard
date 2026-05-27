@@ -1,9 +1,9 @@
 import Expandable from '../ui/Expandable';
 import type { SensorMap, SensorMetadata } from '../../types/sensor';
-import sensorsRaw from '../../data/processed/sensors.json';
 
 interface SensorInfoProps {
   sensorKeys: string[];
+  sensors: SensorMap;
 }
 
 function SensorCard({ sensorKey, sensor }: { sensorKey: string; sensor: SensorMetadata }) {
@@ -61,7 +61,7 @@ function SensorCard({ sensorKey, sensor }: { sensorKey: string; sensor: SensorMe
   );
 }
 
-export default function SensorInfo({ sensorKeys }: SensorInfoProps) {
+export default function SensorInfo({ sensorKeys, sensors }: SensorInfoProps) {
   if (sensorKeys.length === 0) {
     return (
       <p className="text-sm text-slate-400 italic">
@@ -69,8 +69,6 @@ export default function SensorInfo({ sensorKeys }: SensorInfoProps) {
       </p>
     );
   }
-
-  const sensors = sensorsRaw as unknown as SensorMap;
   const matchedSensors = sensorKeys
     .map((key) => ({ key, sensor: sensors[key] }))
     .filter((s): s is { key: string; sensor: SensorMetadata } => s.sensor !== undefined);

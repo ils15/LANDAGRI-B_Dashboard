@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useDashboardStore } from '../../stores/dashboardStore';
 import Card from '../ui/Card';
 import { formatNumber } from '../../lib/normalize';
@@ -5,20 +6,26 @@ import { formatNumber } from '../../lib/normalize';
 export default function SummaryCards() {
   const initiatives = useDashboardStore((s) => s.initiatives);
 
-  if (initiatives.length === 0) return null;
+  const metrics = useMemo(() => {
+    if (initiatives.length === 0) return null;
+    
+    const totalInitiatives = initiatives.length;
+    const avgAccuracy = initiatives.reduce((sum, i) => sum + i.Accuracy, 0) / totalInitiatives;
+    const avgResolution = initiatives.reduce((sum, i) => sum + i.Resolution, 0) / totalInitiatives;
+    const totalClasses = initiatives.reduce((sum, i) => sum + i.Number_of_Classes, 0);
+    const totalYears = new Set(initiatives.flatMap((i) => i.Available_Years)).size;
 
-  // Calculate aggregate metrics
-  const totalInitiatives = initiatives.length;
-  const avgAccuracy = initiatives.reduce((sum, i) => sum + i.Accuracy, 0) / totalInitiatives;
-  const avgResolution = initiatives.reduce((sum, i) => sum + i.Resolution, 0) / totalInitiatives;
-  const totalClasses = initiatives.reduce((sum, i) => sum + i.Number_of_Classes, 0);
-  const totalYears = new Set(initiatives.flatMap((i) => i.Available_Years)).size;
+    const coverageCounts: Record<string, number> = {};
+    initiatives.forEach((i) => {
+      coverageCounts[i.Coverage] = (coverageCounts[i.Coverage] || 0) + 1;
+    });
 
-  // Coverage distribution
-  const coverageCounts: Record<string, number> = {};
-  initiatives.forEach((i) => {
-    coverageCounts[i.Coverage] = (coverageCounts[i.Coverage] || 0) + 1;
-  });
+    return { totalInitiatives, avgAccuracy, avgResolution, totalClasses, totalYears, coverageCounts };
+  }, [initiatives]);
+
+  if (!metrics) return null;
+
+  const { totalInitiatives, avgAccuracy, avgResolution, totalClasses, totalYears, coverageCounts } = metrics;
 
   return (
     <div className="space-y-6">

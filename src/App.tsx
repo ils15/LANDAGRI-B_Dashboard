@@ -1,13 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DashboardLayout from './layouts/DashboardLayout';
-import OverviewPage from './pages/OverviewPage';
-import InitiativeAnalysisPage from './pages/InitiativeAnalysisPage';
-import AgriculturalAnalysisPage from './pages/AgriculturalAnalysisPage';
-import AboutPage from './pages/AboutPage';
 import { useInitiatives } from './hooks/useInitiatives';
 import ErrorBoundary from './components/ErrorBoundary';
+
+const OverviewPage = lazy(() => import('./pages/OverviewPage'));
+const InitiativeAnalysisPage = lazy(() => import('./pages/InitiativeAnalysisPage'));
+const AgriculturalAnalysisPage = lazy(() => import('./pages/AgriculturalAnalysisPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
 
 const queryClient = new QueryClient();
 
@@ -50,15 +51,24 @@ function AppContent() {
   }
 
   return (
-    <Routes>
-      <Route element={<DashboardLayout />}>
-        <Route path="/" element={<Navigate to="/overview" replace />} />
-        <Route path="/overview" element={<OverviewPage />} />
-        <Route path="/initiative-analysis/*" element={<InitiativeAnalysisPage />} />
-        <Route path="/agricultural-analysis/*" element={<AgriculturalAnalysisPage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen bg-slate-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto mb-3" />
+          <p className="text-slate-500">Carregando página...</p>
+        </div>
+      </div>
+    }>
+      <Routes>
+        <Route element={<DashboardLayout />}>
+          <Route path="/" element={<Navigate to="/overview" replace />} />
+          <Route path="/overview" element={<OverviewPage />} />
+          <Route path="/initiative-analysis/*" element={<InitiativeAnalysisPage />} />
+          <Route path="/agricultural-analysis/*" element={<AgriculturalAnalysisPage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
 

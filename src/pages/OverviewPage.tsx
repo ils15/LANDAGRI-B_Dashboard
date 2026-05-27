@@ -8,9 +8,10 @@ import LulcClasses from '../components/overview/LulcClasses';
 import TechnicalDetails from '../components/overview/TechnicalDetails';
 import SensorInfo from '../components/overview/SensorInfo';
 import AgriculturalCharts from '../components/overview/AgriculturalCharts';
+import type { SensorMap } from '../types/sensor';
 
 export default function OverviewPage() {
-  const { initiatives, selection, rawMetadata, setSelectedInitiative } = useDashboardStore();
+  const { initiatives, selection, sensors, setSelectedInitiative } = useDashboardStore();
 
   // Auto-select first initiative if none selected
   useEffect(() => {
@@ -74,7 +75,7 @@ export default function OverviewPage() {
               <TechnicalDetails data={selectedData} />
 
               <h3 className="text-lg font-bold text-slate-800 mb-3 mt-6">🛰️ Sensor Information</h3>
-              <SensorInfo sensorKeys={selectedData.Sensors} />
+              <SensorInfo sensorKeys={selectedData.Sensors} sensors={sensors as SensorMap} />
             </div>
           </div>
         </>

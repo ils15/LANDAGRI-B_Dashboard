@@ -25,6 +25,7 @@ export interface DashboardState {
   // Data
   initiatives: InitiativeRow[];
   rawMetadata: Record<string, unknown>;
+  sensors: Record<string, unknown>;
   isLoading: boolean;
   error: string | null;
 
@@ -47,6 +48,7 @@ export interface DashboardState {
 
   // Data actions
   setInitiatives: (data: InitiativeRow[], raw?: Record<string, unknown>) => void;
+  setSensorsData: (sensors: Record<string, unknown>) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
 
@@ -59,6 +61,7 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
   // Initial state
   initiatives: [],
   rawMetadata: {},
+  sensors: {},
   isLoading: false,
   error: null,
 
@@ -141,6 +144,8 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
       isLoading: false,
       error: null,
     }),
+
+  setSensorsData: (sensors) => set({ sensors }),
 
   setLoading: (loading) => set({ isLoading: loading }),
   setError: (error) => set({ error, isLoading: false }),

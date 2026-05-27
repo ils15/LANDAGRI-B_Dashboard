@@ -4,32 +4,49 @@ import { parseInitiatives } from '../lib/dataParser';
 import type { InitiativeMetadata, InitiativeRow } from '../types/initiative';
 import type { SensorMap } from '../types/sensor';
 
-// Import processed data (Vite handles JSON imports)
-import initiativesRaw from '../data/processed/initiatives.json';
-import sensorsRaw from '../data/processed/sensors.json';
+const BASE = '/LANDAGRI-B_Dashboard';
 
 /**
- * Hook to load and parse initiative data on mount
+ * Hook to load and parse initiative data on mount using fetch (not import)
  */
 export function useInitiatives() {
-  const { setInitiatives, setLoading, setError, initiatives, isLoading, error } = useDashboardStore();
+  const { setInitiatives, setSensorsData, setLoading, setError, initiatives, isLoading, error } = useDashboardStore();
   const [sensors, setSensors] = useState<SensorMap>({});
 
   useEffect(() => {
-    try {
-      setLoading(true);
-      const metadata = initiativesRaw as unknown as Record<string, InitiativeMetadata>;
-      const parsed = parseInitiatives(metadata);
-      setInitiatives(parsed, metadata);
-
-      // Load sensors
-      const sensorData = sensorsRaw as unknown as SensorMap;
-      setSensors(sensorData);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to load data';
-      setError(message);
+    let cancelled = false;
+    
+    async function loadData() {
+      try {
+        setLoading(true);
+        
+        const [initiativesData, sensorsData] = await Promise.all([
+          fetch(`${BASE}/data/processed/initiatives.json`).then(r => r.json()),
+          fetch(`${BASE}/data/processed/sensors.json`).then(r => r.json()),
+        ]);
+        
+        if (cancelled) return;
+        
+        const metadata = initiativesData as unknown as Record<string, InitiativeMetadata>;
+        const parsed = parseInitiatives(metadata);
+        
+        if (!cancelled) {
+          setInitiatives(parsed, metadata);
+          setSensorsData(sensorsData as unknown as SensorMap);
+          setSensors(sensorsData as unknown as SensorMap);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          const message = err instanceof Error ? err.message : 'Failed to load data';
+          setError(message);
+        }
+      }
     }
-  }, [setInitiatives, setLoading, setError]);
+    
+    loadData();
+    
+    return () => { cancelled = true; };
+  }, [setInitiatives, setSensorsData, setLoading, setError]);
 
   return { initiatives, sensors, isLoading, error };
 }
