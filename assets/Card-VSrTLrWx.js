@@ -1,3 +1,0 @@
-import{v as e}from"./vendor-BEowOna1.js";var t=e();function n({children:e,className:n=``,padding:r=`md`,hover:i=!0}){return(0,t.jsx)(`div`,{className:`rounded-xl border ${i?`hover:-translate-y-0.5`:``}
-        ${{sm:`p-4`,md:`p-5`,lg:`p-6`}[r]}
-        transition-all duration-300 ${n}`,style:{backgroundColor:`var(--color-surface)`,borderColor:`var(--color-border)`,boxShadow:`var(--color-shadow-sm)`,...i?{transitionProperty:`background-color, border-color, box-shadow, transform`}:{}},onMouseEnter:e=>{i&&(e.currentTarget.style.boxShadow=`var(--color-shadow)`)},onMouseLeave:e=>{i&&(e.currentTarget.style.boxShadow=`var(--color-shadow-sm)`)},children:e})}export{n as t};

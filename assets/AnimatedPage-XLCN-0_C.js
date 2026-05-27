@@ -1,0 +1,1 @@
+import{U as e,u as t}from"./vendor-CktARBNe.js";var n=e(),r={initial:{opacity:0,y:16},animate:{opacity:1,y:0,transition:{duration:.3,ease:`easeOut`}},exit:{opacity:0,y:-16,transition:{duration:.2,ease:`easeIn`}}};function i({children:e,className:i}){return(0,n.jsx)(t.div,{variants:r,initial:`initial`,animate:`animate`,exit:`exit`,className:i,children:e})}export{i as t};
