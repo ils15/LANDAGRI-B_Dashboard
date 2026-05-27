@@ -37,10 +37,7 @@ export default function DashboardLayout() {
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main content */}
-      <main
-        className="flex-1 min-w-0 overflow-auto"
-        style={{ padding: 'clamp(1rem, 3vw, 2rem)' }}
-      >
+      <main className="flex-1 min-w-0 overflow-auto">
         {/* Breadcrumb */}
         {activeCategory && (
           <Breadcrumbs
@@ -50,8 +47,8 @@ export default function DashboardLayout() {
         )}
 
         {/* Page content with padding for mobile menu button */}
-        <div className="pt-12 lg:pt-0">
-          <div className="mx-auto" style={{ maxWidth: '1600px' }}>
+        <div className="pt-12 lg:pt-0 w-full flex justify-center">
+          <div className="w-full" style={{ maxWidth: '1600px', paddingLeft: 'clamp(0.5rem, 2vw, 2rem)', paddingRight: 'clamp(0.5rem, 2vw, 2rem)' }}>
             <PageTransition>
               <Outlet />
             </PageTransition>

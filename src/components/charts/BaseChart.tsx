@@ -41,13 +41,13 @@ export default function BaseChart({
 
   return (
     <div
-      className="w-full min-h-[300px] rounded-xl"
+      className="w-full rounded-xl p-3"
       style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
     >
       <div
         ref={containerRef}
         className={`w-full ${className}`}
-        style={{ width: '100%', height: '100%', minHeight: '300px' }}
+        style={{ width: '100%', height: '100%', minHeight: '350px' }}
       />
     </div>
   );

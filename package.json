@@ -25,6 +25,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.400.0",
     "papaparse": "^5.5.3",
+    "playwright": "^1.60.0",
     "plotly.js-dist-min": "^2.35.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
