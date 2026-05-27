@@ -16,8 +16,7 @@
     "lint:fix": "eslint src/ --fix",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "test:staged": "vitest run --reporter=verbose --changed",
-    "prepare": "husky"
+    "test:staged": "vitest run --reporter=verbose --changed"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.14",

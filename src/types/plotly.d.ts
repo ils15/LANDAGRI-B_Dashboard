@@ -362,3 +362,12 @@ declare module 'react-plotly.js' {
   const PlotComponent: React.FC<PlotParams>;
   export default PlotComponent;
 }
+
+declare module 'plotly.js-dist-min' {
+  import type { Data, Layout, Config } from 'plotly.js';
+  const Plotly: {
+    react(container: HTMLElement, data: Data[], layout: Partial<Layout>, config: Partial<Config>): void;
+    purge(container: HTMLElement): void;
+  };
+  export default Plotly;
+}
