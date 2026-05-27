@@ -1,0 +1,583 @@
+{
+  "config": {
+    "configFile": "/home/ils15/teste_dir/landagri-b-react/playwright.config.ts",
+    "rootDir": "/home/ils15/teste_dir/landagri-b-react/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/ils15/teste_dir/landagri-b-react/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/ils15/teste_dir/landagri-b-react/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.60.0",
+    "workers": 3,
+    "webServer": {
+      "command": "npm run build && npm run preview",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": true,
+      "timeout": 60000,
+      "cwd": "/home/ils15/teste_dir/landagri-b-react"
+    }
+  },
+  "suites": [
+    {
+      "title": "tests/p0-smoke.spec.ts",
+      "file": "tests/p0-smoke.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "P0 - Smoke Tests (Critical Path)",
+          "file": "tests/p0-smoke.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "App loads with no console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-624200dc4020a0eac222",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "Overview page loads and shows content",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-d8c78083a4640bb209a5",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 21,
+              "column": 3
+            },
+            {
+              "title": "Navigation to /LANDAGRI-B_Dashboard/ works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-7fb3d9908eba119286f2",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 30,
+              "column": 5
+            },
+            {
+              "title": "Navigation to /LANDAGRI-B_Dashboard/initiative-analysis works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-fa2bc1881f8e5b8ffe5f",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 30,
+              "column": 5
+            },
+            {
+              "title": "Navigation to /LANDAGRI-B_Dashboard/agricultural-analysis works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-f9a1765f9e5e483dc32e",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 30,
+              "column": 5
+            },
+            {
+              "title": "Navigation to /LANDAGRI-B_Dashboard/about works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-077763aea3882a4b75f4",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 30,
+              "column": 5
+            },
+            {
+              "title": "Sidebar navigation is visible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-65940215c01b6c5ac828",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 46,
+              "column": 3
+            },
+            {
+              "title": "No broken routes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-7625f6421e2c57246e0c",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 54,
+              "column": 3
+            },
+            {
+              "title": "Plotly charts render on overview page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-7efb21fb5846c3657f89",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 67,
+              "column": 3
+            },
+            {
+              "title": "Page has a title",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3082f92e2f67575f0f9f-d4cddb0e06ee4ce8982a",
+              "file": "tests/p0-smoke.spec.ts",
+              "line": 76,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/p1-modules.spec.ts",
+      "file": "tests/p1-modules.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "P1 - Module Tests",
+          "file": "tests/p1-modules.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "Overview Module",
+              "file": "tests/p1-modules.spec.ts",
+              "line": 6,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "Metric cards are displayed",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-8dac684273139d340678",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 7,
+                  "column": 5
+                },
+                {
+                  "title": "Charts have data in traces",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-c6a373d3028553fdf177",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 17,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Initiative Analysis Module",
+              "file": "tests/p1-modules.spec.ts",
+              "line": 33,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "Page loads content",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-62c076fa5439e429a27e",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 34,
+                  "column": 5
+                },
+                {
+                  "title": "Charts render on initiative page",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-596f03d39c045271d4a5",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 43,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Agricultural Analysis Module",
+              "file": "tests/p1-modules.spec.ts",
+              "line": 53,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "Page loads content",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-e381e85f2ef3882c8db0",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 54,
+                  "column": 5
+                },
+                {
+                  "title": "Charts render on agricultural page",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-b8809c8dec5f3dbadf1a",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 63,
+                  "column": 5
+                },
+                {
+                  "title": "Leaflet map container exists",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-1e751ce0e5bba287ec4d",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 72,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "About Module",
+              "file": "tests/p1-modules.spec.ts",
+              "line": 85,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "Page loads content",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "e3a05c8ce20a4194f5a4-004a827bab4125c625e3",
+                  "file": "tests/p1-modules.spec.ts",
+                  "line": 86,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tests/p2-visual.spec.ts",
+      "file": "tests/p2-visual.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "P2 - Visual Tests",
+          "file": "tests/p2-visual.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Dashboard layout matches expected structure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "16fea4b64a459ae6c8bd-7746ca6a628e39acf916",
+              "file": "tests/p2-visual.spec.ts",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "Dark mode toggle works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "16fea4b64a459ae6c8bd-220f22ee65b45c3fe727",
+              "file": "tests/p2-visual.spec.ts",
+              "line": 21,
+              "column": 3
+            },
+            {
+              "title": "Charts have proper dimensions on desktop",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "16fea4b64a459ae6c8bd-fb9dee41b6ae8888b6d9",
+              "file": "tests/p2-visual.spec.ts",
+              "line": 33,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-05-27T20:23:32.930Z",
+    "duration": 93.245,
+    "expected": 0,
+    "skipped": 21,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

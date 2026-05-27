@@ -16,7 +16,10 @@
     "lint:fix": "eslint src/ --fix",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "test:staged": "vitest run --reporter=verbose --changed"
+    "test:staged": "vitest run --reporter=verbose --changed",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.14",
@@ -25,7 +28,6 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.400.0",
     "papaparse": "^5.5.3",
-    "playwright": "^1.60.0",
     "plotly.js-dist-min": "^2.35.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
@@ -36,6 +38,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.3.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",

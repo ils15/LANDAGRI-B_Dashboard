@@ -10,6 +10,7 @@ interface MetricCardProps {
 export default function MetricCard({ icon, label, value, help, variant = 'accuracy', className = '' }: MetricCardProps) {
   return (
     <div
+      data-testid="metric-card"
       className={`rounded-xl p-4 flex flex-col items-center min-h-[120px] shadow-sm hover:scale-105 transition-all duration-300 ${className}`}
       style={{
         background: `var(--gradient-${variant})`,
