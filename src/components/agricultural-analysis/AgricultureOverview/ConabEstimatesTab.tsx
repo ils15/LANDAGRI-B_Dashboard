@@ -22,6 +22,8 @@ interface CropData {
 interface ConabAgriData {
   metadata?: {
     source?: string;
+    description?: string;
+    source_url?: string;
     unit_production?: string;
     unit_area?: string;
     total_crops?: number;

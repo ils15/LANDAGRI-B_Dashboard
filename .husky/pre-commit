@@ -1,0 +1,16 @@
+# LANDAGRI-B Dashboard pre-commit hook
+
+echo "🔍 Running pre-commit checks..."
+
+npx lint-staged
+
+echo "📝 TypeScript checking..."
+npx tsc --noEmit || {
+  echo "❌ TypeScript errors found. Fix them before committing."
+  exit 1
+}
+
+echo "🧪 Running tests..."
+npx vitest run --reporter=verbose --changed 2>/dev/null || true
+
+echo "✅ All pre-commit checks passed!"

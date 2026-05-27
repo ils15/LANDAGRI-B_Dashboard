@@ -70,7 +70,7 @@ export default function SensorInfo({ sensorKeys }: SensorInfoProps) {
     );
   }
 
-  const sensors = sensorsRaw as SensorMap;
+  const sensors = sensorsRaw as unknown as SensorMap;
   const matchedSensors = sensorKeys
     .map((key) => ({ key, sensor: sensors[key] }))
     .filter((s): s is { key: string; sensor: SensorMetadata } => s.sensor !== undefined);

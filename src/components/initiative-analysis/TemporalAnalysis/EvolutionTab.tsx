@@ -61,7 +61,7 @@ export default function EvolutionTab({ data }: EvolutionTabProps) {
       color: activeByYear.map((d) => (d.year === peakYear ? '#f59e0b' : '#14b8a6')),
       size: activeByYear.map((d) => (d.year === peakYear ? 14 : 6)),
       symbol: activeByYear.map((d) => (d.year === peakYear ? 'star' : 'circle')),
-      line: activeByYear.map((d) => (d.year === peakYear ? { width: 2, color: '#d97706' } : undefined)),
+      line: activeByYear.map((d) => (d.year === peakYear ? { width: 2, color: '#d97706' } : { width: 0 })) as unknown as Partial<{ color: string; width: number }>,
     },
     fill: 'tozeroy',
     fillcolor: 'rgba(20,184,166,0.15)',

@@ -28,8 +28,8 @@ export default function GroupedBarChart({
 
   const layout: Partial<Layout> = {
     title: title ? { text: title, x: 0.5 } : undefined,
-    xaxis: { title: xlabel, tickangle: -45 },
-    yaxis: { title: ylabel },
+    xaxis: { title: { text: xlabel }, tickangle: -45 },
+    yaxis: { title: { text: ylabel } },
     barmode,
     showlegend: true,
     legend: { orientation: 'h', y: -0.2 },

@@ -33,8 +33,8 @@ export default function HistogramChart({
       data={[trace]}
       layout={{
         title: { text: title || '', x: 0 },
-        xaxis: { title: xLabel },
-        yaxis: { title: yLabel },
+        xaxis: { title: { text: xLabel } },
+        yaxis: { title: { text: yLabel } },
         bargap: 0.1,
         showlegend,
         ...(height ? { height } : {}),

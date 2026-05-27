@@ -26,7 +26,7 @@ export default function CoverageTab({ data }: CoverageTabProps) {
     const allYears = data.flatMap((d) => d.years);
     const yearMin = Math.min(...allYears);
     const yearMax = Math.max(...allYears);
-    const years = [];
+    const years: number[] = [];
     for (let y = yearMin; y <= yearMax; y++) years.push(y);
 
     const sorted = [...data].sort((a, b) => a.firstYear - b.firstYear || a.displayName.localeCompare(b.displayName));

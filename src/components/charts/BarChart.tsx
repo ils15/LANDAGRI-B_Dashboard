@@ -3,8 +3,8 @@ import type { Data, Layout } from 'plotly.js';
 import { CATEGORICAL_COLORS } from '../../types/theme';
 
 interface BarChartProps {
-  x: (string | number)[];
-  y: (number | null)[];
+  x: (string | number | null)[];
+  y: (number | string | null)[];
   name?: string;
   title?: string;
   xlabel?: string;
@@ -35,8 +35,8 @@ export default function BarChart({
 
   const layout: Partial<Layout> = {
     title: title ? { text: title, x: 0.5 } : undefined,
-    xaxis: { title: xlabel, tickangle: orientation === 'v' ? -45 : 0 },
-    yaxis: { title: ylabel },
+    xaxis: { title: { text: xlabel }, tickangle: orientation === 'v' ? -45 : 0 },
+    yaxis: { title: { text: ylabel } },
     showlegend: showLegend,
     ...extraLayout,
   };

@@ -44,8 +44,8 @@ export default function LineChart({
 
   const layout: Partial<Layout> = {
     title: title ? { text: title, x: 0.5 } : undefined,
-    xaxis: { title: xlabel, tickangle: -45 },
-    yaxis: { title: ylabel },
+    xaxis: { title: { text: xlabel }, tickangle: -45 },
+    yaxis: { title: { text: ylabel } },
     showlegend: true,
     legend: { orientation: 'h', y: -0.3 },
     hovermode: 'x unified',

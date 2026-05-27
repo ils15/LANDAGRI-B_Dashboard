@@ -49,7 +49,7 @@ export default function GanttChart({
     title: title ? { text: title, x: 0.5 } : undefined,
     xaxis: { title: xlabel || 'Period (month)' },
     yaxis: {
-      title: ylabel,
+      title: { text: ylabel },
       automargin: true,
       categoryorder: 'array',
       categoryarray: bars.map(b => b.label).reverse(),

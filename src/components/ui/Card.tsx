@@ -5,6 +5,7 @@ interface CardProps {
   className?: string;
   padding?: 'sm' | 'md' | 'lg';
   hover?: boolean;
+  title?: string;
 }
 
 export default function Card({ children, className = '', padding = 'md', hover = true }: CardProps) {

@@ -24,7 +24,7 @@ export default function AgriculturalCharts() {
   useEffect(() => {
     try {
       const data = brazilianAgriData as Record<string, unknown>;
-      const producao = data?.data?.producao_agricola as Record<string, ProductEntry> | undefined;
+      const producao = (data as Record<string, Record<string, Record<string, ProductEntry>>>)?.data?.producao_agricola;
 
       if (!producao) return;
 

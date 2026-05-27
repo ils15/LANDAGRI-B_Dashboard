@@ -1,16 +1,11 @@
-# Pre-commit hooks para Dashboard LULC
-repos:
-  # Ruff - Linting e formatação Python
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.4
-    hooks:
-      - id: ruff
-        args: [--fix, --exit-non-zero-on-fix]
-      - id: ruff-format
+# Pre-commit hooks for LANDAGRI-B Dashboard React
+# Uses husky + lint-staged for JS/TS linting
+# See .husky/pre-commit for the actual hook logic
 
-  # Hooks básicos
+repos:
+  # Basic file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -18,37 +13,15 @@ repos:
       - id: check-json
       - id: check-merge-conflict
       - id: check-added-large-files
-        args: ['--maxkb=500']
+        args: ['--maxkb=5000']
       - id: check-case-conflict
-      - id: check-docstring-first
       - id: debug-statements
+      - id: detect-private-key
 
-  # Black - Formatação Python (backup)
-  - repo: https://github.com/psf/black
-    rev: 25.1.0
-    hooks:
-      - id: black
-        language_version: python3.12
-        args: [--line-length=88]
-
-  # isort - Organização de imports
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-        args: [--profile=black, --line-length=88]
-
-# Configuração geral
-default_stages: [pre-commit]
-fail_fast: true  # Para no primeiro erro ao invés de mostrar todos
-
-# Excluir arquivos/diretórios específicos
 exclude: |
   (?x)^(
-    cache/.*|
-    backups/.*|
-    graphics/.*|
-    \.git/.*|
-    \.ruff_cache/.*|
-    __pycache__/.*
+    src/data/processed/.*|
+    node_modules/.*|
+    dist/.*|
+    .husky/.*
   )$

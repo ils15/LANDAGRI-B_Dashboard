@@ -1,5 +1,5 @@
 import BaseChart from './BaseChart';
-import type { Data, Layout } from 'plotly.js';
+import type { Data, Layout, ColorScale } from 'plotly.js';
 
 interface HeatmapChartProps {
   z: (number | null)[][];
@@ -9,7 +9,7 @@ interface HeatmapChartProps {
   xlabel?: string;
   ylabel?: string;
   height?: number;
-  colorscale?: string | string[][];
+  colorscale?: ColorScale;
   zmin?: number;
   zmax?: number;
   showScale?: boolean;
@@ -48,8 +48,8 @@ export default function HeatmapChart({
 
   const layout: Partial<Layout> = {
     title: title ? { text: title, x: 0.5 } : undefined,
-    xaxis: { title: xlabel, tickangle: -45 },
-    yaxis: { title: ylabel },
+    xaxis: { title: { text: xlabel }, tickangle: -45 },
+    yaxis: { title: { text: ylabel } },
     ...extraLayout,
   };
 

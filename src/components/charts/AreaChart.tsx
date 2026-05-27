@@ -35,8 +35,8 @@ export default function AreaChart({
       data={[trace]}
       layout={{
         title: { text: title || '', x: 0 },
-        xaxis: { title: xLabel },
-        yaxis: { title: yLabel },
+  xaxis: { title: { text: xLabel } },
+  yaxis: { title: { text: yLabel } },
         showlegend,
         ...(height ? { height } : {}),
       }}

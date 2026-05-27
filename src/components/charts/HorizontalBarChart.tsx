@@ -2,7 +2,7 @@ import BarChart from './BarChart';
 
 interface HorizontalBarChartProps {
   y: (string | number)[];
-  x: (number | null)[];
+  x: (number | null | string)[];
   name?: string;
   title?: string;
   xlabel?: string;

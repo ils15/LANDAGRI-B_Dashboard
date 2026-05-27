@@ -35,8 +35,8 @@ export default function ScatterChart({
       data={[trace]}
       layout={{
         title: { text: title || '', x: 0 },
-        xaxis: { title: xLabel },
-        yaxis: { title: yLabel },
+        xaxis: { title: { text: xLabel } },
+        yaxis: { title: { text: yLabel } },
         ...(height ? { height } : {}),
       }}
     />
