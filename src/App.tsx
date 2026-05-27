@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
-import DashboardLayout from './layouts/DashboardLayout';
+import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
 import { useInitiatives } from './hooks/useInitiatives';
 
@@ -11,9 +11,26 @@ import { useInitiatives } from './hooks/useInitiatives';
 const OverviewPage = lazy(() => import('./pages/OverviewPage'));
 const InitiativeAnalysisPage = lazy(() => import('./pages/InitiativeAnalysisPage'));
 const AgriculturalAnalysisPage = lazy(() => import('./pages/AgriculturalAnalysisPage'));
+const PredictivePage = lazy(() => import('./pages/PredictivePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 
 const queryClient = new QueryClient();
+
+function LoadingSpinner({ message = 'Carregando...' }: { message?: string }) {
+  return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="text-center">
+        <div
+          className="animate-spin rounded-full h-10 w-10 border-b-2 mx-auto mb-3"
+          style={{ borderColor: 'var(--color-primary)' }}
+        />
+        <p style={{ color: 'var(--color-text-muted)' }} className="text-sm">
+          {message}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 function AppContent() {
   const navigate = useNavigate();
@@ -31,53 +48,52 @@ function AppContent() {
   const { isLoading, error } = useInitiatives();
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-secondary">
-        <div className="text-center">
-          <div
-            className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4"
-            style={{ borderColor: 'var(--color-primary)' }}
-          />
-          <p className="text-secondary text-lg">Carregando dados do dashboard...</p>
-        </div>
-      </div>
-    );
+    return <LoadingSpinner message="Carregando dados do dashboard..." />;
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-secondary">
+      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="text-center max-w-md">
-          <div className="text-5xl mb-4" style={{ color: 'var(--color-error)' }}>⚠</div>
-          <h2 className="text-xl font-bold text-primary mb-2">Erro ao carregar dados</h2>
-          <p className="text-secondary">{error}</p>
+          <div className="text-4xl mb-4" style={{ color: 'var(--color-error)' }}>⚠</div>
+          <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+            Erro ao carregar dados
+          </h2>
+          <p style={{ color: 'var(--color-text-secondary)' }}>{error}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <Suspense fallback={
-      <div className="flex items-center justify-center min-h-screen bg-secondary">
-        <div className="text-center">
-          <div
-            className="animate-spin rounded-full h-10 w-10 border-b-2 mx-auto mb-3"
-            style={{ borderColor: 'var(--color-primary)' }}
-          />
-          <p className="text-muted">Carregando página...</p>
+    <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh' }}>
+      <Header />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<OverviewPage />} />
+            <Route path="/overview" element={<OverviewPage />} />
+            <Route path="/initiative-analysis/*" element={<InitiativeAnalysisPage />} />
+            <Route path="/agricultural-analysis/*" element={<AgriculturalAnalysisPage />} />
+            <Route path="/predictive" element={<PredictivePage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </Suspense>
+      </main>
+
+      <footer
+        className="border-t py-6 mt-12 text-center text-xs"
+        style={{
+          borderColor: 'var(--color-border)',
+          color: 'var(--color-text-muted)',
+          backgroundColor: 'var(--color-bg-secondary)',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4">
+          <p>© 2026 LANDAGRI-B Dashboard — Dados: MapBiomas & IBGE</p>
         </div>
-      </div>
-    }>
-      <Routes>
-        <Route element={<DashboardLayout />}>
-          <Route path="/" element={<Navigate to="/overview" replace />} />
-          <Route path="/overview" element={<OverviewPage />} />
-          <Route path="/initiative-analysis/*" element={<InitiativeAnalysisPage />} />
-          <Route path="/agricultural-analysis/*" element={<AgriculturalAnalysisPage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Route>
-      </Routes>
-    </Suspense>
+      </footer>
+    </div>
   );
 }
 
@@ -86,11 +102,11 @@ export default function App() {
     <ErrorBoundary>
       <ThemeProvider>
         <ToastProvider>
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter basename="/LANDAGRI-B_Dashboard">
-            <AppContent />
-          </BrowserRouter>
-        </QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+            <BrowserRouter basename="/LANDAGRI-B_Dashboard">
+              <AppContent />
+            </BrowserRouter>
+          </QueryClientProvider>
         </ToastProvider>
       </ThemeProvider>
     </ErrorBoundary>

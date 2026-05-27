@@ -63,10 +63,6 @@ export class BasePage {
     }, chartIndex);
   }
 
-  async getSidebar() {
-    return this.page.locator('aside');
-  }
-
   async isMobileView() {
     const viewport = this.page.viewportSize();
     return viewport ? viewport.width < 768 : false;

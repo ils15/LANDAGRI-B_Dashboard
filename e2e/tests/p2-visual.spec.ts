@@ -8,10 +8,10 @@ test.describe('P2 - Visual Tests', () => {
     await bp.navigate(ROUTES.overview);
     await page.waitForTimeout(2000);
 
-    const sidebar = page.locator('aside');
+    const header = page.locator('header');
     const main = page.locator('main');
 
-    await expect(sidebar).toBeVisible();
+    await expect(header).toBeVisible();
     await expect(main).toBeVisible();
 
     const mainChildren = await main.locator('> *').count();
