@@ -55,14 +55,17 @@
       "max": 5,
       "threshold": 300000
     },
-    "shard": null,
+    "shard": {
+      "current": 1,
+      "total": 2
+    },
     "tags": [],
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.60.0",
     "workers": 3,
     "webServer": {
-      "command": "npm run build && npm run preview",
+      "command": "npx vite preview --port 4173",
       "url": "http://localhost:4173",
       "reuseExistingServer": true,
       "timeout": 60000,
@@ -99,12 +102,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2570,
+                      "duration": 2972,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:38:54.644Z",
+                      "startTime": "2026-05-28T20:30:12.670Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -133,12 +136,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 2587,
+                      "duration": 3030,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:38:54.687Z",
+                      "startTime": "2026-05-28T20:30:12.618Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -167,12 +170,12 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 4620,
+                      "duration": 5001,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:38:54.663Z",
+                      "startTime": "2026-05-28T20:30:12.652Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -201,12 +204,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4446,
+                      "duration": 4409,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:38:57.316Z",
+                      "startTime": "2026-05-28T20:30:15.953Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -235,12 +238,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 4433,
+                      "duration": 4430,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:38:57.391Z",
+                      "startTime": "2026-05-28T20:30:16.022Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -269,12 +272,12 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 4290,
+                      "duration": 4319,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:38:59.384Z",
+                      "startTime": "2026-05-28T20:30:18.019Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -303,12 +306,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4344,
+                      "duration": 4432,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:39:01.770Z",
+                      "startTime": "2026-05-28T20:30:20.379Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -337,12 +340,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 3258,
+                      "duration": 3375,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:39:01.832Z",
+                      "startTime": "2026-05-28T20:30:20.471Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -371,12 +374,12 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 5282,
+                      "duration": 5356,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:39:03.686Z",
+                      "startTime": "2026-05-28T20:30:22.352Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -405,12 +408,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 2287,
+                      "duration": 2311,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-27T22:39:05.107Z",
+                      "startTime": "2026-05-28T20:30:23.855Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -463,12 +466,12 @@
                           "workerIndex": 0,
                           "parallelIndex": 0,
                           "status": "passed",
-                          "duration": 7313,
+                          "duration": 7328,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
                           "retry": 0,
-                          "startTime": "2026-05-27T22:39:06.128Z",
+                          "startTime": "2026-05-28T20:30:24.825Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -480,389 +483,8 @@
                   "file": "tests/p1-modules.spec.ts",
                   "line": 7,
                   "column": 5
-                },
-                {
-                  "title": "Charts have data in traces",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 1,
-                          "status": "passed",
-                          "duration": 5318,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-05-27T22:39:07.405Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "e3a05c8ce20a4194f5a4-c6a373d3028553fdf177",
-                  "file": "tests/p1-modules.spec.ts",
-                  "line": 17,
-                  "column": 5
                 }
               ]
-            },
-            {
-              "title": "Initiative Analysis Module",
-              "file": "tests/p1-modules.spec.ts",
-              "line": 33,
-              "column": 8,
-              "specs": [
-                {
-                  "title": "Page loads content",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 2,
-                          "status": "passed",
-                          "duration": 7296,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-05-27T22:39:08.980Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "e3a05c8ce20a4194f5a4-62c076fa5439e429a27e",
-                  "file": "tests/p1-modules.spec.ts",
-                  "line": 34,
-                  "column": 5
-                },
-                {
-                  "title": "Charts render on initiative page",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 1,
-                          "status": "passed",
-                          "duration": 5280,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-05-27T22:39:12.732Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "e3a05c8ce20a4194f5a4-596f03d39c045271d4a5",
-                  "file": "tests/p1-modules.spec.ts",
-                  "line": 43,
-                  "column": 5
-                }
-              ]
-            },
-            {
-              "title": "Agricultural Analysis Module",
-              "file": "tests/p1-modules.spec.ts",
-              "line": 53,
-              "column": 8,
-              "specs": [
-                {
-                  "title": "Page loads content",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 7316,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-05-27T22:39:13.449Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "e3a05c8ce20a4194f5a4-e381e85f2ef3882c8db0",
-                  "file": "tests/p1-modules.spec.ts",
-                  "line": 54,
-                  "column": 5
-                },
-                {
-                  "title": "Charts render on agricultural page",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 2,
-                          "status": "passed",
-                          "duration": 5336,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-05-27T22:39:16.284Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "e3a05c8ce20a4194f5a4-b8809c8dec5f3dbadf1a",
-                  "file": "tests/p1-modules.spec.ts",
-                  "line": 63,
-                  "column": 5
-                },
-                {
-                  "title": "Leaflet map container exists",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 1,
-                          "status": "passed",
-                          "duration": 7277,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-05-27T22:39:18.020Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "e3a05c8ce20a4194f5a4-1e751ce0e5bba287ec4d",
-                  "file": "tests/p1-modules.spec.ts",
-                  "line": 72,
-                  "column": 5
-                }
-              ]
-            },
-            {
-              "title": "About Module",
-              "file": "tests/p1-modules.spec.ts",
-              "line": 85,
-              "column": 8,
-              "specs": [
-                {
-                  "title": "Page loads content",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 7202,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-05-27T22:39:20.776Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "e3a05c8ce20a4194f5a4-004a827bab4125c625e3",
-                  "file": "tests/p1-modules.spec.ts",
-                  "line": 86,
-                  "column": 5
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "tests/p2-visual.spec.ts",
-      "file": "tests/p2-visual.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "P2 - Visual Tests",
-          "file": "tests/p2-visual.spec.ts",
-          "line": 5,
-          "column": 6,
-          "specs": [
-            {
-              "title": "Dashboard layout matches expected structure",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 4723,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-05-27T22:39:21.659Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "16fea4b64a459ae6c8bd-7746ca6a628e39acf916",
-              "file": "tests/p2-visual.spec.ts",
-              "line": 6,
-              "column": 3
-            },
-            {
-              "title": "Dark mode toggle works",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
-                      "status": "passed",
-                      "duration": 2291,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-05-27T22:39:24.730Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "16fea4b64a459ae6c8bd-220f22ee65b45c3fe727",
-              "file": "tests/p2-visual.spec.ts",
-              "line": 21,
-              "column": 3
-            },
-            {
-              "title": "Charts have proper dimensions on desktop",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 5343,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-05-27T22:39:25.810Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "16fea4b64a459ae6c8bd-fb9dee41b6ae8888b6d9",
-              "file": "tests/p2-visual.spec.ts",
-              "line": 33,
-              "column": 3
             }
           ]
         }
@@ -871,9 +493,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-05-27T22:38:47.594Z",
-    "duration": 44362.479,
-    "expected": 21,
+    "startTime": "2026-05-28T20:30:10.561Z",
+    "duration": 21641.596999999998,
+    "expected": 11,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

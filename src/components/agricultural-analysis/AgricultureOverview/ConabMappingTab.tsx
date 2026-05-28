@@ -32,7 +32,26 @@ interface ConabMappingDataType {
   crops_mapping?: Record<string, CropMappingEntry>;
 }
 
+// Types for JSON imports
+interface CalendarEntry {
+  state_code: string;
+  state_name: string;
+  region: string;
+  calendar: Record<string, string>;
+}
 
+interface MappingDataType {
+  metadata?: {
+    source?: string;
+    description?: string;
+    seasons?: Record<string, { period: string; months: string[] }>;
+    legend?: Record<string, string>;
+  };
+  states?: Record<string, StateInfo>;
+  crop_calendar?: Record<string, CalendarEntry[]>;
+}
+
+type MappingData = MappingDataType;
 export default function ConabMappingTab() {
   const mappingData = conabMapping as MappingData;
   const mappingDataDetailed = conabMappingData as ConabMappingDataType;

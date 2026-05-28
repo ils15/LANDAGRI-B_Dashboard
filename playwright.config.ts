@@ -28,6 +28,5 @@ export default defineConfig({
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 60000,
-    cwd: '/home/ils15/teste_dir/landagri-b-react',
   },
 });
