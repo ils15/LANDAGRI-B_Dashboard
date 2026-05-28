@@ -11,24 +11,6 @@ interface StateInfo {
   region: string;
 }
 
-interface CalendarEntry {
-  state_code: string;
-  state_name: string;
-  region: string;
-  calendar: Record<string, string>;
-}
-
-interface ConabMappingType {
-  metadata?: {
-    source?: string;
-    description?: string;
-    seasons?: Record<string, { period: string; months: string[] }>;
-    legend?: Record<string, string>;
-  };
-  states?: Record<string, StateInfo>;
-  crop_calendar?: Record<string, CalendarEntry[]>;
-}
-
 interface CropMappingEntry {
   name: string;
   scientific_name?: string;
@@ -50,8 +32,6 @@ interface ConabMappingDataType {
   crops_mapping?: Record<string, CropMappingEntry>;
 }
 
-type MappingData = ConabMappingType;
-type MappingDataDetailed = ConabMappingDataType;
 
 export default function ConabMappingTab() {
   const mappingData = conabMapping as MappingData;

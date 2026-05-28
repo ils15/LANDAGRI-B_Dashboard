@@ -12,7 +12,7 @@ interface RadarTabProps {
 export default function RadarTab({ selectedInitiatives }: RadarTabProps) {
   const initiatives = useDashboardStore((s) => s.initiatives);
 
-  const { traces, theta } = useMemo(() => {
+  const { traces } = useMemo(() => {
     const thetaLabels = ['Overall Accuracy', 'Spatial Resolution', 'Total Classes', 'Agriculture Classes'];
     const filtered = initiatives
       .filter((i) => selectedInitiatives.includes(i.Name))

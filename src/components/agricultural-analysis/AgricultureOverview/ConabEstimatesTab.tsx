@@ -94,9 +94,9 @@ export default function ConabEstimatesTab() {
     if (!crops) return { categories: [], series: [] };
     const seasons = ['2018/19', '2019/20', '2020/21', '2021/22', '2022/23', '2023/24'];
 
-    const productionSeries = Object.entries(crops).map(([key, crop]) => ({
+    const productionSeries = Object.entries(crops).map(([, crop]) => ({
       name: crop.name,
-      values: seasons.map(s => {
+      values: seasons.map((s) => {
         const pd = crop.production_data;
         return pd && pd[s] ? pd[s].production : 0;
       }),

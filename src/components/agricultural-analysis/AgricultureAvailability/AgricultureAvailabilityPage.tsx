@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Tabs from '../../ui/Tabs';
 import Card from '../../ui/Card';
 import HorizontalBarChart from '../../charts/HorizontalBarChart';
@@ -64,7 +64,6 @@ export default function AgricultureAvailabilityPage() {
       const state = parts[1].trim();
 
       if (!state) continue;
-      const region = stateRegions[state];
 
       if (!cropStates[crop]) cropStates[crop] = new Set();
       cropStates[crop].add(state);

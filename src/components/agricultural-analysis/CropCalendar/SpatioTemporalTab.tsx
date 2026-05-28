@@ -6,8 +6,6 @@ import conabCalendar from '../../../data/processed/conab_calendar.json';
 import conabMapping from '../../../data/processed/conab_mapping.json';
 import { CATEGORICAL_COLORS } from '../../../types/theme';
 
-const MONTHS_FULL = ['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
-
 interface CalendarRow {
   'Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September': string;
 }

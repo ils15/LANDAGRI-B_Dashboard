@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, startTransition } from 'react';
 import BaseChart from '../charts/BaseChart';
 import type { Data, Layout } from 'plotly.js';
 import brazilianAgriData from '../../data/processed/brazilian_agricultural_data.json';
@@ -65,7 +65,7 @@ export default function AgriculturalCharts() {
         } as Data;
       });
 
-      setProductionData(lineTraces);
+      startTransition(() => setProductionData(lineTraces));
 
       // Pie chart for latest year distribution
       if (sortedYears.length > 0) {
@@ -76,14 +76,14 @@ export default function AgriculturalCharts() {
           .slice(0, 10);
 
         if (pieEntries.length > 0) {
-          setPieData([{
+          startTransition(() => setPieData([{
             type: 'pie',
             labels: pieEntries.map((e) => e.name),
             values: pieEntries.map((e) => e.value),
             textinfo: 'label+percent',
             textposition: 'outside',
             hole: 0.3,
-          } as Data]);
+          } as Data]));
         }
       }
 
@@ -108,14 +108,14 @@ export default function AgriculturalCharts() {
         .sort((a, b) => b.avg - a.avg)
         .slice(0, 10);
 
-      setAreaData([{
+      startTransition(() => setAreaData([{
         type: 'bar',
         x: sortedArea.map((e) => e.name),
         y: sortedArea.map((e) => e.avg / 1000),
         marker: {
           color: sortedArea.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]),
         },
-      } as Data]);
+      } as Data]));
     } catch (err) {
       console.error('Error processing agricultural data:', err);
     }

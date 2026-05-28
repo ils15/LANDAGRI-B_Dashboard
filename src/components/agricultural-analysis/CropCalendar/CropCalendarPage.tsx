@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, startTransition } from 'react';
 import Tabs from '../../ui/Tabs';
 import CropCalendarFilters from './CropCalendarFilters';
 import CalendarHeatmapsTab from './CalendarHeatmapsTab';
@@ -28,10 +28,10 @@ export default function CropCalendarPage() {
   const [selectedCrops, setSelectedCrops] = useState<string[]>(crops);
   const [selectedRegions, setSelectedRegions] = useState<string[]>(regions);
 
-  // Update selected crops when data loads
+  // Sync selected crops when data loads (use startTransition to avoid cascading renders)
   useEffect(() => {
     if (crops.length > 0 && selectedCrops.length === 0) {
-      setSelectedCrops(crops);
+      startTransition(() => setSelectedCrops(crops));
     }
   }, [crops, selectedCrops.length]);
 

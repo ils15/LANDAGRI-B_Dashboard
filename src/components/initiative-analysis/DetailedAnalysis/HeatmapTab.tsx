@@ -10,16 +10,15 @@ interface HeatmapTabProps {
 export default function HeatmapTab({ selectedInitiatives }: HeatmapTabProps) {
   const initiatives = useDashboardStore((s) => s.initiatives);
 
-  const { zMatrix, metricLabels, initiativeLabels } = useMemo(() => {
+  const { zMatrix, metricLabels } = useMemo(() => {
     const filtered = initiatives
       .filter((i) => selectedInitiatives.includes(i.Name))
       .filter((i) => i.Accuracy > 0 && i.Resolution > 0);
 
     if (filtered.length === 0) {
-      return { zMatrix: [], metricLabels: [], initiativeLabels: [] };
+      return { zMatrix: [], metricLabels: [] };
     }
 
-    const names = filtered.map((i) => i.Display_Name);
     const metrics = ['Accuracy (%)', 'Resolution (m)', 'Classes', 'Agri Classes', 'Years'];
     const metricGetters: ((i: typeof filtered[0]) => number)[] = [
       (i) => i.Accuracy,
@@ -31,18 +30,10 @@ export default function HeatmapTab({ selectedInitiatives }: HeatmapTabProps) {
 
     const z = filtered.map((item) => metricGetters.map((getter) => getter(item)));
 
-    return { zMatrix: z, metricLabels: metrics, initiativeLabels: names };
+    return { zMatrix: z, metricLabels: metrics };
   }, [initiatives, selectedInitiatives]);
 
-  if (zMatrix.length === 0) {
-    return (
-      <div className="py-8 text-center text-slate-400">
-        No initiatives selected. Choose initiatives to view the correlation heatmap.
-      </div>
-    );
-  }
-
-  // Compute correlation matrix between metrics
+  // Compute correlation matrix between metrics (must be before conditional return for React hooks)
   const correlationMatrix = useMemo(() => {
     const numMetrics = metricLabels.length;
     const numInitiatives = zMatrix.length;

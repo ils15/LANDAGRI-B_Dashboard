@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 interface CropCalendarFiltersProps {
   crops: string[];
   regions: string[];

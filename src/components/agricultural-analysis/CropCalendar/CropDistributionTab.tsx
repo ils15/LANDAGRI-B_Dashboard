@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import Card from '../../ui/Card';
 import HorizontalBarChart from '../../charts/HorizontalBarChart';
-import GroupedBarChart from '../../charts/GroupedBarChart';
 import conabCalendar from '../../../data/processed/conab_calendar.json';
 import conabMapping from '../../../data/processed/conab_mapping.json';
 

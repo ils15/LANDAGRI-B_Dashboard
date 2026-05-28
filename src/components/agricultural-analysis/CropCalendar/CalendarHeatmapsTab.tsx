@@ -35,13 +35,6 @@ function parseActivityValue(val: string): number {
   return 0;
 }
 
-function getActivityLabel(val: number): string {
-  if (val === 1) return 'Planting';
-  if (val === 2) return 'Harvest';
-  if (val === 3) return 'Both';
-  return '';
-}
-
 export default function CalendarHeatmapsTab({ selectedCrops, selectedRegions }: CalendarHeatmapsTabProps) {
   const rawData = conabCalendar as CalendarRow[];
   const mappingData = conabMapping as MappingDataType;

@@ -4,8 +4,6 @@ import GroupedBarChart from '../../charts/GroupedBarChart';
 import conabCalendar from '../../../data/processed/conab_calendar.json';
 import conabMapping from '../../../data/processed/conab_mapping.json';
 
-const MONTHS_FULL = ['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
-
 interface CalendarRow {
   'Crop type;Federation Unit;October;November;December;January;February;March;April;May;June;July;August;September': string;
 }
@@ -17,13 +15,6 @@ interface StateInfo {
 
 interface MappingDataType {
   states?: Record<string, StateInfo>;
-}
-
-function parseActivityValue(val: string): number {
-  if (!val || val.trim() === '') return 0;
-  const v = val.trim();
-  if (v === 'P' || v === 'H' || v === 'PH') return 1;
-  return 0;
 }
 
 interface SeasonalOverviewTabProps {

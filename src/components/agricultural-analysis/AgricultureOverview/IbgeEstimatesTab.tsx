@@ -1,9 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Card from '../../ui/Card';
 import Tabs from '../../ui/Tabs';
 import DataTable from '../../ui/DataTable';
 import MetricCard from '../../ui/MetricCard';
-import GroupedBarChart from '../../charts/GroupedBarChart';
 import HorizontalBarChart from '../../charts/HorizontalBarChart';
 import LineChart from '../../charts/LineChart';
 import ibgeData from '../../../data/processed/brazilian_ibge_agricultural_data.json';

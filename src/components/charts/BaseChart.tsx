@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import Plotly from 'plotly.js-dist-min';
 import type { Data, Layout, Config } from 'plotly.js';
 import { buildStandardLayout, STANDARD_CONFIG } from '../../lib/chartDefaults';
@@ -21,20 +21,25 @@ export default function BaseChart({
   className = '',
 }: BaseChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const finalLayout = useStandardLayout
-    ? buildStandardLayout({ ...layout, height })
-    : { ...layout, height };
+  const finalLayout = useMemo(
+    () =>
+      useStandardLayout
+        ? buildStandardLayout({ ...layout, height })
+        : { ...layout, height },
+    [useStandardLayout, layout, height],
+  );
 
   useEffect(() => {
-    if (containerRef.current) {
-      Plotly.react(containerRef.current, data, finalLayout, {
+    const container = containerRef.current;
+    if (container) {
+      Plotly.react(container, data, finalLayout, {
         ...STANDARD_CONFIG,
         ...config,
       });
     }
     return () => {
-      if (containerRef.current) {
-        Plotly.purge(containerRef.current);
+      if (container) {
+        Plotly.purge(container);
       }
     };
   }, [data, finalLayout, config]);
