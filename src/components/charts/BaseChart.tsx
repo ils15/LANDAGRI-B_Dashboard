@@ -1,7 +1,8 @@
 import { useEffect, useRef, useMemo } from 'react';
 import Plotly from 'plotly.js-dist-min';
 import type { Data, Layout, Config } from 'plotly.js';
-import { buildStandardLayout, STANDARD_CONFIG } from '../../lib/chartDefaults';
+import { buildStandardLayout, STANDARD_CONFIG, getChartLayout } from '../../lib/chartDefaults';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface BaseChartProps {
   data: Data[];
@@ -21,13 +22,40 @@ export default function BaseChart({
   className = '',
 }: BaseChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const finalLayout = useMemo(
-    () =>
-      useStandardLayout
-        ? buildStandardLayout({ ...layout, height })
-        : { ...layout, height },
-    [useStandardLayout, layout, height],
-  );
+  const { theme } = useTheme();
+
+  const finalLayout = useMemo(() => {
+    const base = useStandardLayout
+      ? buildStandardLayout({ ...layout, height })
+      : { ...layout, height };
+
+    const themeLayout = getChartLayout(theme);
+
+    return {
+      ...base,
+      ...themeLayout,
+      font: {
+        ...base.font,
+        ...themeLayout.font,
+        ...layout?.font,
+      },
+      xaxis: {
+        ...base.xaxis,
+        ...themeLayout.xaxis,
+        ...layout?.xaxis,
+      },
+      yaxis: {
+        ...base.yaxis,
+        ...themeLayout.yaxis,
+        ...layout?.yaxis,
+      },
+      legend: {
+        ...base.legend,
+        ...themeLayout.legend,
+        ...layout?.legend,
+      },
+    };
+  }, [useStandardLayout, layout, height, theme]);
 
   useEffect(() => {
     const container = containerRef.current;

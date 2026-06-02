@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
 import ModuleHeader from '../layouts/ModuleHeader';
 import AgricultureOverviewPage from '../components/agricultural-analysis/AgricultureOverview/AgricultureOverviewPage';
 import CropCalendarPage from '../components/agricultural-analysis/CropCalendar/CropCalendarPage';
@@ -24,15 +24,15 @@ export default function AgriculturalAnalysisPage() {
         {subPages.map((tab) => {
           const isActive = location.pathname.includes(tab.path);
           return (
-            <a
+            <Link
               key={tab.path}
-              href={`/LANDAGRI-B_Dashboard/agricultural-analysis/${tab.path}`}
+              to={`/agricultural-analysis/${tab.path}`}
               className={`px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-all duration-200 ${
                 isActive ? 'text-amber-700 border-amber-600 font-semibold' : 'text-slate-500 border-transparent hover:text-slate-700 hover:border-slate-300'
               }`}
             >
               {tab.label}
-            </a>
+            </Link>
           );
         })}
       </div>

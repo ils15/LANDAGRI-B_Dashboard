@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
 import ModuleHeader from '../layouts/ModuleHeader';
 import TemporalPage from '../components/initiative-analysis/TemporalAnalysis/TemporalPage';
 import ComparativePage from '../components/initiative-analysis/ComparativeAnalysis/ComparativePage';
@@ -32,9 +32,9 @@ export default function InitiativeAnalysisPage() {
         {subPages.map((tab) => {
           const isActive = location.pathname.includes(tab.path);
           return (
-            <a
+            <Link
               key={tab.path}
-              href={`/LANDAGRI-B_Dashboard/initiative-analysis/${tab.path}`}
+              to={`/initiative-analysis/${tab.path}`}
               className="px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-all duration-200"
               style={{
                 borderColor: isActive ? '#80400B' : 'transparent',
@@ -42,7 +42,7 @@ export default function InitiativeAnalysisPage() {
               }}
             >
               {tab.label}
-            </a>
+            </Link>
           );
         })}
       </div>
