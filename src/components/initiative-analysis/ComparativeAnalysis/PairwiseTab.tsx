@@ -22,7 +22,7 @@ export default function PairwiseTab() {
   }, [initiatives]);
 
   if (chartData.length === 0) {
-    return <div className="py-8 text-center text-slate-400">No pairwise data available.</div>;
+    return <div className="py-8 text-center text-fg-muted">No pairwise data available.</div>;
   }
 
   const scatterTrace: Data = {
@@ -46,7 +46,7 @@ export default function PairwiseTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Accuracy vs. Spatial Resolution scatter plot. Marker size represents the number of classes.
         Hover for details.
       </p>

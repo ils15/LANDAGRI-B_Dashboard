@@ -110,7 +110,7 @@ export default function CalendarHeatmapsTab({ selectedCrops, selectedRegions }: 
   if (matrix.crops.length === 0) {
     return (
       <Card padding="lg" hover={false}>
-        <div className="p-8 text-center text-slate-500">
+        <div className="p-8 text-center text-fg-secondary">
           <p>No calendar data available for the selected filters.</p>
         </div>
       </Card>
@@ -120,8 +120,8 @@ export default function CalendarHeatmapsTab({ selectedCrops, selectedRegions }: 
   return (
     <div className="space-y-6">
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">National Calendar Matrix</h3>
-        <p className="text-xs text-slate-500 mb-4">
+        <h3 className="text-base font-semibold text-fg mb-2">National Calendar Matrix</h3>
+        <p className="text-xs text-fg-secondary mb-4">
           Green = Planting | Orange = Harvest | Blue = Both
         </p>
         <HeatmapChart
@@ -139,22 +139,22 @@ export default function CalendarHeatmapsTab({ selectedCrops, selectedRegions }: 
       {/* Legend */}
       <Card padding="md" hover={false}>
         <div className="flex items-center gap-6 flex-wrap">
-          <span className="text-sm font-medium text-slate-600">Legend:</span>
+          <span className="text-sm font-medium text-fg-secondary">Legend:</span>
           <div className="flex items-center gap-2">
             <span className="w-4 h-4 rounded bg-green-500 inline-block" />
-            <span className="text-xs text-slate-600">Planting (P)</span>
+            <span className="text-xs text-fg-secondary">Planting (P)</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-4 h-4 rounded bg-orange-500 inline-block" />
-            <span className="text-xs text-slate-600">Harvest (H)</span>
+            <span className="text-xs text-fg-secondary">Harvest (H)</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-4 h-4 rounded bg-blue-500 inline-block" />
-            <span className="text-xs text-slate-600">Planting &amp; Harvest (PH)</span>
+            <span className="text-xs text-fg-secondary">Planting &amp; Harvest (PH)</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-4 h-4 rounded bg-gray-200 inline-block" />
-            <span className="text-xs text-slate-600">No activity</span>
+            <span className="w-4 h-4 rounded bg-surface-alt inline-block" />
+            <span className="text-xs text-fg-secondary">No activity</span>
           </div>
         </div>
       </Card>

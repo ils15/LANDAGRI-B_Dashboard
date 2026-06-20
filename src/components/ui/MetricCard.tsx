@@ -17,9 +17,9 @@ export default function MetricCard({ icon, label, value, help, variant = 'accura
       }}
     >
       <div className="text-3xl mb-1">{icon}</div>
-      <div className="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-0.5">{label}</div>
-      <div className="text-2xl font-bold text-slate-800 dark:text-white">{value}</div>
-      {help && <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 text-center">{help}</div>}
+      <div className="text-sm font-semibold text-fg-secondary mb-0.5">{label}</div>
+      <div className="text-2xl font-bold text-fg">{value}</div>
+      {help && <div className="text-xs text-fg-muted mt-1 text-center">{help}</div>}
     </div>
   );
 }

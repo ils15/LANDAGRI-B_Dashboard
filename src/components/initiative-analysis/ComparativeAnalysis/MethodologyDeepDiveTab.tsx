@@ -37,7 +37,7 @@ export default function MethodologyDeepDiveTab() {
   }, [initiatives]);
 
   if (methods.length === 0) {
-    return <div className="py-8 text-center text-slate-400">No methodology data available.</div>;
+    return <div className="py-8 text-center text-fg-muted">No methodology data available.</div>;
   }
 
   // Pie: methodology distribution
@@ -83,7 +83,7 @@ export default function MethodologyDeepDiveTab() {
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Methodology Distribution</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Methodology Distribution</h3>
           <BaseChart
             data={[pieTrace]}
             layout={{
@@ -93,7 +93,7 @@ export default function MethodologyDeepDiveTab() {
           />
         </div>
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Avg Accuracy by Methodology</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Avg Accuracy by Methodology</h3>
           <BaseChart
             data={[hbarTrace]}
             layout={{
@@ -109,8 +109,8 @@ export default function MethodologyDeepDiveTab() {
 
       {/* Accuracy comparison */}
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Methodology Accuracy Trends</h3>
-        <p className="text-sm text-slate-500 mb-3">
+        <h3 className="text-base font-semibold text-fg mb-2">Methodology Accuracy Trends</h3>
+        <p className="text-sm text-fg-secondary mb-3">
           Average overall accuracy achieved by each methodology type.
         </p>
         <BaseChart
@@ -129,20 +129,20 @@ export default function MethodologyDeepDiveTab() {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-200">
-              <th className="px-4 py-2 text-left font-semibold text-slate-600 bg-slate-50">Methodology</th>
-              <th className="px-4 py-2 text-right font-semibold text-slate-600 bg-slate-50">Count</th>
-              <th className="px-4 py-2 text-right font-semibold text-slate-600 bg-slate-50">Avg Accuracy</th>
+            <tr className="border-b border-border">
+              <th className="px-4 py-2 text-left font-semibold text-fg-secondary bg-surface-alt">Methodology</th>
+              <th className="px-4 py-2 text-right font-semibold text-fg-secondary bg-surface-alt">Count</th>
+              <th className="px-4 py-2 text-right font-semibold text-fg-secondary bg-surface-alt">Avg Accuracy</th>
             </tr>
           </thead>
           <tbody>
             {methodData.map((d, idx) => {
               const acc = methodAccuracy.find((a) => a.method === d.method);
               return (
-                <tr key={d.method} className={`border-b border-slate-100 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}>
-                  <td className="px-4 py-2 text-slate-700">{d.method}</td>
-                  <td className="px-4 py-2 text-right text-slate-700">{d.count}</td>
-                  <td className="px-4 py-2 text-right text-slate-700">{acc?.avgAccuracy ?? '-'}%</td>
+                <tr key={d.method} className={`border-b border-border ${idx % 2 === 0 ? 'bg-surface' : 'bg-surface-alt'}`}>
+                  <td className="px-4 py-2 text-fg">{d.method}</td>
+                  <td className="px-4 py-2 text-right text-fg">{d.count}</td>
+                  <td className="px-4 py-2 text-right text-fg">{acc?.avgAccuracy ?? '-'}%</td>
                 </tr>
               );
             })}

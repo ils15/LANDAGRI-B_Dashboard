@@ -34,9 +34,9 @@ export default function SummaryCards() {
         {Object.entries(coverageCounts).map(([coverage, count]) => (
           <Card key={coverage} padding="sm">
             <div className="text-center">
-              <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">{coverage}</div>
-              <div className="text-2xl font-bold text-slate-800 mt-1">{count}</div>
-              <div className="text-xs text-slate-400 mt-0.5">
+              <div className="text-xs font-medium text-fg-secondary uppercase tracking-wider">{coverage}</div>
+              <div className="text-2xl font-bold text-fg mt-1">{count}</div>
+              <div className="text-xs text-fg-muted mt-0.5">
                 {((count / totalInitiatives) * 100).toFixed(0)}% of total
               </div>
             </div>
@@ -49,29 +49,29 @@ export default function SummaryCards() {
         <Card padding="sm">
           <div className="text-center">
             <div className="text-2xl mb-1">🎯</div>
-            <div className="text-xs font-medium text-slate-500">Avg Accuracy</div>
-            <div className="text-xl font-bold text-slate-800">{avgAccuracy.toFixed(1)}%</div>
+            <div className="text-xs font-medium text-fg-secondary">Avg Accuracy</div>
+            <div className="text-xl font-bold text-fg">{avgAccuracy.toFixed(1)}%</div>
           </div>
         </Card>
         <Card padding="sm">
           <div className="text-center">
             <div className="text-2xl mb-1">🌌</div>
-            <div className="text-xs font-medium text-slate-500">Avg Resolution</div>
-            <div className="text-xl font-bold text-slate-800">{avgResolution.toFixed(0)}m</div>
+            <div className="text-xs font-medium text-fg-secondary">Avg Resolution</div>
+            <div className="text-xl font-bold text-fg">{avgResolution.toFixed(0)}m</div>
           </div>
         </Card>
         <Card padding="sm">
           <div className="text-center">
             <div className="text-2xl mb-1">🏷️</div>
-            <div className="text-xs font-medium text-slate-500">Total Classes</div>
-            <div className="text-xl font-bold text-slate-800">{formatNumber(totalClasses)}</div>
+            <div className="text-xs font-medium text-fg-secondary">Total Classes</div>
+            <div className="text-xl font-bold text-fg">{formatNumber(totalClasses)}</div>
           </div>
         </Card>
         <Card padding="sm">
           <div className="text-center">
             <div className="text-2xl mb-1">📅</div>
-            <div className="text-xs font-medium text-slate-500">Temporal Coverage</div>
-            <div className="text-xl font-bold text-slate-800">{totalYears} years</div>
+            <div className="text-xs font-medium text-fg-secondary">Temporal Coverage</div>
+            <div className="text-xl font-bold text-fg">{totalYears} years</div>
           </div>
         </Card>
       </div>

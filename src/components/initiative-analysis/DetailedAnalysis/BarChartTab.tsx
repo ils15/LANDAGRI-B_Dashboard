@@ -48,7 +48,7 @@ export default function BarChartTab({ selectedInitiatives }: BarChartTabProps) {
 
   if (filteredData.length === 0) {
     return (
-      <div className="py-8 text-center text-slate-400">
+      <div className="py-8 text-center text-fg-muted">
         No initiatives selected. Use the multi-select above to choose initiatives.
       </div>
     );
@@ -79,7 +79,7 @@ export default function BarChartTab({ selectedInitiatives }: BarChartTabProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Compare selected initiatives across multiple metrics. Choose up to 3 metrics to display as grouped bars.
       </p>
 

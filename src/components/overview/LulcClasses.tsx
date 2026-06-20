@@ -30,15 +30,15 @@ export default function LulcClasses({ classification }: LulcClassesProps) {
     return (
       <div className="space-y-4">
         {classification.map((product, idx) => (
-          <div key={idx} className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+          <div key={idx} className="p-3 bg-surface-alt rounded-lg border border-border">
             <div className="flex justify-between items-center mb-2">
-              <span className="font-semibold text-slate-700">{product.product_name}</span>
+              <span className="font-semibold text-fg">{product.product_name}</span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
                 {product.product_type}
               </span>
             </div>
             {product.accuracy > 0 && (
-              <div className="text-xs text-slate-500 mb-2">Accuracy: {product.accuracy}%</div>
+              <div className="text-xs text-fg-secondary mb-2">Accuracy: {product.accuracy}%</div>
             )}
             <div className="flex flex-wrap gap-1.5">
               {parseClassLegend(product.class_legend).map((cls, i) => (
@@ -61,7 +61,7 @@ export default function LulcClasses({ classification }: LulcClassesProps) {
   if (typeof classification === 'string' && classification) {
     const classes = parseClassLegend(classification);
     if (classes.length === 0) {
-      return <p className="text-sm text-slate-400 italic">No classification data available</p>;
+      return <p className="text-sm text-fg-muted italic">No classification data available</p>;
     }
     return (
       <div className="flex flex-wrap gap-2">
@@ -78,5 +78,5 @@ export default function LulcClasses({ classification }: LulcClassesProps) {
     );
   }
 
-  return <p className="text-sm text-slate-400 italic">No classification data available</p>;
+  return <p className="text-sm text-fg-muted italic">No classification data available</p>;
 }

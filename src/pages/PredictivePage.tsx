@@ -44,7 +44,7 @@ export default function PredictivePage() {
     <AnimatedPage>
       <div className="space-y-6">
         <div
-          className="rounded-2xl p-6 border relative overflow-hidden bg-surface border-theme"
+          className="rounded-2xl p-6 border relative overflow-hidden bg-surface border-border"
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
@@ -60,11 +60,11 @@ export default function PredictivePage() {
                 <span>Simulador de Cenários</span>
               </div>
               <h2
-                className="text-xl font-bold tracking-tight text-primary"
+                className="text-xl font-bold tracking-tight text-fg"
               >
                 Simulador de Políticas de Uso do Solo
               </h2>
-              <p className="text-sm mt-1 text-secondary">
+              <p className="text-sm mt-1 text-fg-secondary">
                 Ajuste os parâmetros abaixo e veja as projeções até <strong>2035</strong>
               </p>
             </div>
@@ -73,9 +73,9 @@ export default function PredictivePage() {
               onClick={handleReset}
               className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer transition-all border w-fit"
               style={{
-                backgroundColor: 'var(--color-bg)',
+                backgroundColor: 'var(--color-canvas)',
                 borderColor: 'var(--color-border)',
-                color: 'var(--color-text-secondary)',
+                color: 'var(--color-fg-secondary)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = 'var(--color-primary)';
@@ -83,7 +83,7 @@ export default function PredictivePage() {
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = 'var(--color-border)';
-                e.currentTarget.style.color = 'var(--color-text-secondary)';
+                e.currentTarget.style.color = 'var(--color-fg-secondary)';
               }}
             >
               <RefreshCw size={14} />
@@ -95,17 +95,17 @@ export default function PredictivePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-4 space-y-6">
             <div
-              className="rounded-2xl p-6 border space-y-6 bg-surface border-theme"
+              className="rounded-2xl p-6 border space-y-6 bg-surface border-border"
             >
               <h4
-                className="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-muted"
+                className="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-fg-muted"
               >
                 <Settings2 size={14} />
                 Parâmetros de Política
               </h4>
 
               <div className="space-y-2">
-                <div className="flex justify-between text-sm text-primary">
+                <div className="flex justify-between text-sm text-fg">
                   <span className="font-semibold">Reflorestamento</span>
                   <span className="font-bold" style={{ color: 'var(--color-primary)' }}>+{reforestationRate}% / ano</span>
                 </div>
@@ -119,13 +119,13 @@ export default function PredictivePage() {
                   className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-blue-500"
                   style={{ backgroundColor: 'var(--color-border)' }}
                 />
-                <p className="text-xs text-muted">
+                <p className="text-xs text-fg-muted">
                   Taxa de recuperação de áreas degradadas e reflorestamento de reservas legais.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <div className="flex justify-between text-sm text-primary">
+                <div className="flex justify-between text-sm text-fg">
                   <span className="font-semibold">Expansão Agrícola</span>
                   <span className="font-bold text-amber-500">+{agriExpansion}% / ano</span>
                 </div>
@@ -139,13 +139,13 @@ export default function PredictivePage() {
                   className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   style={{ backgroundColor: 'var(--color-border)' }}
                 />
-                <p className="text-xs text-muted">
+                <p className="text-xs text-fg-muted">
                   Conversão de pastagens degradadas para agricultura intensiva.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <div className="flex justify-between text-sm text-primary">
+                <div className="flex justify-between text-sm text-fg">
                   <span className="font-semibold">Adoção Sustentável</span>
                   <span className="font-bold text-emerald-500">{sustainableAdoption}%</span>
                 </div>
@@ -159,7 +159,7 @@ export default function PredictivePage() {
                   className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                   style={{ backgroundColor: 'var(--color-border)' }}
                 />
-                <p className="text-xs text-muted">
+                <p className="text-xs text-fg-muted">
                   Integração lavoura-pecuária-floresta (ILPF), plantio direto e bioinsumos.
                 </p>
               </div>
@@ -180,7 +180,7 @@ export default function PredictivePage() {
                 <Info size={14} />
                 Sobre o Modelo
               </h5>
-              <p className="text-xs leading-relaxed text-secondary">
+              <p className="text-xs leading-relaxed text-fg-secondary">
                 O simulador projeta cenários baseados em parâmetros do <strong>Plano ABC+</strong> e dados do
                 MapBiomas. Pastagens atuam como amortecedor: recuperando pastagens degradadas,
                 o Brasil pode expandir agricultura e floresta simultaneamente.
@@ -190,14 +190,14 @@ export default function PredictivePage() {
 
           <div className="lg:col-span-8 space-y-6">
             <div
-              className="rounded-2xl p-6 border bg-surface border-theme"
+              className="rounded-2xl p-6 border bg-surface border-border"
             >
               <h3
-                className="text-xs font-bold uppercase tracking-wider mb-1 text-muted"
+                className="text-xs font-bold uppercase tracking-wider mb-1 text-fg-muted"
               >
                 Projeção Anual (2025 - 2035)
               </h3>
-              <p className="text-sm mb-4 text-secondary">
+              <p className="text-sm mb-4 text-fg-secondary">
                 Interação entre reflorestamento, expansão agrícola e emissões
               </p>
 
@@ -207,18 +207,18 @@ export default function PredictivePage() {
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
                     <XAxis
                       dataKey="year"
-                      tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }}
+                      tick={{ fontSize: 11, fill: 'var(--color-fg-muted)' }}
                       tickLine={false}
                     />
-                    <YAxis tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }} tickLine={false} axisLine={false} />
+                    <YAxis tick={{ fontSize: 11, fill: 'var(--color-fg-muted)' }} tickLine={false} axisLine={false} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: 'var(--color-bg)',
+                        backgroundColor: 'var(--color-canvas)',
                         border: '1px solid var(--color-border)',
                         borderRadius: '12px',
                         fontSize: '12px',
                       }}
-                      labelStyle={{ color: 'var(--color-text-primary)', fontWeight: 'bold' }}
+                      labelStyle={{ color: 'var(--color-fg)', fontWeight: 'bold' }}
                     />
                     <Legend
                       iconType="circle"
@@ -266,9 +266,9 @@ export default function PredictivePage() {
               className="grid grid-cols-3 gap-4"
             >
               <div
-                className="rounded-2xl p-5 border text-center bg-surface border-theme"
+                className="rounded-2xl p-5 border text-center bg-surface border-border"
               >
-                <p className="text-[10px] font-bold uppercase tracking-wider mb-1 text-muted">
+                <p className="text-[10px] font-bold uppercase tracking-wider mb-1 text-fg-muted">
                   Variação Florestal
                 </p>
                 <h3
@@ -277,29 +277,29 @@ export default function PredictivePage() {
                 >
                   {forestDelta >= 0 ? '+' : ''}{forestDelta} Mha
                 </h3>
-                <p className="text-xs mt-1 text-muted">
+                <p className="text-xs mt-1 text-fg-muted">
                   {forestDelta >= 0 ? 'Ganho de cobertura' : 'Perda florestal'}
                 </p>
               </div>
 
               <div
-                className="rounded-2xl p-5 border text-center bg-surface border-theme"
+                className="rounded-2xl p-5 border text-center bg-surface border-border"
               >
-                <p className="text-[10px] font-bold uppercase tracking-wider mb-1 text-muted">
+                <p className="text-[10px] font-bold uppercase tracking-wider mb-1 text-fg-muted">
                   Expansão Agrícola
                 </p>
                 <h3 className="text-2xl font-black text-amber-500">
                   +{agriDelta} Mha
                 </h3>
-                <p className="text-xs mt-1 text-muted">
+                <p className="text-xs mt-1 text-fg-muted">
                   Nova área cultivada
                 </p>
               </div>
 
               <div
-                className="rounded-2xl p-5 border text-center bg-surface border-theme"
+                className="rounded-2xl p-5 border text-center bg-surface border-border"
               >
-                <p className="text-[10px] font-bold uppercase tracking-wider mb-1 text-muted">
+                <p className="text-[10px] font-bold uppercase tracking-wider mb-1 text-fg-muted">
                   Status de Emissão
                 </p>
                 <h3
@@ -308,7 +308,7 @@ export default function PredictivePage() {
                 >
                   {carbonDelta <= 0 ? '' : '+'}{carbonDelta}%
                 </h3>
-                <p className="text-xs mt-1 text-muted">
+                <p className="text-xs mt-1 text-fg-muted">
                   {carbonDelta <= 0 ? 'Redução de emissões' : 'Aumento de emissões'}
                 </p>
               </div>

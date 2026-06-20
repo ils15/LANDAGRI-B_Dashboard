@@ -132,9 +132,9 @@ export default function ActivityIntensityTab({ selectedCrops, selectedRegions }:
 
   const intensityContent = (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Activity Intensity Matrix (States × Months)</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Activity Intensity Matrix (States × Months)</h3>
       {noData ? (
-        <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+        <p className="text-fg-muted text-center py-8">No data available for selected filters.</p>
       ) : (
         <HeatmapChart
           z={intensityMatrix.z}
@@ -155,9 +155,9 @@ export default function ActivityIntensityTab({ selectedCrops, selectedRegions }:
 
   const peakContent = (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Peak Activity Analysis by State</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Peak Activity Analysis by State</h3>
       {noData ? (
-        <p className="text-slate-400 text-center py-8">No data available.</p>
+        <p className="text-fg-muted text-center py-8">No data available.</p>
       ) : (
         <GroupedBarChart
           categories={peakActivity.categories}
@@ -172,9 +172,9 @@ export default function ActivityIntensityTab({ selectedCrops, selectedRegions }:
 
   const densityContent = (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Activity Density by Region</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Activity Density by Region</h3>
       {densityByRegion.values.length === 0 || densityByRegion.values.every(v => v === 0) ? (
-        <p className="text-slate-400 text-center py-8">No data available.</p>
+        <p className="text-fg-muted text-center py-8">No data available.</p>
       ) : (
         <HorizontalBarChart
           y={densityByRegion.labels}
@@ -189,9 +189,9 @@ export default function ActivityIntensityTab({ selectedCrops, selectedRegions }:
 
   const concentrationContent = (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Concentration Index by State</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Concentration Index by State</h3>
       {concentrationIndex.values.length === 0 || concentrationIndex.values.every(v => v === 0) ? (
-        <p className="text-slate-400 text-center py-8">No data available.</p>
+        <p className="text-fg-muted text-center py-8">No data available.</p>
       ) : (
         <HorizontalBarChart
           y={concentrationIndex.labels}

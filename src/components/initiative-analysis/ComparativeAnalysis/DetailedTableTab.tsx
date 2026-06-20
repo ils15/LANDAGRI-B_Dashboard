@@ -41,7 +41,7 @@ export default function DetailedTableTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Complete comparison table of all LULC initiatives with key metrics.
       </p>
       <DataTable columns={columns} data={tableData} className="max-h-[600px] overflow-y-auto" />

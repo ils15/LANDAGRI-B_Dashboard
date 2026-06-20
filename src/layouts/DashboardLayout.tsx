@@ -19,14 +19,14 @@ export default function DashboardLayout() {
   );
 
   return (
-    <div className="flex min-h-screen" style={{ backgroundColor: 'var(--color-bg)' }}>
+    <div className="flex min-h-screen" style={{ backgroundColor: 'var(--color-canvas)' }}>
       {/* Mobile menu button (hamburger) */}
       <button
         onClick={() => setSidebarOpen(true)}
         className="fixed top-4 left-4 z-20 lg:hidden flex items-center justify-center w-10 h-10 rounded-lg shadow-md"
         style={{
           backgroundColor: 'var(--color-surface)',
-          color: 'var(--color-text-primary)',
+          color: 'var(--color-fg)',
         }}
         aria-label="Abrir menu"
       >

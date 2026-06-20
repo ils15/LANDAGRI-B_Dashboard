@@ -41,12 +41,12 @@ export default function CropCalendarFilters({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200/60 shadow-sm p-4 mb-6">
+    <div className="bg-surface rounded-xl border border-border/60 shadow-sm p-4 mb-6">
       <div className="flex flex-col sm:flex-row gap-6">
         {/* Crop Filter */}
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-slate-700">🌾 Crops</span>
+            <span className="text-sm font-semibold text-fg">🌾 Crops</span>
             <button
               onClick={toggleAllCrops}
               className="text-xs text-amber-700 hover:text-amber-800 font-medium"
@@ -62,7 +62,7 @@ export default function CropCalendarFilters({
                 className={`px-2.5 py-1 text-xs rounded-full border transition-colors ${
                   selectedCrops.includes(crop)
                     ? 'bg-amber-100 border-amber-300 text-amber-800 font-medium'
-                    : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300'
+                    : 'bg-surface border-border text-fg-secondary hover:border-border'
                 }`}
               >
                 {crop}
@@ -74,7 +74,7 @@ export default function CropCalendarFilters({
         {/* Region Filter */}
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-slate-700">📍 Regions</span>
+            <span className="text-sm font-semibold text-fg">📍 Regions</span>
             <button
               onClick={toggleAllRegions}
               className="text-xs text-amber-700 hover:text-amber-800 font-medium"
@@ -90,7 +90,7 @@ export default function CropCalendarFilters({
                 className={`px-2.5 py-1 text-xs rounded-full border transition-colors ${
                   selectedRegions.includes(region)
                     ? 'bg-amber-100 border-amber-300 text-amber-800 font-medium'
-                    : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300'
+                    : 'bg-surface border-border text-fg-secondary hover:border-border'
                 }`}
               >
                 {region}
@@ -101,10 +101,10 @@ export default function CropCalendarFilters({
       </div>
 
       {/* Active filters summary */}
-      <div className="mt-3 pt-3 border-t border-slate-100">
-        <p className="text-xs text-slate-400">
-          Showing <span className="font-medium text-slate-600">{selectedCrops.length}</span> crop{selectedCrops.length !== 1 ? 's' : ''} in{' '}
-          <span className="font-medium text-slate-600">{selectedRegions.length}</span> region{selectedRegions.length !== 1 ? 's' : ''}
+      <div className="mt-3 pt-3 border-t border-border">
+        <p className="text-xs text-fg-muted">
+          Showing <span className="font-medium text-fg-secondary">{selectedCrops.length}</span> crop{selectedCrops.length !== 1 ? 's' : ''} in{' '}
+          <span className="font-medium text-fg-secondary">{selectedRegions.length}</span> region{selectedRegions.length !== 1 ? 's' : ''}
         </p>
       </div>
     </div>

@@ -13,8 +13,8 @@ function SensorCard({ sensorKey, sensor }: { sensorKey: string; sensor: SensorMe
     : '-';
 
   return (
-    <div className="mb-4 p-3 bg-white rounded-lg border border-slate-100">
-      <div className="font-semibold text-slate-700 mb-2">
+    <div className="mb-4 p-3 bg-surface rounded-lg border border-border">
+      <div className="font-semibold text-fg mb-2">
         🛰️ {sensor.display_name || sensorKey}
       </div>
 
@@ -38,15 +38,15 @@ function SensorCard({ sensorKey, sensor }: { sensorKey: string; sensor: SensorMe
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
               <thead>
-                <tr className="border-b border-slate-200">
-                  <th className="text-left px-2 py-1 text-slate-500">Band</th>
-                  <th className="text-left px-2 py-1 text-slate-500">Wavelength (nm)</th>
-                  <th className="text-left px-2 py-1 text-slate-500">Resolution (m)</th>
+                <tr className="border-b border-border">
+                  <th className="text-left px-2 py-1 text-fg-secondary">Band</th>
+                  <th className="text-left px-2 py-1 text-fg-secondary">Wavelength (nm)</th>
+                  <th className="text-left px-2 py-1 text-fg-secondary">Resolution (m)</th>
                 </tr>
               </thead>
               <tbody>
                 {sensor.spectral_bands.map((band, idx) => (
-                  <tr key={idx} className="border-b border-slate-100">
+                  <tr key={idx} className="border-b border-border">
                     <td className="px-2 py-1">{band.band_name || `Band ${idx + 1}`}</td>
                     <td className="px-2 py-1">{band.wavelength_nm || '-'}</td>
                     <td className="px-2 py-1">{band.resolution_m ?? '-'}</td>
@@ -64,7 +64,7 @@ function SensorCard({ sensorKey, sensor }: { sensorKey: string; sensor: SensorMe
 export default function SensorInfo({ sensorKeys, sensors }: SensorInfoProps) {
   if (sensorKeys.length === 0) {
     return (
-      <p className="text-sm text-slate-400 italic">
+      <p className="text-sm text-fg-muted italic">
         No specific sensor information available for this initiative.
       </p>
     );
@@ -75,7 +75,7 @@ export default function SensorInfo({ sensorKeys, sensors }: SensorInfoProps) {
 
   if (matchedSensors.length === 0) {
     return (
-      <p className="text-sm text-slate-400 italic">
+      <p className="text-sm text-fg-muted italic">
         Detailed sensor metadata not available in database.
       </p>
     );

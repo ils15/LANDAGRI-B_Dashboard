@@ -141,7 +141,7 @@ export default function AgriculturalCharts() {
 
   return (
     <div className="space-y-6 mt-8">
-      <h2 className="text-xl font-bold text-slate-800">🌾 Brazilian Agricultural Data</h2>
+      <h2 className="text-xl font-bold text-fg">🌾 Brazilian Agricultural Data</h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <BaseChart data={productionData} layout={lineLayout} height={350} />

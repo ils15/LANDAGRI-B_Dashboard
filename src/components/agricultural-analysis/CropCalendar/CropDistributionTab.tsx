@@ -99,9 +99,9 @@ export default function CropDistributionTab({ selectedCrops, selectedRegions }: 
   return (
     <div className="space-y-6">
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Crop Distribution by State</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Crop Distribution by State</h3>
         {noStateData ? (
-          <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+          <p className="text-fg-muted text-center py-8">No data available for selected filters.</p>
         ) : (
           <HorizontalBarChart
             y={stateCropCounts.labels}
@@ -114,7 +114,7 @@ export default function CropDistributionTab({ selectedCrops, selectedRegions }: 
       </Card>
 
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Top Crops by Number of States</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Top Crops by Number of States</h3>
         {topCropsByStates.values.length > 0 ? (
           <HorizontalBarChart
             y={topCropsByStates.labels}
@@ -124,7 +124,7 @@ export default function CropDistributionTab({ selectedCrops, selectedRegions }: 
             height={Math.max(250, topCropsByStates.labels.length * 35)}
           />
         ) : (
-          <p className="text-slate-400 text-center py-8">No data available.</p>
+          <p className="text-fg-muted text-center py-8">No data available.</p>
         )}
       </Card>
     </div>

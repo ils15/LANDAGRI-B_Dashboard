@@ -51,7 +51,7 @@ export default function GapAnalysisTab({ data }: GapAnalysisTabProps) {
 
   if (gapData.length === 0) {
     return (
-      <div className="py-8 text-center text-slate-400">
+      <div className="py-8 text-center text-fg-muted">
         No gap analysis data available.
       </div>
     );
@@ -85,7 +85,7 @@ export default function GapAnalysisTab({ data }: GapAnalysisTabProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Analysis of the largest temporal gap (consecutive missing years) for each initiative.
         Gaps are color-coded by severity.
       </p>
@@ -103,7 +103,7 @@ export default function GapAnalysisTab({ data }: GapAnalysisTabProps) {
       />
 
       {/* Color legend */}
-      <div className="flex flex-wrap gap-4 justify-center text-xs text-slate-600">
+      <div className="flex flex-wrap gap-4 justify-center text-xs text-fg-secondary">
         <span>🟢 No gaps</span>
         <span>🟡 Small (&le;2y)</span>
         <span>🟠 Medium (3-5y)</span>

@@ -17,23 +17,23 @@ export default function Breadcrumbs({ category, page }: BreadcrumbsProps) {
       <div
         className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm"
         style={{
-          backgroundColor: 'var(--color-bg-secondary)',
+          backgroundColor: 'var(--color-surface-alt)',
           border: '1px solid var(--color-border-light)',
         }}
       >
         {/* Desktop: Home icon */}
         <Home
           size={14}
-          className="hidden sm:block text-muted"
+          className="hidden sm:block text-fg-muted"
         />
         <span
-          className="hidden sm:inline text-muted"
+          className="hidden sm:inline text-fg-muted"
         >
           Dashboard
         </span>
         <ChevronRight
           size={12}
-          className="hidden sm:block text-muted"
+          className="hidden sm:block text-fg-muted"
         />
 
         {/* Category — always visible */}
@@ -41,7 +41,7 @@ export default function Breadcrumbs({ category, page }: BreadcrumbsProps) {
           className={page ? '' : 'font-semibold'}
           style={{
             color: page
-              ? 'var(--color-text-secondary)'
+              ? 'var(--color-fg-secondary)'
               : 'var(--color-primary)',
           }}
         >
@@ -53,10 +53,10 @@ export default function Breadcrumbs({ category, page }: BreadcrumbsProps) {
           <>
             <ChevronRight
               size={12}
-              className="text-muted"
+              className="text-fg-muted"
             />
             <span
-              className="font-semibold truncate max-w-[200px] text-primary"
+              className="font-semibold truncate max-w-[200px] text-fg"
             >
               {page}
             </span>
@@ -65,7 +65,7 @@ export default function Breadcrumbs({ category, page }: BreadcrumbsProps) {
 
         {/* Current route path (mobile only) */}
         <span
-          className="sm:hidden ml-auto text-xs truncate max-w-[120px] text-muted"
+          className="sm:hidden ml-auto text-xs truncate max-w-[120px] text-fg-muted"
         >
           {location.pathname.split('/').filter(Boolean).pop()}
         </span>

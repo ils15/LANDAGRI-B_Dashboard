@@ -29,7 +29,7 @@ export default function MethodologyDistributionTab() {
   }, [initiatives]);
 
   if (methods.length === 0) {
-    return <div className="py-8 text-center text-slate-400">No methodology data available.</div>;
+    return <div className="py-8 text-center text-fg-muted">No methodology data available.</div>;
   }
 
   const traces: Data[] = coverageTypes.map((cov, idx) => ({
@@ -43,7 +43,7 @@ export default function MethodologyDistributionTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Distribution of initiatives by methodology type, grouped by coverage category (Global, Regional, National).
       </p>
       <BaseChart

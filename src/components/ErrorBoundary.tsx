@@ -30,11 +30,11 @@ export default class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
       return (
-        <div className="flex items-center justify-center min-h-[400px]" style={{ backgroundColor: 'var(--color-bg)' }}>
+        <div className="flex items-center justify-center min-h-[400px]" style={{ backgroundColor: 'var(--color-canvas)' }}>
           <div className="text-center max-w-md p-8">
             <div className="text-5xl mb-4" style={{ color: 'var(--color-error)' }}>⚠</div>
-            <h2 className="text-xl font-bold mb-2 text-primary">Something went wrong</h2>
-            <p className="text-sm mb-4 text-secondary">
+            <h2 className="text-xl font-bold mb-2 text-fg">Something went wrong</h2>
+            <p className="text-sm mb-4 text-fg-secondary">
               {this.state.error?.message || 'An unexpected error occurred'}
             </p>
             <button

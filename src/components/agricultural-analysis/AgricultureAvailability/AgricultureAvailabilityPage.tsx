@@ -161,7 +161,7 @@ export default function AgricultureAvailabilityPage() {
         <MetricCard icon="📍" label="Regions" value={totalRegions} variant="classes" />
       </div>
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">CONAB Spatial Coverage by State</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">CONAB Spatial Coverage by State</h3>
         {stateCoverage.values.length > 0 ? (
           <HorizontalBarChart
             y={stateCoverage.labels}
@@ -171,7 +171,7 @@ export default function AgricultureAvailabilityPage() {
             height={Math.max(300, stateCoverage.labels.length * 25)}
           />
         ) : (
-          <p className="text-slate-400 text-center py-8">No spatial coverage data available.</p>
+          <p className="text-fg-muted text-center py-8">No spatial coverage data available.</p>
         )}
       </Card>
     </div>
@@ -180,7 +180,7 @@ export default function AgricultureAvailabilityPage() {
   const cropDiversityContent = (
     <div className="space-y-6">
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Crop Diversity by State</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Crop Diversity by State</h3>
         {cropDiversity.values.length > 0 ? (
           <HorizontalBarChart
             y={cropDiversity.labels}
@@ -190,7 +190,7 @@ export default function AgricultureAvailabilityPage() {
             height={Math.max(300, cropDiversity.labels.length * 35)}
           />
         ) : (
-          <p className="text-slate-400 text-center py-8">No crop diversity data available.</p>
+          <p className="text-fg-muted text-center py-8">No crop diversity data available.</p>
         )}
       </Card>
     </div>
@@ -202,7 +202,7 @@ export default function AgricultureAvailabilityPage() {
       label: '📊 Activity Comparison',
       content: (
         <Card padding="lg" hover={false}>
-          <h3 className="text-base font-semibold text-slate-700 mb-3">Regional Activity Comparison</h3>
+          <h3 className="text-base font-semibold text-fg mb-3">Regional Activity Comparison</h3>
           {regionalActivity.series.length > 0 ? (
             <GroupedBarChart
               categories={regionalActivity.categories}
@@ -212,7 +212,7 @@ export default function AgricultureAvailabilityPage() {
               height={400}
             />
           ) : (
-            <p className="text-slate-400 text-center py-8">No regional activity data available.</p>
+            <p className="text-fg-muted text-center py-8">No regional activity data available.</p>
           )}
         </Card>
       ),
@@ -222,7 +222,7 @@ export default function AgricultureAvailabilityPage() {
       label: '🗺️ Activity Heatmap',
       content: (
         <Card padding="lg" hover={false}>
-          <h3 className="text-base font-semibold text-slate-700 mb-3">Regional Activity Heatmap</h3>
+          <h3 className="text-base font-semibold text-fg mb-3">Regional Activity Heatmap</h3>
           {activityHeatmap.regions.length > 0 ? (
             <HeatmapChart
               z={activityHeatmap.z}
@@ -239,7 +239,7 @@ export default function AgricultureAvailabilityPage() {
               ]}
             />
           ) : (
-            <p className="text-slate-400 text-center py-8">No heatmap data available.</p>
+            <p className="text-fg-muted text-center py-8">No heatmap data available.</p>
           )}
         </Card>
       ),

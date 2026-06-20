@@ -112,7 +112,7 @@ export default function ConabMappingTab() {
 
   if (!mappingData?.crop_calendar) {
     return (
-      <div className="p-8 text-center text-slate-500">
+      <div className="p-8 text-center text-fg-secondary">
         <p className="text-lg">No CONAB mapping data available.</p>
         <p className="text-sm mt-2">The mapping data file may be empty or in an unexpected format.</p>
       </div>
@@ -134,7 +134,7 @@ export default function ConabMappingTab() {
 
       {/* Crop Regional Distribution */}
       <Card title="Crop Regional Distribution" padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Crop Regional Distribution</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Crop Regional Distribution</h3>
         {cropRegionData.series.length > 0 ? (
           <GroupedBarChart
             categories={cropRegionData.categories}
@@ -144,13 +144,13 @@ export default function ConabMappingTab() {
             height={400}
           />
         ) : (
-          <p className="text-slate-400 text-center py-8">No regional distribution data available.</p>
+          <p className="text-fg-muted text-center py-8">No regional distribution data available.</p>
         )}
       </Card>
 
       {/* Temporal Coverage Evolution */}
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Temporal Coverage Evolution</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Temporal Coverage Evolution</h3>
         {temporalData.series.length > 0 ? (
           <LineChart
             series={temporalData.series}
@@ -161,7 +161,7 @@ export default function ConabMappingTab() {
             fill="tozeroy"
           />
         ) : (
-          <p className="text-slate-400 text-center py-8">No temporal coverage data available.</p>
+          <p className="text-fg-muted text-center py-8">No temporal coverage data available.</p>
         )}
       </Card>
 
@@ -169,12 +169,12 @@ export default function ConabMappingTab() {
       <Card padding="md" hover={false}>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h4 className="text-sm font-semibold text-slate-700">Data Source</h4>
-            <p className="text-xs text-slate-500">
+            <h4 className="text-sm font-semibold text-fg">Data Source</h4>
+            <p className="text-xs text-fg-secondary">
               {mappingData?.metadata?.source || 'CONAB'} &mdash;{' '}
               {mappingData?.metadata?.description || 'Agricultural Mapping Data'}
             </p>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-fg-muted mt-1">
               Spatial Resolution: {mappingDataDetailed?.metadata?.spatial_resolution || '30m'} |
               Temporal Coverage: {mappingYears}
             </p>

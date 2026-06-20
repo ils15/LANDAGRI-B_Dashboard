@@ -75,7 +75,7 @@ export default function DataTable({ columns, data, className = '', searchable = 
         <div className="relative mb-3">
           <Search
             size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-fg-muted"
           />
           <input
             type="text"
@@ -85,21 +85,21 @@ export default function DataTable({ columns, data, className = '', searchable = 
               setSearch(e.target.value);
               setPage(0);
             }}
-            className="w-full pl-9 pr-3 py-2 rounded-lg text-sm outline-none transition-all bg-surface border border-theme text-primary"
+            className="w-full pl-9 pr-3 py-2 rounded-lg text-sm outline-none transition-all bg-surface border border-border text-fg"
           />
         </div>
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-lg border border-theme">
+      <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-secondary">
+            <tr className="bg-surface-alt">
               {columns.map(col => (
                 <th
                   key={col.key}
                   onClick={() => col.sortable !== false && handleSort(col.key)}
-                  className="px-4 py-3 text-left font-semibold cursor-pointer select-none whitespace-nowrap transition-colors hover:bg-slate-100 dark:hover:bg-slate-700 text-secondary"
+                  className="px-4 py-3 text-left font-semibold cursor-pointer select-none whitespace-nowrap transition-colors hover:bg-surface-hover text-fg-secondary"
                 >
                   <div className="flex items-center gap-1">
                     {col.label}
@@ -115,7 +115,7 @@ export default function DataTable({ columns, data, className = '', searchable = 
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-4 py-12 text-center text-muted"
+                  className="px-4 py-12 text-center text-fg-muted"
                 >
                   {search ? 'No results matching your search.' : 'No data available.'}
                 </td>
@@ -128,20 +128,20 @@ export default function DataTable({ columns, data, className = '', searchable = 
                   style={{
                     borderBottom: '1px solid var(--color-border-light)',
                     backgroundColor:
-                      idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-bg-secondary)',
+                      idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-alt)',
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.backgroundColor = 'var(--color-primary-light)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.backgroundColor =
-                      idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-bg-secondary)';
+                      idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-alt)';
                   }}
                 >
                   {columns.map(col => (
                     <td
                       key={col.key}
-                      className="px-4 py-2.5 text-primary"
+                      className="px-4 py-2.5 text-fg"
                     >
                       {col.format ? col.format(row[col.key]) : String(row[col.key] ?? '-')}
                     </td>
@@ -156,14 +156,14 @@ export default function DataTable({ columns, data, className = '', searchable = 
       {/* Pagination */}
       {totalPages > 1 && (
         <div
-          className="flex items-center justify-between mt-3 text-sm text-secondary"
+          className="flex items-center justify-between mt-3 text-sm text-fg-secondary"
         >
           <span>{sorted.length} records</span>
           <div className="flex gap-1">
             <button
               onClick={() => setPage(p => Math.max(0, p - 1))}
               disabled={page === 0}
-              className="px-3 py-1 rounded transition-colors disabled:opacity-40 bg-secondary"
+              className="px-3 py-1 rounded transition-colors disabled:opacity-40 bg-surface-alt"
             >
               Previous
             </button>
@@ -173,7 +173,7 @@ export default function DataTable({ columns, data, className = '', searchable = 
             <button
               onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
               disabled={page >= totalPages - 1}
-              className="px-3 py-1 rounded transition-colors disabled:opacity-40 bg-secondary"
+              className="px-3 py-1 rounded transition-colors disabled:opacity-40 bg-surface-alt"
             >
               Next
             </button>

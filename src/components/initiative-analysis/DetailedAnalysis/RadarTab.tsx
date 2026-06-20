@@ -56,7 +56,7 @@ export default function RadarTab({ selectedInitiatives }: RadarTabProps) {
 
   if (traces.length === 0) {
     return (
-      <div className="py-8 text-center text-slate-400">
+      <div className="py-8 text-center text-fg-muted">
         No initiatives selected or insufficient data. Choose initiatives with accuracy and resolution data.
       </div>
     );
@@ -64,7 +64,7 @@ export default function RadarTab({ selectedInitiatives }: RadarTabProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Radar chart comparing normalized metrics (min-max scaled to [0, 1]) across selected initiatives.
         Resolution is inverted (higher inverse = better relative resolution).
       </p>

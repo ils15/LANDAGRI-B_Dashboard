@@ -93,7 +93,7 @@ export default function HeatmapTab({ selectedInitiatives }: HeatmapTabProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Correlation heatmap between metrics across selected initiatives.
         Values range from -1 (negative correlation) to +1 (positive correlation).
       </p>

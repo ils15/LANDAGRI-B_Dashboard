@@ -69,10 +69,10 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           style={{ borderColor: 'var(--color-border)' }}
         >
           <div>
-            <h1 className="text-lg font-bold" style={{ color: 'var(--color-text-primary)' }}>
+            <h1 className="text-lg font-bold" style={{ color: 'var(--color-fg)' }}>
               LANDAGRI-B
             </h1>
-            <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+            <p className="text-xs" style={{ color: 'var(--color-fg-muted)' }}>
               Dashboard
             </p>
           </div>
@@ -81,10 +81,10 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
             {/* Close button — visible only on mobile */}
             <button
               onClick={onClose}
-              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="lg:hidden p-2 rounded-lg hover:bg-surface-hover transition-colors"
               aria-label="Fechar menu"
             >
-              <X size={18} style={{ color: 'var(--color-text-secondary)' }} />
+              <X size={18} style={{ color: 'var(--color-fg-secondary)' }} />
             </button>
           </div>
         </div>

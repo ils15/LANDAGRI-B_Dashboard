@@ -24,7 +24,7 @@ export default function Tabs({ tabs, defaultTab, onChange }: TabsProps) {
     <div>
       {/* Tab headers */}
       <div
-        className="flex mb-4 overflow-x-auto border-b border-theme"
+        className="flex mb-4 overflow-x-auto border-b border-border"
       >
         {tabs.map((tab) => (
           <button
@@ -34,18 +34,18 @@ export default function Tabs({ tabs, defaultTab, onChange }: TabsProps) {
               border-b-2 -mb-px`}
             style={{
               borderBottomColor: activeTab === tab.id ? 'var(--color-primary)' : 'transparent',
-              color: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-text-muted)',
+              color: activeTab === tab.id ? 'var(--color-primary)' : 'var(--color-fg-muted)',
               fontWeight: activeTab === tab.id ? 600 : 400,
             }}
             onMouseEnter={(e) => {
               if (activeTab !== tab.id) {
-                e.currentTarget.style.color = 'var(--color-text-primary)';
+                e.currentTarget.style.color = 'var(--color-fg)';
                 e.currentTarget.style.borderBottomColor = 'var(--color-border)';
               }
             }}
             onMouseLeave={(e) => {
               if (activeTab !== tab.id) {
-                e.currentTarget.style.color = 'var(--color-text-muted)';
+                e.currentTarget.style.color = 'var(--color-fg-muted)';
                 e.currentTarget.style.borderBottomColor = 'transparent';
               }
             }}

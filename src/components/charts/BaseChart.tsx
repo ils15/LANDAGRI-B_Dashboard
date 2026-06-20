@@ -74,7 +74,7 @@ export default function BaseChart({
 
   return (
     <div
-      className="w-full rounded-xl p-3 bg-surface border border-theme"
+      className="w-full rounded-xl p-3 bg-surface border border-border"
     >
       <div
         ref={containerRef}

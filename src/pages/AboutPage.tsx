@@ -14,10 +14,14 @@ import {
   Globe,
 } from 'lucide-react';
 import AnimatedPage from '../components/AnimatedPage';
+import { exportToCSV, exportToJSON } from '../lib/dataExport';
+import { useDashboardStore } from '../stores/dashboardStore';
 
 export default function AboutPage() {
   const [copiedBib, setCopiedBib] = useState(false);
   const [downloadFormat, setDownloadFormat] = useState<string | null>(null);
+
+  const initiatives = useDashboardStore((state) => state.initiatives);
 
   const handleCopyBib = () => {
     navigator.clipboard.writeText(bibtexEntry);
@@ -28,6 +32,22 @@ export default function AboutPage() {
   const handleDownload = (format: 'csv' | 'json') => {
     setDownloadFormat(format);
     setTimeout(() => setDownloadFormat(null), 3000);
+
+    if (format === 'csv') {
+      // Flatten initiatives into CSV-friendly rows
+      const flatData = initiatives.map((i) => ({
+        name: i.Name,
+        acronym: i.Acronym,
+        coverage: i.Coverage,
+        resolution: i.Resolution,
+        accuracy: i.Accuracy,
+        methodology: i.Methodology,
+        sensors: Array.isArray(i.Sensors) ? i.Sensors.join(';') : i.Sensors,
+      }));
+      exportToCSV(flatData);
+    } else {
+      exportToJSON(initiatives);
+    }
   };
 
   return (
@@ -35,7 +55,7 @@ export default function AboutPage() {
       <div className="space-y-6">
         {/* Header */}
         <div
-          className="rounded-2xl p-6 border relative overflow-hidden bg-surface border-theme"
+          className="rounded-2xl p-6 border relative overflow-hidden bg-surface border-border"
         >
           <div className="flex items-start gap-4">
             <div
@@ -49,11 +69,11 @@ export default function AboutPage() {
             </div>
             <div>
               <h2
-                className="text-xl font-bold tracking-tight text-primary"
+                className="text-xl font-bold tracking-tight text-fg"
               >
                 Publicações, Referências e Fontes de Dados
               </h2>
-              <p className="text-sm mt-1 text-secondary">
+              <p className="text-sm mt-1 text-fg-secondary">
                 Modelos de citação, parâmetros de satélite e bases de dados utilizadas no{' '}
                 <strong>LANDAGRI-B Dashboard</strong>.
               </p>
@@ -66,31 +86,30 @@ export default function AboutPage() {
           <div className="lg:col-span-7 space-y-6">
             {/* Research Citation */}
             <div
-              className="rounded-2xl p-6 border space-y-4 bg-surface border-theme"
+              className="rounded-2xl p-6 border space-y-4 bg-surface border-border"
             >
               <div className="flex gap-4 items-start">
                 <div
                   className="p-3 rounded-xl shrink-0"
                   style={{
-                    backgroundColor: '#fef2f2',
-                    color: '#dc2626',
-                    border: '1px solid #fecaca',
+                    backgroundColor: 'var(--color-primary-light)',
+                    color: 'var(--color-primary)',
                   }}
                 >
                   <FileText size={24} />
                 </div>
                 <div>
                   <p
-                    className="text-[10px] font-bold uppercase tracking-wider mb-1 text-muted"
+                    className="text-[10px] font-bold uppercase tracking-wider mb-1 text-fg-muted"
                   >
                     Contribuição Acadêmica
                   </p>
                   <h3
-                    className="text-base font-bold leading-snug text-primary"
+                    className="text-base font-bold leading-snug text-fg"
                   >
                     A Multi-Scale Land Use and Land Cover Classification Initiative for the Brazilian Territory
                   </h3>
-                  <p className="text-sm mt-1 text-secondary">
+                  <p className="text-sm mt-1 text-fg-secondary">
                     Publicado por{' '}
                     <strong style={{ color: 'var(--color-primary)' }}>Igor S. Leite</strong> e
                     colaboradores (2024). <em>Remote Sensing Applications: Society and Environment</em>,
@@ -103,16 +122,16 @@ export default function AboutPage() {
               <div
                 className="rounded-xl p-4 border"
                 style={{
-                  backgroundColor: 'var(--color-bg)',
+                  backgroundColor: 'var(--color-canvas)',
                   borderColor: 'var(--color-border)',
                 }}
               >
                 <p
-                  className="text-xs font-bold uppercase tracking-wider mb-2 text-muted"
+                  className="text-xs font-bold uppercase tracking-wider mb-2 text-fg-muted"
                 >
                   Resumo
                 </p>
-                <p className="text-sm italic leading-relaxed text-secondary">
+                <p className="text-sm italic leading-relaxed text-fg-secondary">
                   "Este estudo apresenta uma iniciativa abrangente de classificação de uso e cobertura da terra
                   para o território brasileiro, integrando dados de sensoriamento remoto de múltiplas escalas
                   (30m a 250m) e validando com referências terrestres. Os resultados demonstram acurácia
@@ -123,24 +142,16 @@ export default function AboutPage() {
               {/* BibTeX */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-semibold text-primary">
+                  <span className="text-sm font-semibold text-fg">
                     BibTeX Citation
                   </span>
                   <button
                     onClick={handleCopyBib}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer transition-all border"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer transition-all border hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
                     style={{
-                      backgroundColor: 'var(--color-bg)',
+                      backgroundColor: 'var(--color-canvas)',
                       borderColor: 'var(--color-border)',
-                      color: 'var(--color-text-secondary)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--color-primary)';
-                      e.currentTarget.style.color = 'var(--color-primary)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--color-border)';
-                      e.currentTarget.style.color = 'var(--color-text-secondary)';
+                      color: 'var(--color-fg-secondary)',
                     }}
                   >
                     {copiedBib ? <Check size={12} /> : <Copy size={12} />}
@@ -148,9 +159,9 @@ export default function AboutPage() {
                   </button>
                 </div>
                 <pre
-                  className="p-4 rounded-xl overflow-x-auto text-xs leading-relaxed border text-secondary"
+                  className="p-4 rounded-xl overflow-x-auto text-xs leading-relaxed border text-fg-secondary"
                   style={{
-                    backgroundColor: 'var(--color-bg)',
+                    backgroundColor: 'var(--color-canvas)',
                     borderColor: 'var(--color-border)',
                   }}
                 >
@@ -160,8 +171,10 @@ export default function AboutPage() {
 
               {/* ResearchGate link */}
               <a
-                href="#"
-                className="flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all"
+                href="https://www.researchgate.net/profile/Igor-Leite-5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all hover:opacity-80"
                 style={{
                   backgroundColor: 'var(--color-primary-light)',
                   borderColor: 'var(--color-primary)',
@@ -178,10 +191,10 @@ export default function AboutPage() {
           <div className="lg:col-span-5 space-y-6">
             {/* Data Sources */}
             <div
-              className="rounded-2xl p-6 border space-y-5 bg-surface border-theme"
+              className="rounded-2xl p-6 border space-y-5 bg-surface border-border"
             >
               <h3
-                className="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-muted"
+                className="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-fg-muted"
               >
                 <Database size={14} />
                 Plataformas Espaciais Integradas
@@ -198,21 +211,21 @@ export default function AboutPage() {
                   <div
                     className="px-2.5 py-1 rounded-lg text-xs font-bold font-mono h-fit shrink-0"
                     style={{
-                      backgroundColor: `${source.color}15`,
+                      backgroundColor: `color-mix(in srgb, ${source.color} 15%, transparent)`,
                       color: source.color,
-                      border: `1px solid ${source.color}30`,
+                      border: `1px solid color-mix(in srgb, ${source.color} 30%, transparent)`,
                     }}
                   >
                     {source.initials}
                   </div>
                   <div>
                     <h4
-                      className="text-sm font-semibold flex items-center gap-1.5 text-primary"
+                      className="text-sm font-semibold flex items-center gap-1.5 text-fg"
                     >
                       {source.name}
-                      <ExternalLink size={10} className="text-muted" />
+                      <ExternalLink size={10} className="text-fg-muted" />
                     </h4>
-                    <p className="text-xs mt-1 leading-relaxed text-secondary">
+                    <p className="text-xs mt-1 leading-relaxed text-fg-secondary">
                       {source.description}
                     </p>
                   </div>
@@ -222,53 +235,37 @@ export default function AboutPage() {
 
             {/* Downloads */}
             <div
-              className="rounded-2xl p-6 border bg-surface border-theme"
+              className="rounded-2xl p-6 border bg-surface border-border"
             >
               <h3
-                className="text-sm font-bold flex items-center gap-2 mb-3 text-primary"
+                className="text-sm font-bold flex items-center gap-2 mb-3 text-fg"
               >
                 <Download size={16} />
                 Exportar Dados
               </h3>
-              <p className="text-xs mb-4 text-secondary">
+              <p className="text-xs mb-4 text-fg-secondary">
                 Exporte métricas espaciais compiladas para processamento GIS externo.
               </p>
 
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => handleDownload('csv')}
-                  className="px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-all border text-center"
+                  className="px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-all border text-center hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
                   style={{
-                    backgroundColor: 'var(--color-bg)',
+                    backgroundColor: 'var(--color-canvas)',
                     borderColor: 'var(--color-border)',
-                    color: 'var(--color-text-secondary)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-primary)';
-                    e.currentTarget.style.color = 'var(--color-primary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
-                    e.currentTarget.style.color = 'var(--color-text-secondary)';
+                    color: 'var(--color-fg-secondary)',
                   }}
                 >
                   Download CSV
                 </button>
                 <button
                   onClick={() => handleDownload('json')}
-                  className="px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-all border text-center"
+                  className="px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-all border text-center hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
                   style={{
-                    backgroundColor: 'var(--color-bg)',
+                    backgroundColor: 'var(--color-canvas)',
                     borderColor: 'var(--color-border)',
-                    color: 'var(--color-text-secondary)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-primary)';
-                    e.currentTarget.style.color = 'var(--color-primary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
-                    e.currentTarget.style.color = 'var(--color-text-secondary)';
+                    color: 'var(--color-fg-secondary)',
                   }}
                 >
                   Download JSON
@@ -279,9 +276,9 @@ export default function AboutPage() {
                 <div
                   className="mt-4 p-3 rounded-xl border text-xs text-center"
                   style={{
-                    backgroundColor: '#f0fdf4',
-                    borderColor: '#86efac',
-                    color: '#16a34a',
+                    backgroundColor: 'var(--color-primary-light)',
+                    borderColor: 'var(--color-primary)',
+                    color: 'var(--color-primary)',
                   }}
                 >
                   <strong>Sucesso!</strong> Arquivo <strong>landagri_dataset.{downloadFormat}</strong> gerado.
@@ -291,10 +288,10 @@ export default function AboutPage() {
 
             {/* Technical Metadata */}
             <div
-              className="rounded-2xl p-6 border bg-surface border-theme"
+              className="rounded-2xl p-6 border bg-surface border-border"
             >
               <h3
-                className="text-sm font-bold flex items-center gap-2 mb-4 text-primary"
+                className="text-sm font-bold flex items-center gap-2 mb-4 text-fg"
               >
                 <Globe size={16} />
                 Metadados Técnicos
@@ -311,24 +308,24 @@ export default function AboutPage() {
                       key={idx}
                       className="p-3 rounded-xl border text-center"
                       style={{
-                        backgroundColor: 'var(--color-bg)',
+                        backgroundColor: 'var(--color-canvas)',
                         borderColor: 'var(--color-border)',
                       }}
                     >
                       <Icon
                         size={14}
                         className="mx-auto mb-1"
-                        style={{ color: item.highlight ? 'var(--color-primary)' : 'var(--color-text-muted)' }}
+                        style={{ color: item.highlight ? 'var(--color-primary)' : 'var(--color-fg-muted)' }}
                       />
                       <p
-                        className="text-[10px] font-bold uppercase tracking-wider text-muted"
+                        className="text-[10px] font-bold uppercase tracking-wider text-fg-muted"
                       >
                         {item.label}
                       </p>
                       <p
                         className="text-sm font-bold mt-0.5"
                         style={{
-                          color: item.highlight ? 'var(--color-primary)' : 'var(--color-text-primary)',
+                          color: item.highlight ? 'var(--color-primary)' : 'var(--color-fg)',
                         }}
                       >
                         {item.value}

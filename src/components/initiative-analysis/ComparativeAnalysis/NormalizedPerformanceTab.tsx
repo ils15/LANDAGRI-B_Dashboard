@@ -71,7 +71,7 @@ export default function NormalizedPerformanceTab() {
   }, [initiatives]);
 
   if (heatmapData.length === 0) {
-    return <div className="py-8 text-center text-slate-400">No normalized performance data available.</div>;
+    return <div className="py-8 text-center text-fg-muted">No normalized performance data available.</div>;
   }
 
   // Heatmap
@@ -115,8 +115,8 @@ export default function NormalizedPerformanceTab() {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Normalized Performance Heatmap</h3>
-        <p className="text-sm text-slate-500 mb-3">
+        <h3 className="text-base font-semibold text-fg mb-2">Normalized Performance Heatmap</h3>
+        <p className="text-sm text-fg-secondary mb-3">
           Metrics normalized to [0, 1] using min-max scaling. Resolution is inverted (higher = better).
           Darker colors indicate better relative performance.
         </p>
@@ -134,7 +134,7 @@ export default function NormalizedPerformanceTab() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Average Normalized Metrics</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Average Normalized Metrics</h3>
           <BaseChart
             data={[metricBar]}
             layout={{
@@ -146,7 +146,7 @@ export default function NormalizedPerformanceTab() {
           />
         </div>
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Radar Comparison (Top 5)</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Radar Comparison (Top 5)</h3>
           <BaseChart
             data={radarTraces}
             layout={{

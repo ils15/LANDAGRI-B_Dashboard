@@ -212,7 +212,7 @@ export default function EvolutionTab({ data }: EvolutionTabProps) {
 
   if (activeByYear.length === 0) {
     return (
-      <div className="py-8 text-center text-slate-400">
+      <div className="py-8 text-center text-fg-muted">
         No temporal data available for evolution analysis.
       </div>
     );
@@ -221,8 +221,8 @@ export default function EvolutionTab({ data }: EvolutionTabProps) {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Active Initiatives per Year</h3>
-        <p className="text-sm text-slate-500 mb-3">
+        <h3 className="text-base font-semibold text-fg mb-2">Active Initiatives per Year</h3>
+        <p className="text-sm text-fg-secondary mb-3">
           Number of active LULC initiatives with available data each year.
           Peak year highlighted with ⭐ marker. Dashed line shows average.
         </p>
@@ -263,8 +263,8 @@ export default function EvolutionTab({ data }: EvolutionTabProps) {
       </div>
 
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Resolution Evolution</h3>
-        <p className="text-sm text-slate-500 mb-3">
+        <h3 className="text-base font-semibold text-fg mb-2">Resolution Evolution</h3>
+        <p className="text-sm text-fg-secondary mb-3">
           Distribution of initiatives by spatial resolution category over time.
           High (&lt;30m), Medium (30-99m), and Coarse (&ge;100m).
         </p>

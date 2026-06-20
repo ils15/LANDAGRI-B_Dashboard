@@ -88,9 +88,9 @@ export default function SeasonalOverviewTab({ selectedCrops, selectedRegions }: 
 
   return (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Seasonal Overview — Planting &amp; Harvest Patterns</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Seasonal Overview — Planting &amp; Harvest Patterns</h3>
       {noData ? (
-        <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+        <p className="text-fg-muted text-center py-8">No data available for selected filters.</p>
       ) : (
         <GroupedBarChart
           categories={seasonalData.categories}
@@ -100,8 +100,8 @@ export default function SeasonalOverviewTab({ selectedCrops, selectedRegions }: 
           height={400}
         />
       )}
-      <div className="mt-4 p-3 bg-slate-50 rounded-lg">
-        <p className="text-xs text-slate-500">
+      <div className="mt-4 p-3 bg-surface-alt rounded-lg">
+        <p className="text-xs text-fg-secondary">
           <strong>Note:</strong> Seasons are defined as: Spring (Oct-Dec), Summer (Jan-Mar),
           Autumn (Apr-Jun), Winter (Jul-Sep) based on the Southern Hemisphere calendar.
           Values represent the total count of active crop activities per season.

@@ -73,7 +73,7 @@ export default function TimelineTab({ data }: TimelineTabProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Timeline showing available years for each initiative. Each dot represents a year with data.
         Initiatives are sorted by coverage type (Global first), then by start year.
       </p>

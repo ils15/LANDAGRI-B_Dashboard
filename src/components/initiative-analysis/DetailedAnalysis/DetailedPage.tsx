@@ -41,7 +41,7 @@ export default function DetailedPage() {
     <div className="space-y-6">
       {/* Multi-select for initiatives */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-2">
+        <label className="block text-sm font-medium text-fg mb-2">
           Select Initiatives to Compare
         </label>
         <div className="flex flex-wrap gap-2">
@@ -54,7 +54,7 @@ export default function DetailedPage() {
                 className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all duration-200 ${
                   isSelected
                     ? 'bg-blue-50 border-blue-300 text-blue-700'
-                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                    : 'bg-surface border-border text-fg-secondary hover:border-surface-alt'
                 }`}
               >
                 {opt.label}
@@ -62,7 +62,7 @@ export default function DetailedPage() {
             );
           })}
         </div>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-fg-muted mt-1">
           Click to toggle. Selected: {selected.length} initiative{selected.length !== 1 ? 's' : ''}
         </p>
       </div>

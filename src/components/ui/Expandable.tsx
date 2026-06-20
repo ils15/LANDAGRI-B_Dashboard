@@ -13,16 +13,16 @@ export default function Expandable({ title, children, defaultExpanded = false, i
 
   return (
     <div
-      className="rounded-lg mb-3 overflow-hidden border border-theme"
+      className="rounded-lg mb-3 overflow-hidden border border-border"
     >
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200 bg-secondary text-primary"
+        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200 bg-surface-alt text-fg"
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = 'var(--color-surface-hover)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)';
+          e.currentTarget.style.backgroundColor = 'var(--color-surface-alt)';
         }}
       >
         {expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
@@ -30,7 +30,7 @@ export default function Expandable({ title, children, defaultExpanded = false, i
         {title}
       </button>
       {expanded && (
-        <div className="px-4 py-3 text-sm text-secondary">
+        <div className="px-4 py-3 text-sm text-fg-secondary">
           {children}
         </div>
       )}

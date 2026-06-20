@@ -20,7 +20,7 @@ export default function AgriculturalAnalysisPage() {
         title="🌾 Agricultural Analysis"
         subtitle="Agricultural indicators, crop calendar and aggregated availability by region and time period."
       />
-      <div className="flex border-b border-slate-200 mb-6 overflow-x-auto">
+      <div className="flex border-b border-border mb-6 overflow-x-auto">
         {subPages.map((tab) => {
           const isActive = location.pathname.includes(tab.path);
           return (
@@ -28,7 +28,7 @@ export default function AgriculturalAnalysisPage() {
               key={tab.path}
               to={`/agricultural-analysis/${tab.path}`}
               className={`px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-all duration-200 ${
-                isActive ? 'text-amber-700 border-amber-600 font-semibold' : 'text-slate-500 border-transparent hover:text-slate-700 hover:border-slate-300'
+                isActive ? 'text-amber-700 border-amber-600 font-semibold' : 'text-fg-secondary border-transparent hover:text-fg hover:border-border'
               }`}
             >
               {tab.label}

@@ -45,7 +45,7 @@ export default function Header() {
   return (
     <>
       {/* Desktop Header (md+) */}
-      <header className="sticky top-0 z-40 bg-surface border-b border-theme shadow-sm hidden md:block">
+      <header className="sticky top-0 z-40 bg-surface border-b border-border shadow-sm hidden md:block">
         <div className="flex items-center justify-between h-14 px-6">
           {/* Logo */}
           <div className="flex items-center gap-3 shrink-0">
@@ -58,10 +58,10 @@ export default function Header() {
               <BarChart3 size={16} className="text-white" />
             </div>
             <div className="flex items-baseline gap-2">
-              <h1 className="text-sm font-bold tracking-tight text-primary">
+              <h1 className="text-sm font-bold tracking-tight text-fg">
                 LANDAGRI-B
               </h1>
-              <span className="text-[10px] font-mono text-muted hidden lg:inline">
+              <span className="text-[10px] font-mono text-fg-muted hidden lg:inline">
                 Dashboard de Análise Territorial
               </span>
             </div>
@@ -79,8 +79,8 @@ export default function Header() {
                   className={`
                     relative flex items-center gap-2 px-3 py-2 text-xs font-semibold transition-all cursor-pointer rounded-lg
                     ${isActive
-                      ? 'text-primary'
-                      : 'text-secondary hover:text-primary hover:bg-surface-hover'
+                      ? 'text-fg'
+                      : 'text-fg-secondary hover:text-fg hover:bg-surface-hover'
                     }
                   `}
                 >
@@ -106,11 +106,11 @@ export default function Header() {
       </header>
 
       {/* Mobile Header (< md) */}
-      <header className="sticky top-0 z-40 bg-surface border-b border-theme md:hidden">
+      <header className="sticky top-0 z-40 bg-surface border-b border-border md:hidden">
         <div className="flex items-center justify-between h-12 px-4">
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="p-2 -ml-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-hover active:bg-surface-hover cursor-pointer"
+            className="p-2 -ml-2 rounded-lg text-fg-secondary hover:text-fg hover:bg-surface-hover active:bg-surface-hover cursor-pointer"
             aria-label="Abrir menu"
           >
             <Menu size={20} />
@@ -125,7 +125,7 @@ export default function Header() {
             >
               <BarChart3 size={14} className="text-white" />
             </div>
-            <span className="text-xs font-bold text-primary">
+            <span className="text-xs font-bold text-fg">
               {tabs.find(t => t.id === activeTab)?.shortLabel || 'Visão Geral'}
             </span>
           </div>
@@ -154,9 +154,9 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-0 left-0 bottom-0 z-50 w-72 bg-surface border-r border-theme shadow-xl md:hidden"
+              className="fixed top-0 left-0 bottom-0 z-50 w-72 bg-surface border-r border-border shadow-xl md:hidden"
             >
-              <div className="flex items-center justify-between p-4 border-b border-theme">
+              <div className="flex items-center justify-between p-4 border-b border-border">
                 <div className="flex items-center gap-2">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -166,11 +166,11 @@ export default function Header() {
                   >
                     <BarChart3 size={16} className="text-white" />
                   </div>
-                  <span className="text-sm font-bold text-primary">LANDAGRI-B</span>
+                  <span className="text-sm font-bold text-fg">LANDAGRI-B</span>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-hover cursor-pointer"
+                  className="p-2 rounded-lg text-fg-secondary hover:text-fg hover:bg-surface-hover cursor-pointer"
                   aria-label="Fechar menu"
                 >
                   <X size={18} />
@@ -188,8 +188,8 @@ export default function Header() {
                       className={`
                         flex items-center gap-3 w-full p-3 rounded-xl text-sm font-semibold cursor-pointer transition-all
                         ${isActive
-                          ? 'bg-primary-light text-primary'
-                          : 'text-secondary hover:text-primary hover:bg-surface-hover'
+                          ? 'bg-primary-light text-fg'
+                          : 'text-fg-secondary hover:text-fg hover:bg-surface-hover'
                         }
                       `}
                     >
@@ -203,8 +203,8 @@ export default function Header() {
                 })}
               </nav>
 
-              <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-theme">
-                <p className="text-[10px] text-muted text-center">
+              <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
+                <p className="text-[10px] text-fg-muted text-center">
                   LANDAGRI-B v2.4
                 </p>
               </div>

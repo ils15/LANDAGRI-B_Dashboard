@@ -128,7 +128,7 @@ export default function ActivitiesTimelineTab({ selectedCrops, selectedRegions }
 
   const monthlyContent = (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Monthly &amp; Seasonality</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Monthly &amp; Seasonality</h3>
       <LineChart
         series={monthlyActivity.series}
         xlabel="Month"
@@ -140,7 +140,7 @@ export default function ActivitiesTimelineTab({ selectedCrops, selectedRegions }
 
   const ganttContent = (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Planting &amp; Harvest Periods (Gantt Chart)</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Planting &amp; Harvest Periods (Gantt Chart)</h3>
       {ganttBars.length > 0 ? (
         <GanttChart
           bars={ganttBars}
@@ -148,14 +148,14 @@ export default function ActivitiesTimelineTab({ selectedCrops, selectedRegions }
           height={Math.min(600, Math.max(300, ganttBars.length * 12))}
         />
       ) : (
-        <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+        <p className="text-fg-muted text-center py-8">No data available for selected filters.</p>
       )}
     </Card>
   );
 
   const polarContent = (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Polar Seasonality Distribution</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Polar Seasonality Distribution</h3>
       {polarData.series[0].r.some(v => v > 0) ? (
         <PolarChart
           series={polarData.series}
@@ -163,7 +163,7 @@ export default function ActivitiesTimelineTab({ selectedCrops, selectedRegions }
           height={500}
         />
       ) : (
-        <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+        <p className="text-fg-muted text-center py-8">No data available for selected filters.</p>
       )}
     </Card>
   );

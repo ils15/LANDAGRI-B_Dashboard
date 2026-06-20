@@ -40,7 +40,7 @@ export default function AnnualCoverageTab({ selectedInitiatives }: AnnualCoverag
 
   if (bars.length === 0) {
     return (
-      <div className="py-8 text-center text-slate-400">
+      <div className="py-8 text-center text-fg-muted">
         No initiatives selected or no temporal coverage data available.
       </div>
     );
@@ -68,7 +68,7 @@ export default function AnnualCoverageTab({ selectedInitiatives }: AnnualCoverag
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Horizontal bars showing the temporal coverage period for each selected initiative.
         Bar length represents the full span from start year to end year.
       </p>

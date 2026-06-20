@@ -147,7 +147,7 @@ export default function IbgeEstimatesTab() {
 
   if (!production || Object.keys(production).length === 0) {
     return (
-      <div className="p-8 text-center text-slate-500">
+      <div className="p-8 text-center text-fg-secondary">
         <p className="text-lg">No IBGE estimates data available.</p>
         <p className="text-sm mt-2">The IBGE data file may be empty or in an unexpected format.</p>
       </div>
@@ -158,7 +158,7 @@ export default function IbgeEstimatesTab() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card padding="lg" hover={false}>
-          <h3 className="text-base font-semibold text-slate-700 mb-3">Top 10 Crops by Production</h3>
+          <h3 className="text-base font-semibold text-fg mb-3">Top 10 Crops by Production</h3>
           {topCrops.length > 0 ? (
             <HorizontalBarChart
               y={topCrops.map(c => c.name)}
@@ -168,12 +168,12 @@ export default function IbgeEstimatesTab() {
               height={Math.max(300, topCrops.length * 35)}
             />
           ) : (
-            <p className="text-slate-400 text-center py-8">No data available.</p>
+            <p className="text-fg-muted text-center py-8">No data available.</p>
           )}
         </Card>
 
         <Card padding="lg" hover={false}>
-          <h3 className="text-base font-semibold text-slate-700 mb-3">Crop Data Table</h3>
+          <h3 className="text-base font-semibold text-fg mb-3">Crop Data Table</h3>
           <DataTable
             columns={tableColumns}
             data={topCrops as unknown as Record<string, unknown>[]}
@@ -186,7 +186,7 @@ export default function IbgeEstimatesTab() {
   const regionalContent = (
     <div className="space-y-6">
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Regional Distribution Indicators</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Regional Distribution Indicators</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {REGIONS.map(region => (
             <div key={region} className="bg-amber-50 rounded-lg p-3 text-center border border-amber-200">
@@ -204,22 +204,22 @@ export default function IbgeEstimatesTab() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card padding="lg" hover={false}>
-          <h3 className="text-base font-semibold text-slate-700 mb-3">Total Production Evolution</h3>
+          <h3 className="text-base font-semibold text-fg mb-3">Total Production Evolution</h3>
           <LineChart series={totalProductionEvolution.series} xlabel="Year" ylabel="Production (tonnes)" height={350} />
         </Card>
 
         <Card padding="lg" hover={false}>
-          <h3 className="text-base font-semibold text-slate-700 mb-3">Harvested Area Evolution</h3>
+          <h3 className="text-base font-semibold text-fg mb-3">Harvested Area Evolution</h3>
           <LineChart series={areaEvolution.series} xlabel="Year" ylabel="Area (hectares)" height={350} />
         </Card>
       </div>
 
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Top 5 Crops — Production Evolution</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Top 5 Crops — Production Evolution</h3>
         {top5Evolution.series.length > 0 ? (
           <LineChart series={top5Evolution.series} xlabel="Year" ylabel="Production (tonnes)" height={400} />
         ) : (
-          <p className="text-slate-400 text-center py-8">No data available.</p>
+          <p className="text-fg-muted text-center py-8">No data available.</p>
         )}
       </Card>
     </div>

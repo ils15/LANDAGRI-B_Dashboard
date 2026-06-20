@@ -13,22 +13,9 @@ export default function Card({ children, className = '', padding = 'md', hover =
 
   return (
     <div
-      className={`rounded-xl border bg-surface border-theme shadow-[var(--color-shadow-sm)] ${hover ? 'hover:-translate-y-0.5 hover:shadow-card' : ''}
+      className={`rounded-xl border bg-surface border-border shadow-sm ${hover ? 'hover:-translate-y-0.5 hover:shadow-lg' : ''}
         ${paddingMap[padding]}
         transition-all duration-300 ${className}`}
-      style={{
-        ...(hover ? { transitionProperty: 'background-color, border-color, box-shadow, transform' } : {}),
-      }}
-      onMouseEnter={(e) => {
-        if (hover) {
-          e.currentTarget.style.boxShadow = 'var(--color-shadow)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (hover) {
-          e.currentTarget.style.boxShadow = 'var(--color-shadow-sm)';
-        }
-      }}
     >
       {children}
     </div>

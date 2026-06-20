@@ -24,7 +24,7 @@ export default function ClassDetailsTab() {
   }, [initiatives]);
 
   if (chartData.length === 0) {
-    return <div className="py-8 text-center text-slate-400">No class data available.</div>;
+    return <div className="py-8 text-center text-fg-muted">No class data available.</div>;
   }
 
   // Total classes bar
@@ -115,7 +115,7 @@ export default function ClassDetailsTab() {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Total Classes by Initiative</h3>
+        <h3 className="text-base font-semibold text-fg mb-2">Total Classes by Initiative</h3>
         <BaseChart
           data={[classesBar]}
           layout={{
@@ -130,7 +130,7 @@ export default function ClassDetailsTab() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Agriculture vs Other Classes</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Agriculture vs Other Classes</h3>
           <BaseChart
             data={[focusPie]}
             layout={{
@@ -140,7 +140,7 @@ export default function ClassDetailsTab() {
           />
         </div>
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Agricultural Capabilities</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Agricultural Capabilities</h3>
           <BaseChart
             data={[capBar]}
             layout={{
@@ -156,7 +156,7 @@ export default function ClassDetailsTab() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Total vs Agriculture Classes</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Total vs Agriculture Classes</h3>
           <BaseChart
             data={groupedTraces}
             layout={{
@@ -170,7 +170,7 @@ export default function ClassDetailsTab() {
           />
         </div>
         <div>
-          <h3 className="text-base font-semibold text-slate-700 mb-2">Agriculture Focus (%)</h3>
+          <h3 className="text-base font-semibold text-fg mb-2">Agriculture Focus (%)</h3>
           <BaseChart
             data={stackedTraces}
             layout={{

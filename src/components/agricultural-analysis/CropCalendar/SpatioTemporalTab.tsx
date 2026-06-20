@@ -131,11 +131,11 @@ export default function SpatioTemporalTab({ selectedCrops, selectedRegions }: Sp
 
   return (
     <Card padding="lg" hover={false}>
-      <h3 className="text-base font-semibold text-slate-700 mb-3">Spatio-Temporal Distribution</h3>
+      <h3 className="text-base font-semibold text-fg mb-3">Spatio-Temporal Distribution</h3>
       {chartData.length > 0 ? (
         <BaseChart data={chartData} layout={layout} />
       ) : (
-        <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+        <p className="text-fg-muted text-center py-8">No data available for selected filters.</p>
       )}
     </Card>
   );

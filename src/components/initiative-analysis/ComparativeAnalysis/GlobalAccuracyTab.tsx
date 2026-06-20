@@ -20,7 +20,7 @@ export default function GlobalAccuracyTab() {
   }, [initiatives]);
 
   if (chartData.length === 0) {
-    return <div className="py-8 text-center text-slate-400">No accuracy data available.</div>;
+    return <div className="py-8 text-center text-fg-muted">No accuracy data available.</div>;
   }
 
   const barTrace: Data = {
@@ -54,7 +54,7 @@ export default function GlobalAccuracyTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Global overall accuracy for each LULC initiative. Initiatives sorted by accuracy (descending).
         Dashed line shows the average accuracy across all initiatives.
       </p>
@@ -81,18 +81,18 @@ export default function GlobalAccuracyTab() {
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="bg-white rounded-lg border border-slate-200 p-3 text-center">
-          <div className="text-xs text-slate-500">Average Accuracy</div>
+        <div className="bg-surface rounded-lg border border-border p-3 text-center">
+          <div className="text-xs text-fg-secondary">Average Accuracy</div>
           <div className="text-lg font-bold text-emerald-600">{avgAccuracy.toFixed(1)}%</div>
         </div>
-        <div className="bg-white rounded-lg border border-slate-200 p-3 text-center">
-          <div className="text-xs text-slate-500">Highest Accuracy</div>
+        <div className="bg-surface rounded-lg border border-border p-3 text-center">
+          <div className="text-xs text-fg-secondary">Highest Accuracy</div>
           <div className="text-lg font-bold text-blue-600">
             {Math.max(...chartData.map((d) => d.accuracy)).toFixed(1)}%
           </div>
         </div>
-        <div className="bg-white rounded-lg border border-slate-200 p-3 text-center">
-          <div className="text-xs text-slate-500">Lowest Accuracy</div>
+        <div className="bg-surface rounded-lg border border-border p-3 text-center">
+          <div className="text-xs text-fg-secondary">Lowest Accuracy</div>
           <div className="text-lg font-bold text-orange-600">
             {Math.min(...chartData.map((d) => d.accuracy)).toFixed(1)}%
           </div>

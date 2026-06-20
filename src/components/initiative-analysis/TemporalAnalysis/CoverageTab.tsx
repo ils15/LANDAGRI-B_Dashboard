@@ -61,7 +61,7 @@ export default function CoverageTab({ data }: CoverageTabProps) {
 
   if (!stats || sortedData.length === 0) {
     return (
-      <div className="py-8 text-center text-slate-400">
+      <div className="py-8 text-center text-fg-muted">
         No temporal coverage data available.
       </div>
     );
@@ -100,7 +100,7 @@ export default function CoverageTab({ data }: CoverageTabProps) {
 
   return (
     <div className="space-y-6">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-fg-secondary">
         Coverage matrix showing data availability per year for each initiative.
         Green cells indicate available data, gray cells indicate gaps.
       </p>
@@ -113,9 +113,9 @@ export default function CoverageTab({ data }: CoverageTabProps) {
           { label: 'Worst Covered Year', value: `${stats.worstYear.year} (${stats.worstYear.count})` },
           { label: 'Complete Coverage', value: `${stats.completeCoverage}/${stats.totalInitiatives}` },
         ].map((stat) => (
-          <div key={stat.label} className="bg-white rounded-lg border border-slate-200 p-3 text-center">
-            <div className="text-xs text-slate-500 mb-1">{stat.label}</div>
-            <div className="text-sm font-semibold text-slate-800">{stat.value}</div>
+          <div key={stat.label} className="bg-surface rounded-lg border border-border p-3 text-center">
+            <div className="text-xs text-fg-secondary mb-1">{stat.label}</div>
+            <div className="text-sm font-semibold text-fg">{stat.value}</div>
           </div>
         ))}
       </div>

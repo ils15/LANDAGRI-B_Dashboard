@@ -41,7 +41,7 @@ export default function DistributionsTab() {
   }, [initiatives]);
 
   if (initiatives.length === 0) {
-    return <div className="py-8 text-center text-slate-400">No distribution data available.</div>;
+    return <div className="py-8 text-center text-fg-muted">No distribution data available.</div>;
   }
 
   // Methodology pie
@@ -89,7 +89,7 @@ export default function DistributionsTab() {
     <div className="space-y-8">
       {/* Methodology Distribution Pie */}
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Methodology Distribution</h3>
+        <h3 className="text-base font-semibold text-fg mb-2">Methodology Distribution</h3>
         <BaseChart
           data={[pieTrace]}
           layout={{
@@ -101,7 +101,7 @@ export default function DistributionsTab() {
 
       {/* Resolution Comparison */}
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Spatial Resolution Comparison</h3>
+        <h3 className="text-base font-semibold text-fg mb-2">Spatial Resolution Comparison</h3>
         <BaseChart
           data={[resTrace]}
           layout={{
@@ -116,7 +116,7 @@ export default function DistributionsTab() {
 
       {/* Temporal Coverage */}
       <div>
-        <h3 className="text-base font-semibold text-slate-700 mb-2">Temporal Coverage Duration</h3>
+        <h3 className="text-base font-semibold text-fg mb-2">Temporal Coverage Duration</h3>
         <BaseChart
           data={[tempTrace]}
           layout={{

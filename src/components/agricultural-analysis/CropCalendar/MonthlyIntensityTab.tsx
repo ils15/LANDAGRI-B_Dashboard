@@ -103,9 +103,9 @@ export default function MonthlyIntensityTab({ selectedCrops, selectedRegions }: 
   return (
     <div className="space-y-6">
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Monthly Activity Intensity Heatmap</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Monthly Activity Intensity Heatmap</h3>
         {noData ? (
-          <p className="text-slate-400 text-center py-8">No data available for selected filters.</p>
+          <p className="text-fg-muted text-center py-8">No data available for selected filters.</p>
         ) : (
           <HeatmapChart
             z={heatmapZ.z}
@@ -124,9 +124,9 @@ export default function MonthlyIntensityTab({ selectedCrops, selectedRegions }: 
       </Card>
 
       <Card padding="lg" hover={false}>
-        <h3 className="text-base font-semibold text-slate-700 mb-3">Activity Intensity by Month</h3>
+        <h3 className="text-base font-semibold text-fg mb-3">Activity Intensity by Month</h3>
         {noData ? (
-          <p className="text-slate-400 text-center py-8">No data available.</p>
+          <p className="text-fg-muted text-center py-8">No data available.</p>
         ) : (
           <LineChart
             series={intensitySeries.series}
